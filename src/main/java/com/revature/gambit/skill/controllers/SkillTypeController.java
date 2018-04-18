@@ -1,7 +1,8 @@
-package com.gambit.skill.controllers;
+package com.revature.gambit.skill.controllers;
 
-import com.gambit.skill.beans.SkillTypes;
-import com.gambit.skill.repo.SkillTypeRepository;
+import com.revature.gambit.skill.beans.SkillTypes;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

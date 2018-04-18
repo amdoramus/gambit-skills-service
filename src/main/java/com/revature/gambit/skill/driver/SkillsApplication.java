@@ -1,4 +1,4 @@
-package com.gambit.skill.driver;
+package com.revature.gambit.skill.driver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

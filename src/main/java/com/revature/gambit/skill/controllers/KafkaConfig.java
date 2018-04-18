@@ -1,4 +1,4 @@
-package com.gambit.skill.controllers;
+package com.revature.gambit.skill.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
-import com.gambit.skill.messaging.Receiver;
+import com.revature.gambit.skill.messaging.Receiver;
 
 @Configuration
 @EnableKafka

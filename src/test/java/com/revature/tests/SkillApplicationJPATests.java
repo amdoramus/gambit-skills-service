@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gambit.skill.beans.Skill;
-import com.gambit.skill.repo.SkillTypeRepository;
+import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
 
 
 @RunWith(SpringRunner.class)
