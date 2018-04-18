@@ -1,4 +1,4 @@
-package com.gambit.skill.messaging;
+package com.revature.gambit.skill.messaging;
 
 import org.springframework.kafka.annotation.KafkaListener;
 

@@ -1,4 +1,4 @@
-package com.gambit.skill.driver;
+package com.revature.gambit.skill;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,18 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
-@EnableDiscoveryClient
-@EnableEurekaClient
-@EnableCircuitBreaker
+//@RestController
+//@EnableDiscoveryClient
+//@EnableEurekaClient
+//@EnableCircuitBreaker
 public class SkillsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SkillsApplication.class, args);
-	}
-	
-	@RequestMapping(value="/")
-	public String test() {
-		return "test";
 	}
 }
