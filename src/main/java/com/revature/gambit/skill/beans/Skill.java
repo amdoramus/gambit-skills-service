@@ -1,42 +1,59 @@
 package com.revature.gambit.skill.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import javax.persistence.*;
 
+@Entity
+@EntityScan("Skill")
+@Table(name="SKILL")
 public class Skill {
-	private int skill_id;
-	private String skill_name;
-	private boolean active;
+
+	@Id
+	@Column(name="SKILL_ID")
+	@SequenceGenerator(name="SKILL_ID_SEQ",sequenceName="SKILL_ID_SEQ")
+	@GeneratedValue(generator = "SKILL_ID_SEQ")
+	private int skillID;
+
+	@Column(name = "SKILL_NAME")
+	private String skillName;
+
+	@Column(name = "IS_ACTIVE")
+	private boolean isActive;
+	
+	public Skill() { }
+	
 	public Skill(int skill_id, String skill_name, boolean active) {
-		super();
-		this.skill_id = skill_id;
-		this.skill_name = skill_name;
-		this.active = active;
+		this.skillID = skill_id;
+		this.skillName = skill_name;
+		this.isActive = active;
 	}
-	public int getSkill_id() {
-		return skill_id;
+	public int getSkillID() {
+		return skillID;
 	}
-	public void setSkill_id(int skill_id) {
-		this.skill_id = skill_id;
+	public void setSkillID(int skillID) {
+		this.skillID = skillID;
 	}
-	public String getSkill_name() {
-		return skill_name;
+	public String getSkillName() {
+		return skillName;
 	}
-	public void setSkill_name(String skill_name) {
-		this.skill_name = skill_name;
+	public void setSkillName(String skillName) {
+		this.skillName = skillName;
 	}
 	public boolean isActive() {
-		return active;
+		return isActive;
 	}
 	public void setActive(boolean active) {
-		this.active = active;
+		this.isActive = active;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
-		result = prime * result + skill_id;
-		result = prime * result + ((skill_name == null) ? 0 : skill_name.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + skillID;
+		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		return result;
 	}
 	@Override
@@ -48,18 +65,16 @@ public class Skill {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
-		if (active != other.active)
+		if (isActive != other.isActive)
 			return false;
-		if (skill_id != other.skill_id)
+		if (skillID != other.skillID)
 			return false;
-		if (skill_name == null) {
-			if (other.skill_name != null)
+		if (skillName == null) {
+			if (other.skillName != null)
 				return false;
-		} else if (!skill_name.equals(other.skill_name))
+		} else if (!skillName.equals(other.skillName))
 			return false;
 		return true;
 	}
 	
-	
-
 }
