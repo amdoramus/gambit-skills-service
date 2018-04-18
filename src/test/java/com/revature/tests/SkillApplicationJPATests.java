@@ -10,8 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.data.SkillTypeRepository;
-import com.revature.domain.Skill;
+import com.gambit.skill.beans.Skill;
+import com.gambit.skill.repo.SkillTypeRepository;
+
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -25,7 +26,7 @@ public class SkillApplicationJPATests {
 	
 	@Test
 	public void getSkillByName() {
-		Skill sk = new Skill("Coding", true);
-		assertEquals(sk.getName(), "Coding");
+		Skill sk = new Skill(1, "Coding", true);
+		assertEquals(sk.getSkill_name(), "Coding");
 	}
 }
