@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.driver;
+package com.revature.gambit.skill;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +17,5 @@ public class SkillsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SkillsApplication.class, args);
-	}
-	
-	@RequestMapping(value="/")
-	public String test() {
-		return "test";
 	}
 }
