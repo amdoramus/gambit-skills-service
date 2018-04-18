@@ -1,6 +1,5 @@
 package com.gambit.skill.beans;
 
-import com.gambit.skill.beans.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
@@ -29,8 +28,7 @@ public class SkillTypes {
 	@Column(name = "IS_CORE")
 	private boolean is_core;
 
-	@Autowired
-	private Skill skill;
+
 
 	public SkillTypes(){
 
