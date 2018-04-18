@@ -1,7 +1,7 @@
-package com.revature.controllers;
+package com.gambit.skill.controllers;
 
-import com.revature.data.SkillTypeRepository;
-import com.revature.domain.SkillType;
+import com.gambit.skill.beans.SkillTypes;
+import com.gambit.skill.repo.SkillTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +17,12 @@ public class SkillTypeController {
     private SkillTypeRepository skillTypeRepository;
 
     @PostMapping("/skilltype")
-    public SkillType create(@Valid @RequestBody SkillType skillType) {
+    public SkillTypes create(@Valid @RequestBody SkillTypes skillType) {
         return skillTypeRepository.save(skillType);
     }
 
     @GetMapping("/skilltype")
-    public Iterable<SkillType> findAll(){
+    public Iterable<SkillTypes> findAll(){
         return skillTypeRepository.findAll();
     }
 
