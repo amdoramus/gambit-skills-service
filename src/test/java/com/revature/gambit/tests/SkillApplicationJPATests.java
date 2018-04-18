@@ -1,4 +1,4 @@
-package com.revature.tests;
+package com.revature.gambit.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

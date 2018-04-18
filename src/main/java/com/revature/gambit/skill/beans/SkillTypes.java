@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.beans;
+  package com.revature.gambit.skill.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
