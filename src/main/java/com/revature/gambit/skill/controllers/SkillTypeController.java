@@ -3,11 +3,10 @@ package com.revature.gambit.skill.controllers;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.repo.SkillTypeRepository;
 
+import com.revature.gambit.skill.services.SkillTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -15,16 +14,19 @@ import javax.validation.Valid;
 public class SkillTypeController {
 
     @Autowired
-    private SkillTypeRepository skillTypeRepository;
+    private SkillTypeService skillTypeService;
 
-    @PostMapping("/skilltype")
-    public SkillType create(@Valid @RequestBody SkillType skillType) {
-        return skillTypeRepository.save(skillType);
-    }
+//    @PostMapping("/skilltype")
+//    public SkillType create(@Valid @RequestBody SkillType skillType) { return this.skillTypeService.create(skillType); }
+
+//    @GetMapping("/skilltype")
+//    public Iterable<SkillType> findAll(){
+//        return this.skillTypeService.findByAll();
+//    }
 
     @GetMapping("/skilltype")
-    public Iterable<SkillType> findAll(){
-        return skillTypeRepository.findAll();
+    public String findAll(){
+        return "hello";
     }
 
 }
