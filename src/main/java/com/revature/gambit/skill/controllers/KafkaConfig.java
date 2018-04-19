@@ -19,7 +19,6 @@ import com.revature.gambit.skill.messaging.Receiver;
 
 @Configuration
 @EnableKafka
-
 public class KafkaConfig {
 	
 	@Value("${spring.kafka.bootstrap-servers}")
