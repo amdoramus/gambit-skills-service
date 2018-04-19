@@ -23,7 +23,7 @@ public class SkillControllerTests {
 	
 	@MockBean
 	private SkillRepository repository;
-	
+
 	@Test
 	public void getSkillType() throws Exception{
 
