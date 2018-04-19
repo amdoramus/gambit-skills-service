@@ -35,7 +35,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillType() throws Exception{
 		
-		SkillType skillT = new SkillType("Java", "I can code in Java", true, true);
+		SkillType skillT = new SkillType(100, "Java", "I can code in Java", true, true);
 		Iterable<SkillType> skills = Arrays.asList(skillT);
 		
 		//mvc.perform(post("/skilltype")
