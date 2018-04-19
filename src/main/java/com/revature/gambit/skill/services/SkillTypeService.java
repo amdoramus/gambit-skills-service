@@ -15,18 +15,21 @@ public class SkillTypeService {
 
     public SkillType create(SkillType skillType) { return this.skillTypeRepository.save(skillType); }
 
-    public SkillType findByID(int id) { return this.skillTypeRepository.findBySkillTypeID(id); }
+    public SkillType findBySkillTypeName(String name) { return this.skillTypeRepository.findBySkillTypeName(name); }
 
     public List<SkillType> findByAll() { return this.skillTypeRepository.findAll(); }
 
-    public SkillType update(SkillType updatedSkillType , String name){
-        SkillType skillType =  this.skillTypeRepository.findBySkillTypeName(name);
-        skillType.setSkillTypeDesc(updatedSkillType.getSkillTypeDesc());
-        skillType.setIsCore(updatedSkillType.isIs_core());
-        skillType.setIsActive(updatedSkillType.isIsActive());
-        return this.skillTypeRepository.saveAndFlush(skillType);
+    public int update(SkillType updatedSkillType , String name){
+        SkillType skillType = this.skillTypeRepository.findBySkillTypeName(name);
+        if(skillType == null){
+            return 405;
+        }else {
+            skillType.setSkillTypeDesc(updatedSkillType.getSkillTypeDesc());
+            skillType.setIsCore(updatedSkillType.isIs_core());
+            skillType.setIsActive(updatedSkillType.isIsActive());
+            this.skillTypeRepository.saveAndFlush(skillType);
+            return 202;
+        }
     }
-
-    public int updateAll(){ return 405; }
 
 }
