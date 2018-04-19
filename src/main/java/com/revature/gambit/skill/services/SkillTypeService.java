@@ -19,16 +19,16 @@ public class SkillTypeService {
 
     public List<SkillType> findByAll() { return this.skillTypeRepository.findAll(); }
 
-    public int update(SkillType updatedSkillType , String name){
+    public boolean update(SkillType updatedSkillType , String name){
         SkillType skillType = this.skillTypeRepository.findBySkillTypeName(name);
         if(skillType == null){
-            return 405;
+            return false;
         }else {
             skillType.setSkillTypeDesc(updatedSkillType.getSkillTypeDesc());
             skillType.setIsCore(updatedSkillType.isIs_core());
             skillType.setIsActive(updatedSkillType.isIsActive());
             this.skillTypeRepository.saveAndFlush(skillType);
-            return 202;
+            return true;
         }
     }
 

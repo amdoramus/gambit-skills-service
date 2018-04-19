@@ -37,14 +37,14 @@ public class SkillTypeController {
     }
 
    @PutMapping(value = "/skilltype/{name}",consumes = MediaType.APPLICATION_JSON_VALUE)
-   public int update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
+   public boolean update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
        try {
            return this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8"));
 
        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
        }
-       return 400;
+       return false;
 
    }
 
