@@ -3,11 +3,14 @@ package com.revature.gambit.skill;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.revature.gambit.skill.controllers.SkillTypeController;
+import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.gambit.skill.beans.Skill;
@@ -26,8 +29,8 @@ public class SkillAndTypeJPATests {
 	@Autowired
 	private SkillRepository skillRepository;
 	
-	@Autowired
-	private SkillTypeRepository skillTypeRepository;
+	@MockBean
+	private SkillTypeService skillTypeService;
 	
 	@Test
 	public void getSkillByName() {
@@ -38,6 +41,7 @@ public class SkillAndTypeJPATests {
 	@Test
 	public void getSkillTypeByName() {
 		SkillType stk = new SkillType(100, "Coding", "Can code in a language", true, true);
-		assertEquals(stk.getSkillTypeName(), "Coding");
+		skillTypeService.findByAll();
+		assertEquals(skillTypeService.findByAll(),skillTypeService.findByAll());
 	}
 }
