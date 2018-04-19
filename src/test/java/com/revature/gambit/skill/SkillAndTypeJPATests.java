@@ -19,7 +19,7 @@ import com.revature.gambit.skill.repo.SkillTypeRepository;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class SkillAndTypeJPATests {
-	
+
 	@Autowired
 	private TestEntityManager entityManager;
 	

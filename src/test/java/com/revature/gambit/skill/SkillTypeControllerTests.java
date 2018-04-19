@@ -49,4 +49,6 @@ public class SkillTypeControllerTests {
 	//		      .andExpect(status().isOk())
 	//		      .andExpect(jsonPath("$[0].name", is(alex.getName())));
 	}
+
+	
 }

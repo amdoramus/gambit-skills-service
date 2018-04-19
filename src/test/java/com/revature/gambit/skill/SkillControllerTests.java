@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.controllers.SkillController;
 import com.revature.gambit.skill.repo.SkillRepository;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(SkillController.class)
