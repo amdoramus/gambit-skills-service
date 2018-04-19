@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class SkillTypeJPATests {
+public class SkillTypeBootTests {
 
     @Autowired
     private SkillTypeService skillTypeService;
