@@ -1,4 +1,4 @@
-package com.revature.tests;
+package com.revature.gambit.skill;
 
 import static org.junit.Assert.assertTrue;
 
