@@ -1,5 +1,6 @@
 package com.revature.gambit.skill.controllers;
 
+import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.repo.SkillTypeRepository;
 
@@ -9,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 public class SkillTypeController {
@@ -22,7 +24,15 @@ public class SkillTypeController {
     @GetMapping("/skilltype")
     public Iterable<SkillType> findAll(){
         return this.skillTypeService.findByAll();
-    }
+   }
 
+   @PutMapping(value = "/skilltype/{name}",consumes = MediaType.APPLICATION_JSON_VALUE)
+   public void update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
+       try {
+           this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8"));
+       } catch (UnsupportedEncodingException e) {
+           e.printStackTrace();
+       }
+   }
 
 }

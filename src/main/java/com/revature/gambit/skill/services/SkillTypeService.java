@@ -19,4 +19,14 @@ public class SkillTypeService {
 
     public List<SkillType> findByAll() { return this.skillTypeRepository.findAll(); }
 
+    public SkillType update(SkillType updatedSkillType , String name){
+        SkillType skillType =  this.skillTypeRepository.findBySkillTypeName(name);
+        skillType.setSkillTypeDesc(updatedSkillType.getSkillTypeDesc());
+        skillType.setIsCore(updatedSkillType.isIs_core());
+        skillType.setIsActive(updatedSkillType.isIsActive());
+        return this.skillTypeRepository.saveAndFlush(skillType);
+    }
+
+    public int updateAll(){ return 405; }
+
 }

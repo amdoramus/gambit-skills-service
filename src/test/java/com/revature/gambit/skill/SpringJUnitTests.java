@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.skill.controllers.SkillController;
 import com.revature.gambit.skill.repo.SkillRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,14 +22,14 @@ public class SpringJUnitTests {
 	private MockMvc mockMvc;
 	
 	@InjectMocks
-	private SkillRepository repository;
+	private SkillController controller;
 	
 	@Mock
 	private Skill skill;
 	
 	@Before
 	public void setUp() throws Exception {
-		mockMvc = MockMvcBuilders.standaloneSetup(repository).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 	
 	@Test
