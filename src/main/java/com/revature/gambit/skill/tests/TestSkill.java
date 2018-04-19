@@ -5,23 +5,25 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TestTransaction;
 
+import com.revature.gambit.skill.repo.SkillRepository;
 import com.revature.gambit.skill.services.SkillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= SkillService.class)
+@ContextConfiguration(classes= SkillService.class, locations = {"src/main/java/com/revature/gambit/skill/tests/"})
 public class TestSkill extends AbstractTransactionalJUnit4SpringContextTests {
 	
-//	@Autowired
-//	private SkillService skillser;
+	@Autowired
+	private SkillService skillser;
 	
 	@MockBean
-	private SkillService skillser;
+	private SkillRepository skillrepo;
 	
 	@Test
 	public void deleteSkillViaId() {
