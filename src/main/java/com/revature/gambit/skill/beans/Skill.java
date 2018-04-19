@@ -34,7 +34,7 @@ public class Skill {
 	}
 	public void setSkillID(int skillID) {
 		this.skillID = skillID;
-	}
+	} 
 	public String getSkillName() {
 		return skillName;
 	}
