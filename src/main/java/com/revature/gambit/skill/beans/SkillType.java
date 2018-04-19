@@ -99,4 +99,5 @@ public class SkillType {
 		result = 31 * result + (isCore ? 1 : 0);
 		return result;
 	}
+
 }
