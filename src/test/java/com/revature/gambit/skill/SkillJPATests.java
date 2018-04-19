@@ -69,14 +69,15 @@ public class SkillJPATests {
 //	}
 	
 	@Test
-	public void getSkill1() {
+	public void getSkill() {
 		Skill skill = this.skillService.findByName("Java");
 		assertEquals(skill.getSkillName(), "Java");
 	}
 	
 	@Test
-	public void getSkill2() {
-		Skill skill = this.skillService.findByName("JSP");
-		assertEquals(skill.getSkillName(), "JSP");
+	public void getAllSkill2() {
+		List<Skill> skillsTest = (List<Skill>) this.skillService.findAll();
+		assertEquals(skillsTest, skills);
 	}
+	
 }

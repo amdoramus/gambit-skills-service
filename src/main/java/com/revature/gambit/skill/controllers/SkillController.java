@@ -25,7 +25,7 @@ public class SkillController {
 
     @GetMapping("/skill")
     public Iterable<Skill> findAll(){
-        return this.skillService.findAll();
+        return this.skillService.findAllSkill();
     }
 
     @PutMapping
