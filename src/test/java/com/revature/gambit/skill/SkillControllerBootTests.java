@@ -13,13 +13,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.controllers.SkillController;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(
-//		webEnvironment = WebEnvironment.RANDOM_PORT,
-//		classes = Application.class)
-//@AutoConfigureMockMvc
-//@TestPropertySource(
-//		locations = "classpath:application-integrationtest.properties")
+@RunWith(SpringRunner.class)
+@SpringBootTest(
+		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		classes = Application.class)
+@AutoConfigureMockMvc
+@TestPropertySource(
+		locations = "classpath:application-integrationtest.properties")
 public class SkillControllerBootTests {
 
 	@Autowired
