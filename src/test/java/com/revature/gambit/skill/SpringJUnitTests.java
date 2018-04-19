@@ -1,5 +1,7 @@
 package com.revature.gambit.skill;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.controllers.SkillController;
 import com.revature.gambit.skill.repo.SkillRepository;
 
@@ -39,9 +42,21 @@ public class SpringJUnitTests {
 		skills.add(new Skill(1, "SQL", true));
 		
 		//when(skill.findAll()).thenReturn((List) batches);
-		
-		
 	}
+	
+	
+	@Test
+	public void getSkillByName() {
+		Skill sk = new Skill(1, "Java", true);
+		assertEquals(sk.getSkillName(), "Java");
+	}
+	
+	@Test
+	public void getSkillTypeByName() {
+		SkillType stk = new SkillType(100, "Coding", "Can code in a language", true, true);
+		assertEquals(stk.getSkillTypeName(), "Coding");
+	}
+	
 	
 }
 

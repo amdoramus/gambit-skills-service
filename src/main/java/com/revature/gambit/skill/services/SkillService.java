@@ -16,5 +16,7 @@ public class SkillService {
     public Iterable<Skill> findAll() { return this.skillRepository.findAll(); }
 
     public Skill findById(int id) { return this.skillRepository.findBySkillID(id); }
+    
+    
 
 }
