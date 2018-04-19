@@ -10,4 +10,5 @@ public interface SkillTypeRepository extends JpaRepository<SkillType,Integer> {
 
     SkillType findBySkillTypeID(int id);
 
+    SkillType findBySkillTypeName(String name);
 }

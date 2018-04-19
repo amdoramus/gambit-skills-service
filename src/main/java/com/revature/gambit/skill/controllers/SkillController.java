@@ -18,9 +18,6 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @Autowired
-    private SkillRepository skillRepository;
-
     @PostMapping("/skill")
     public Skill create(@Valid @RequestBody Skill skill) { return this.skillService.create(skill); }
 
