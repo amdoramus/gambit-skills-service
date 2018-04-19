@@ -9,4 +9,6 @@ import com.revature.gambit.skill.beans.Skill;
 public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
     Skill findBySkillID(int id);
+    
+    public Skill findBySkillName(String name);
 }

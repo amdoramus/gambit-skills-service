@@ -4,6 +4,7 @@ import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.repo.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SkillService {
@@ -17,6 +18,13 @@ public class SkillService {
 
     public Skill findById(int id) { return this.skillRepository.findBySkillID(id); }
     
-    
+    @Transactional
+	public Skill saveSkill(Skill skill) {
+		return skillRepository.save(skill);
+	}
+	
+	public Skill findByName(String name) {
+		return skillRepository.findBySkillName(name);
+	}
 
 }
