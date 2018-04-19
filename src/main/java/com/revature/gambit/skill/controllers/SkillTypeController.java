@@ -44,8 +44,8 @@ public class SkillTypeController {
        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
        }
-
        return 400;
+
    }
 
 
