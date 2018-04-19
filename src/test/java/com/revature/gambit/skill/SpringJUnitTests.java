@@ -37,7 +37,7 @@ public class SpringJUnitTests {
 		skills.add(new Skill(1, "Java", true));
 		skills.add(new Skill(1, "SQL", true));
 		
-		when(skill.findAll()).thenReturn((List) batches);
+		//when(skill.findAll()).thenReturn((List) batches);
 		
 		
 	}

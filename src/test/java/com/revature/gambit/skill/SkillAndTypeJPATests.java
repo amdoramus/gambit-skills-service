@@ -37,7 +37,7 @@ public class SkillAndTypeJPATests {
 	
 	@Test
 	public void getSkillTypeByName() {
-		SkillType stk = new SkillType("Coding", "Can code in a language", true, true);
+		SkillType stk = new SkillType(100, "Coding", "Can code in a language", true, true);
 		assertEquals(stk.getSkillTypeName(), "Coding");
 	}
 }

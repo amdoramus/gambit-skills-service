@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 
 @Entity
-@EntityScan("Skill")
+//@EntityScan("Skill")
 @Table(name="SKILL")
 public class Skill {
 

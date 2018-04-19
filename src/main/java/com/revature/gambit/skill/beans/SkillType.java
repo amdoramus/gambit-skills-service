@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 
 @Entity
-@EntityScan("SkillType")
+//@EntityScan("SkillType")
 @Table(name="SKILLTYPE")
 public class SkillType {
 
@@ -30,15 +30,15 @@ public class SkillType {
 
 	public SkillType() { }
 
-	public SkillType(String skillTypeName, String skillTypeDesc, boolean isActive, boolean isCore) {
+	public SkillType(Integer skillTypeID, String skillTypeName, String skillTypeDesc, boolean isActive, boolean isCore) {
+		this.skillTypeID = skillTypeID;
 		this.skillTypeName = skillTypeName;
 		this.skillTypeDesc = skillTypeDesc;
 		this.isActive = isActive;
 		this.isCore = isCore;
 	}
-	public Integer getSkillTypeId() {
-		return skillTypeID;
-	}
+
+	public Integer getSkillTypeId() { return skillTypeID; }
 	public void setSkillTypeId(Integer skillId) {
 		this.skillTypeID = skillId;
 	}
@@ -65,5 +65,31 @@ public class SkillType {
 	}
 	public void setIsCore(boolean isCore) {
 		this.isCore = isCore;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		SkillType skillType = (SkillType) o;
+
+		if (isActive != skillType.isActive) return false;
+		if (isCore != skillType.isCore) return false;
+		if (skillTypeID != null ? !skillTypeID.equals(skillType.skillTypeID) : skillType.skillTypeID != null)
+			return false;
+		if (skillTypeName != null ? !skillTypeName.equals(skillType.skillTypeName) : skillType.skillTypeName != null)
+			return false;
+		return skillTypeDesc != null ? skillTypeDesc.equals(skillType.skillTypeDesc) : skillType.skillTypeDesc == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = skillTypeID != null ? skillTypeID.hashCode() : 0;
+		result = 31 * result + (skillTypeName != null ? skillTypeName.hashCode() : 0);
+		result = 31 * result + (skillTypeDesc != null ? skillTypeDesc.hashCode() : 0);
+		result = 31 * result + (isActive ? 1 : 0);
+		result = 31 * result + (isCore ? 1 : 0);
+		return result;
 	}
 }
