@@ -76,5 +76,13 @@ public class Skill {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", isActive=" + isActive + ", skillTypes="
+				+ skillTypes + "]";
+	}
+	
+	
 	
 }

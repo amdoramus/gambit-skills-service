@@ -16,6 +16,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.controllers.SkillTypeController;
@@ -30,19 +32,18 @@ public class SkillTypeControllerTests {
 	private MockMvc mvc;
 	
 	@MockBean
-	private SkillTypeRepository repository;
+	private SkillTypeController repository;
 	
 	@Test
 	public void getSkillType() throws Exception{
 		
 		SkillType skillT = new SkillType(100, "Java", "I can code in Java", true, true);
 		Iterable<SkillType> skills = Arrays.asList(skillT);
-		
-		//mvc.perform(post("/skilltype")
-		//	.contentType(MediaType.APPLICATION_JSON)
-		//	.content(skillT)
-		//	.andDo(print())
-		//	.andExpect(content().string("[]"));
+	 
+		mvc.perform((RequestBuilder) ((ResultActions) get("/skilltype")
+			.contentType(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(content().string("[]")));
 		
 	//	mvc.perform(get("/api/employees")
 	//		      .contentType(MediaType.APPLICATION_JSON))
