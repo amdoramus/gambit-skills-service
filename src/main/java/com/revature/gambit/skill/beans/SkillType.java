@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 //@EntityScan("SkillType")
@@ -27,6 +28,12 @@ public class SkillType {
 
 	@Column(name = "IS_CORE")
 	private boolean isCore;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name = "SKILL_SKILLTYPE",
+			joinColumns = {@JoinColumn(name = "SKILLTYPE_ID")},
+			inverseJoinColumns = {@JoinColumn(name = "SKILL_ID")})
+	private List<Skill> skills;
 
 	public SkillType() { }
 

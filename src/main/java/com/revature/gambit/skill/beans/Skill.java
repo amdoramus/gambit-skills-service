@@ -1,12 +1,9 @@
 package com.revature.gambit.skill.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-//@EntityScan("Skill")
 @Table(name="SKILL")
 public class Skill {
 
@@ -21,6 +18,9 @@ public class Skill {
 
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
+
+	@ManyToMany(mappedBy = "skills")
+	private List<SkillType> skillTypes;
 	
 	public Skill() { }
 	

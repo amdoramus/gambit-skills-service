@@ -16,17 +16,13 @@ public class SkillTypeController {
     @Autowired
     private SkillTypeService skillTypeService;
 
-//    @PostMapping("/skilltype")
-//    public SkillType create(@Valid @RequestBody SkillType skillType) { return this.skillTypeService.create(skillType); }
-
-//    @GetMapping("/skilltype")
-//    public Iterable<SkillType> findAll(){
-//        return this.skillTypeService.findByAll();
-//    }
+    @PostMapping("/skilltype")
+    public SkillType create(@Valid @RequestBody SkillType skillType) { return this.skillTypeService.create(skillType); }
 
     @GetMapping("/skilltype")
-    public String findAll(){
-        return "hello";
+    public Iterable<SkillType> findAll(){
+        return this.skillTypeService.findByAll();
     }
+
 
 }
