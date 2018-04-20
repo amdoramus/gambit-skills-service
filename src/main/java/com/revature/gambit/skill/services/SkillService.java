@@ -34,9 +34,9 @@ public class SkillService implements ISkillService {
 	}
 
 	@Override
-	public void deleteSkillViaName(String name) {
+	public void deleteSkillViaName(int id) {
 		// TODO Auto-generated method stub
-		skillRepository.deleteBySkillName(name);
+		skillRepository.delete(findById(id)); //change to take a name instead of an int
 	}
 	
 

@@ -45,12 +45,12 @@ public class SkillController {
     		
     }
     
-    @DeleteMapping("/skill/{name}")
-    public ResponseEntity<Void> deleteSkillofName(@PathVariable("name") String name) {
-    		iskillService.deleteSkillViaName(name);
-    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    		
-    }
+//    @DeleteMapping("/skill/{name}")
+//    public ResponseEntity<Void> deleteSkillofName(@PathVariable("name") String name) {
+//    		iskillService.deleteSkillViaName(name);
+//    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+//    		
+//    }
 
 
 

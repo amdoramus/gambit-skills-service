@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.gambit.skill.beans.Skill;
 
 @Repository
-public interface SkillRepository extends CrudRepository<Skill, Integer> { //Might be JPA repository
+public interface SkillRepository extends CrudRepository<Skill, Integer> { 
 	
 	
 	Skill findBySkillID(int id);
