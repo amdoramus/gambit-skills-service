@@ -32,13 +32,16 @@ public class SkillJPATests {
 	public void testSkillCreate() {
 		Skill skill = new Skill(1900, "test", true);
 		this.skillService.create(skill);
+		System.out.println(skill.getSkillID());
 		Skill retrieveSkill = this.skillService.findById(1900);
+		System.out.println(retrieveSkill.getSkillID());
 		assertEquals(skill.getSkillID(), retrieveSkill.getSkillID());
 	}
 	
 	@Test
 	public void getSkillByName() {
 		Skill sk = new Skill(1, "Java", true);
+		System.out.println(sk.getSkillID());
 		assertEquals(sk.getSkillName(), "Java");
 	}
 }
