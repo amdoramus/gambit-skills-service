@@ -44,7 +44,7 @@ public class SkillControllerTests {
 			add(new Skill(2, "java", true));
 		}};
 		Iterable<Skill> skills = list;
-		when(controller.findAll()).thenReturn(skills);
+		//when(controller.findAll()).thenReturn(skills);
 		mvc.perform(get("/skill"))
 			.andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))

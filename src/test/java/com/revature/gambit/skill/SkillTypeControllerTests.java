@@ -90,7 +90,7 @@ public class SkillTypeControllerTests {
 
         mvc.perform(MockMvcRequestBuilders.get("/skilltype/{name}", "jv")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
     }
 
 
