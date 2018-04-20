@@ -39,13 +39,13 @@ public class SkillServiceTests {
 
 	@Test
 	public void testSaveSkill() {
-		Skill skill1 = skillService.findByName("Javas");
+		Skill skill1 = skillService.findByName("PEGA");
 		Skill skill2 = skillService.saveSkill(new Skill(1, "Javas", true));
 		assertNotEquals(skill2.getSkillName(), skill1.getSkillName());
 		Skill skill3 = skillService.saveSkill(new Skill(1, skill1.getSkillName(), true));
 		assertEquals(skill1.getSkillName(), skill3.getSkillName());
 	}
-
+	
 	@Test
 	public void testDeleteSkillFunction() {
 		Iterable<Skill> skills = this.skillService.findAll();
