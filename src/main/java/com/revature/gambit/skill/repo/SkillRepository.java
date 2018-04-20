@@ -9,10 +9,11 @@ import com.revature.gambit.skill.beans.Skill;
 public interface SkillRepository extends CrudRepository<Skill, Integer> { 
 	
     Skill findBySkillName(String name);
-	void deleteBySkillName(String name);
 
     List<Skill> findAll();
     
     List<Skill> findAllByIsActive(boolean bool);
     
+	void deleteBySkillName(String name);
+
 }

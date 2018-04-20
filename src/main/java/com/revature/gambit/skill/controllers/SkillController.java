@@ -2,7 +2,6 @@ package com.revature.gambit.skill.controllers;
 
 import javax.validation.Valid;
 
-import com.revature.gambit.skill.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.repo.SkillRepository;
 import com.revature.gambit.skill.services.ISkillService;
+import com.revature.gambit.skill.services.SkillService;
+
+import java.net.*;
 
 @RestController
 public class SkillController {
 
     @Autowired
     private SkillService skillService;
-
-    @Autowired
-    private SkillRepository skillRepository;
     
     @Autowired
     private ISkillService iskillService;
@@ -53,20 +52,24 @@ public class SkillController {
         this.skillService.saveSkill(updatedSkill);
         return  new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
-    
-    @DeleteMapping("/skill/{id}")
+    /**
+     * Here for convenience in case we ever change our deleting strategy
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/skill")
     public ResponseEntity<Void> deleteSkillOfId(@PathVariable("id") Integer id) {
     		iskillService.deleteSkillViaId(id);
-    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     		
     }
     
-//    @DeleteMapping("/skill/{name}")
-//    public ResponseEntity<Void> deleteSkillofName(@PathVariable("name") String name) {
-//    		iskillService.deleteSkillViaName(name);
-//    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    		
-//    }
+    @DeleteMapping("/skill/{name}")
+    public ResponseEntity<Void> deleteSkillofName(@PathVariable String name) {
+    		iskillService.deleteSkillViaName(name);
+    		return new ResponseEntity<Void>( HttpStatus.ACCEPTED);
+//    		java.net.URLDecoder.decode("/", "UTF-8"),
+    }
 
     @GetMapping("/skill/{name}")
     public ResponseEntity<Skill> findByName(@PathVariable String name) {

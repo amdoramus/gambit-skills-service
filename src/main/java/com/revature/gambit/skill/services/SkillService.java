@@ -32,6 +32,10 @@ public class SkillService implements ISkillService {
 	public Skill findByName(String name) {
 		return skillRepository.findBySkillName(name);
 	}
+	
+	public Skill findByName(String name) {
+		return this.skillRepository.findBySkillName(name);
+	}
 
 	@Transactional
 	public Skill saveSkill(Skill skill) {
