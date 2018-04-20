@@ -13,7 +13,7 @@ import com.revature.gambit.skill.services.SkillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class SkillBootTests {
+public class SkillServiceTests {
 
     @Autowired
     private SkillService skillService;
