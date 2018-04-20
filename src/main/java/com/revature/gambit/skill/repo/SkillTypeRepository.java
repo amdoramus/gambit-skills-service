@@ -8,8 +8,6 @@ import com.revature.gambit.skill.beans.SkillType;
 @Repository
 public interface SkillTypeRepository extends JpaRepository<SkillType,Integer> {
 
-    SkillType findBySkillTypeId(int id);
-
     SkillType findBySkillTypeName(String name);
     
     void deleteBySkillTypeName(String name);

@@ -1,7 +1,6 @@
 package com.revature.gambit.skill.controllers;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,69 +17,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.repo.SkillRepository;
 import com.revature.gambit.skill.services.ISkillService;
- 
+
 @RestController
 public class SkillController {
 
-    @Autowired
-    private SkillService skillService;
+	@Autowired
+	private SkillService skillService;
 
-    @Autowired
-    private SkillRepository skillRepository;
-    
-    @Autowired
-    private ISkillService iskillService;
+	@Autowired
+	private ISkillService iskillService;
 
+	@PostMapping("/skill")
+	public ResponseEntity<Void> create(@Valid @RequestBody Skill skill) {
+		this.skillService.create(skill);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
 
-    @PostMapping("/skill")
-    public ResponseEntity<Void> create(@Valid @RequestBody Skill skill) {
-        this.skillService.create(skill);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
-    }
+	@GetMapping("/skill")
+	public ResponseEntity<Iterable<Skill>> findAll() {
+		return new ResponseEntity<Iterable<Skill>>(this.skillService.findAll(), HttpStatus.OK);
+	}
 
-    @GetMapping("/skill")
-    public ResponseEntity<List<Skill>> findAll(){
-        return new ResponseEntity<List<Skill>>(this.skillService.findAllSkill() , HttpStatus.OK);
-    }
-    
-    @GetMapping("/skill/active")
-    public Iterable<Skill> findActive(){
-    	return this.skillService.findAllActive();
-    }
+	@GetMapping("/skill/active")
+	public Iterable<Skill> findActive() {
+		return this.skillService.findAllActive();
+	}
 
-    @PutMapping
-    public ResponseEntity<Void> update(@RequestBody Skill updatedSkill) {
+	@PutMapping
+	public ResponseEntity<Void> update(@RequestBody Skill updatedSkill) {
 
-        this.skillService.saveSkill(updatedSkill);
-        return  new ResponseEntity<Void>(HttpStatus.ACCEPTED);
-    }
-    
-    @DeleteMapping("/skill/{id}")
-    public ResponseEntity<Void> deleteSkillOfId(@PathVariable("id") Integer id) {
-    		iskillService.deleteSkillViaId(id);
-    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    		
-    }
-    
-//    @DeleteMapping("/skill/{name}")
-//    public ResponseEntity<Void> deleteSkillofName(@PathVariable("name") String name) {
-//    		iskillService.deleteSkillViaName(name);
-//    		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//    		
-//    }
+		this.skillService.saveSkill(updatedSkill);
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
 
-    @GetMapping("/skill/{name}")
-    public ResponseEntity<Skill> findByName(@PathVariable String name) {
-        try {
-            return new ResponseEntity<Skill>(this.skillService.findByName(java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.OK);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+	@DeleteMapping("/skill/{name}")
+	public ResponseEntity<Void> deleteSkillofName(@PathVariable String name) {
+		iskillService.deleteSkillViaName(name);
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
-    }
-    
+/*	@GetMapping("/skill/{name}")
+	public ResponseEntity<Skill> findByName(@PathVariable String name) {
+		try {
+			return new ResponseEntity<Skill>(this.skillService.findByName(java.net.URLDecoder.decode(name, "UTF-8")),
+					HttpStatus.OK);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
+	}
+*/
 }
-

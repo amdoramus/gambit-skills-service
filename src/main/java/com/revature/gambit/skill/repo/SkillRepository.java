@@ -11,6 +11,9 @@ import com.revature.gambit.skill.beans.Skill;
 public interface SkillRepository extends CrudRepository<Skill, Integer> { 
 	
     Skill findBySkillName(String name);
+    
+    Skill findBySkillID(int id);
+    
 	void deleteBySkillName(String name);
 
     List<Skill> findAll();

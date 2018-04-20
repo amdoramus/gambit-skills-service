@@ -17,52 +17,35 @@ public class SkillService implements ISkillService {
 	@Autowired
 	private SkillRepository skillRepository;
 
+	@Transactional
 	public Skill create(Skill skill) {
-		return this.skillRepository.save(skill);
+		return skillRepository.save(skill);
 	}
-
-	public Iterable<Skill> findAll() {
-		return this.skillRepository.findAll();
-	}
-
+	
 	public Skill findById(int id) {
 		return this.skillRepository.findBySkillID(id);
 	}
 
-	@Override
-	public void deleteSkillViaId(int id) {
-
-		skillRepository.delete(findById(id));
-
+	public Iterable<Skill> findAll() {
+		return skillRepository.findAll();
 	}
-
-  @Autowired
-  private SkillRepository skillRepository;
-
-  public Skill create(Skill skill) { return this.skillRepository.save(skill); }
-
-  public Skill findByName(string name) { return this.skillRepository.findBySkillName(name); }
-    
-	@Transactional
-	public Skill saveSkill(Skill skill) {
-		return skillRepository.saveAndFlush(skill);
+	
+	public Iterable<Skill> findAllActive(){
+		return skillRepository.findAllByIsActive(true);
 	}
 	
 	public Skill findByName(String name) {
 		return skillRepository.findBySkillName(name);
 	}
-	
-	public List<Skill> findAllSkill(){
-		return skillRepository.findAll();
-	}
-	
-	public List<Skill> findAllActive(){
-		return skillRepository.findAllByIsActive(true);
-	}
-	@Override
-	public void deleteSkillViaName(String name) {
-		skillRepository.delete(findByName(name)); //change to take a name instead of an int
 
+	@Transactional
+	public Skill saveSkill(Skill skill) {
+		return skillRepository.save(skill);
+	}
+
+	@Transactional
+	public void deleteSkillViaName(String name) {
+		skillRepository.delete(findByName(name));
 	}
 
 }

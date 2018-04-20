@@ -32,7 +32,7 @@ public class Skill {
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
 
-	@ManyToMany(mappedBy = "skills", cascade =CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "skills", cascade =CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<SkillType> skillTypes;
 
 	public Skill() {
