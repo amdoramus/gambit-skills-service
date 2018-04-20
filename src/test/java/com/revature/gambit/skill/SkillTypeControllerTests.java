@@ -1,12 +1,16 @@
 package com.revature.gambit.skill;
 
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +27,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.controllers.SkillTypeController;
+
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SkillTypeControllerTests {
