@@ -38,15 +38,12 @@ public class SkillControllerTests {
 
 	@Test
 	public void getSkillType() throws Exception{
-		SkillService s1 = new SkillService();
-		
+
 		List<Skill> list = new ArrayList<Skill>() {{
 			add(new Skill(1, "Coding", true));
 			add(new Skill(2, "java", true));
 		}};
 		Iterable<Skill> skills = list;
-		System.out.println("00000000000000000" + skills.toString());
-		
 		when(controller.findAll()).thenReturn(skills);
 		mvc.perform(get("/skill"))
 			.andExpect(status().isOk())
