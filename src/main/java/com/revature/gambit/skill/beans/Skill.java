@@ -1,15 +1,28 @@
 package com.revature.gambit.skill.beans;
 
-import javax.persistence.*;
 import java.util.List;
 
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 @Entity
-@Table(name="SKILL")
+@Table(name = "SKILL")
 public class Skill {
 
 	@Id
-	@Column(name="SKILL_ID")
-	@SequenceGenerator(name="SKILL_ID_SEQ",sequenceName="SKILL_ID_SEQ")
+	@Column(name = "SKILL_ID")
+	@SequenceGenerator(name = "SKILL_ID_SEQ", sequenceName = "SKILL_ID_SEQ")
 	@GeneratedValue(generator = "SKILL_ID_SEQ")
 	private int skillID;
 
@@ -19,34 +32,42 @@ public class Skill {
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
 
-	@ManyToMany(mappedBy = "skills")
+	@ManyToMany(mappedBy = "skills", cascade =CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<SkillType> skillTypes;
-	
-	public Skill() { }
-	
+
+	public Skill() {
+	}
+
 	public Skill(int skill_id, String skill_name, boolean active) {
 		this.skillID = skill_id;
 		this.skillName = skill_name;
 		this.isActive = active;
 	}
+
 	public int getSkillID() {
 		return skillID;
 	}
+
 	public void setSkillID(int skillID) {
 		this.skillID = skillID;
-	} 
+	}
+	
 	public String getSkillName() {
 		return skillName;
 	}
+
 	public void setSkillName(String skillName) {
 		this.skillName = skillName;
 	}
+
 	public boolean isActive() {
 		return isActive;
 	}
+
 	public void setActive(boolean active) {
 		this.isActive = active;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +77,7 @@ public class Skill {
 		result = prime * result + ((skillName == null) ? 0 : skillName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,11 +98,26 @@ public class Skill {
 			return false;
 		return true;
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
 
 	@Override
 	public String toString() {
 		return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", isActive=" + isActive + ", skillTypes="
 				+ skillTypes + "]";
 	}
+<<<<<<< HEAD
 	
+<<<<<<< HEAD
+	
+>>>>>>> origin/feature-get-skill
+	
+=======
+>>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
+=======
+
+>>>>>>> origin/feature-deleteSkill
 }
