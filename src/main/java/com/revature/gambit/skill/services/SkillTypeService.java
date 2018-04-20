@@ -1,13 +1,16 @@
 package com.revature.gambit.skill.services;
 
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.repo.SkillTypeRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
+
 @Service
-public class SkillTypeService {
+public class SkillTypeService implements ISkillTypeService {
 
     @Autowired
     private SkillTypeRepository skillTypeRepository;
@@ -30,4 +33,11 @@ public class SkillTypeService {
             return true;
         }
     }
+
+	@Override
+	@Transactional
+	public void deleteBySkillTypeName(String name) {
+		this.skillTypeRepository.deleteBySkillTypeName(name);
+	}
+
 }

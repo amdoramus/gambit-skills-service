@@ -28,7 +28,7 @@ public class SkillType {
 	@Column(name = "IS_CORE")
 	private boolean isCore;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
 	@JoinTable(name = "SKILL_SKILLTYPE",
 			joinColumns = {@JoinColumn(name = "SKILLTYPE_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "SKILL_ID")})

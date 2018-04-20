@@ -1,19 +1,16 @@
 package com.revature.gambit.skill.repo;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.revature.gambit.skill.beans.Skill;
 
 @Repository
-public interface SkillRepository extends JpaRepository<Skill, Integer> {
+public interface SkillRepository extends CrudRepository<Skill, Integer> { 
+	
+    Skill findBySkillName(String name);
+	void deleteBySkillName(String name);
 
-    Skill findBySkillID(int id);
-    
-    public Skill findBySkillName(String name);
-    
     List<Skill> findAll();
     
     List<Skill> findAllByIsActive(boolean bool);
