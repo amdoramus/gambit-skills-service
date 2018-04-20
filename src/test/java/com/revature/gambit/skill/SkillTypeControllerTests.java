@@ -1,20 +1,13 @@
 package com.revature.gambit.skill;
 
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -93,6 +86,39 @@ public class SkillTypeControllerTests {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void putSkillType() throws Exception{
+
+        SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+        ObjectMapper mapper =  new ObjectMapper();
+        String requestJson = mapper.writeValueAsString(skill1);
+
+
+        when(skillTypeService.update(skill1, "Java")).thenReturn(true);
+
+        mvc.perform(MockMvcRequestBuilders.put("/skilltype/{name}", "Java")
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
+
+    }
+
+
+    @Test
+    public void putSkillTypeFailed() throws Exception{
+
+        SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+        ObjectMapper mapper =  new ObjectMapper();
+        String requestJson = mapper.writeValueAsString(skill1);
+
+        when(skillTypeService.update(skill1, "Jv")).thenReturn(false);
+
+        mvc.perform(MockMvcRequestBuilders.put("/skilltype/{name}", "Jv")
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
+    }
 
 
 }

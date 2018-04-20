@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.controllers.SkillController;
-import com.revature.gambit.skill.services.SkillService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(SkillController.class)
