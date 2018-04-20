@@ -25,13 +25,10 @@ public class SkillController {
 
     @Autowired
     private SkillRepository skillRepository;
-<<<<<<< HEAD
     
     @Autowired
     private ISkillService iskillService;
 
-=======
->>>>>>> origin/feature-deleteSkill
 
     @PostMapping("/skill")
     public Skill create(@Valid @RequestBody Skill skill) { return this.skillService.create(skill); }
@@ -58,3 +55,4 @@ public class SkillController {
 
 
 }
+

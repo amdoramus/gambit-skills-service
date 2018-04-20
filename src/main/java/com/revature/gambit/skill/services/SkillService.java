@@ -2,7 +2,6 @@ package com.revature.gambit.skill.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
@@ -30,30 +29,18 @@ public class SkillService implements ISkillService {
 
 	@Override
 	public void deleteSkillViaId(int id) {
-<<<<<<< HEAD
+
 		skillRepository.delete(findById(id));
-=======
-		skillRepository.deleteById(id);
->>>>>>> origin/feature-deleteSkill
+
 	}
 
 	@Override
 	public void deleteSkillViaName(int id) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 		skillRepository.delete(findById(id)); //change to take a name instead of an int
+
 	}
-	
-=======
-		skillRepository.deleteSkillWithName(name);
-	}
-	
-	@Bean
-    public SkillService skillService() {
-        SkillService skillService = new SkillService();
-        // set properties, etc.
-        return skillService;
-    }
->>>>>>> origin/feature-deleteSkill
+
 
 }
