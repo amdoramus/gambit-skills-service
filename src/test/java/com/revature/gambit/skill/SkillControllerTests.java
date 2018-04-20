@@ -1,20 +1,30 @@
 package com.revature.gambit.skill;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.controllers.SkillController;
+import com.revature.gambit.skill.services.SkillService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(SkillController.class)
@@ -26,18 +36,22 @@ public class SkillControllerTests {
 	@MockBean
 	private SkillController controller;
 
-	@Before
-	public void populate() {
-		Skill sk1 = new Skill(1, "coding", true);
-		Skill sk2 = new Skill(2, "java", true);
-		controller.create(sk1);
-		controller.create(sk2);
-		System.out.println("oooooooooooooo" + controller.findAll());
-	}
-	
 	@Test
 	public void getSkillType() throws Exception{
-		mvc.perform(get("/skill")).andExpect(content().string(""));
+		SkillService s1 = new SkillService();
+		
+		List<Skill> list = new ArrayList<Skill>() {{
+			add(new Skill(1, "Coding", true));
+			add(new Skill(2, "java", true));
+		}};
+		Iterable<Skill> skills = list;
+		System.out.println("00000000000000000" + skills.toString());
+		
+		when(controller.findAll()).thenReturn(skills);
+		mvc.perform(get("/skill"))
+			.andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+			.andExpect(content().string("[{\"skillID\":1,\"skillName\":\"Coding\",\"active\":true},{\"skillID\":2,\"skillName\":\"java\",\"active\":true}]"));
 		
 	}
 }

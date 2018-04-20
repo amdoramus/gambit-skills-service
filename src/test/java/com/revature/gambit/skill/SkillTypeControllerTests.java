@@ -1,11 +1,8 @@
 package com.revature.gambit.skill;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -21,7 +18,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.controllers.SkillTypeController;
-import com.revature.gambit.skill.repo.SkillTypeRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(SkillTypeController.class)
