@@ -1,4 +1,4 @@
-  package com.revature.gambit.skill.beans;
+package com.revature.gambit.skill.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-//@EntityScan("SkillType")
 @Table(name="SKILLTYPE")
 public class SkillType {
 
@@ -106,5 +105,5 @@ public class SkillType {
 		result = 31 * result + (isCore ? 1 : 0);
 		return result;
 	}
-
+  
 }
