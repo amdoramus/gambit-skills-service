@@ -31,5 +31,5 @@ public class SkillTypeService {
             return true;
         }
     }
-
+  
 }

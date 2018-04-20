@@ -12,6 +12,10 @@
 **/bin/
 **/META-INF/**
 
+#Maven
+mvnw
+mvnw.cmd
+
 #Eclipse
 **/.metadata
 **/.project

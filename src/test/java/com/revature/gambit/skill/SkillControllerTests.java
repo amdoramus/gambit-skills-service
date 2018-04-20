@@ -49,5 +49,6 @@ public class SkillControllerTests {
 		mvc.perform(MockMvcRequestBuilders.get("/skill")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
+
 	}
 }

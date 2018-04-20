@@ -31,8 +31,12 @@ public class SkillTypeController {
     @GetMapping("/skilltype/{name}")
     public ResponseEntity<SkillType> findSkill(@PathVariable String name){
         try {
-            return new ResponseEntity<SkillType>(this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.OK);
-
+            SkillType skillType = this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name,"UTF-8"));
+            if(skillType == null){
+                return new ResponseEntity<SkillType>( HttpStatus.NOT_FOUND);
+            }else {
+                return new ResponseEntity<SkillType>(this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8")), HttpStatus.OK);
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -43,7 +47,9 @@ public class SkillTypeController {
    @PutMapping(value = "/skilltype/{name}",consumes = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
        try {
-           return  new ResponseEntity<Boolean>(this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.ACCEPTED);
+           boolean successful = this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8"));
+           if(successful)
+           return  new ResponseEntity<Boolean>( HttpStatus.ACCEPTED);
 
        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
@@ -51,9 +57,5 @@ public class SkillTypeController {
        return new ResponseEntity<Boolean>( HttpStatus.NOT_FOUND);
 
    }
-
-
-
-
 
 }
