@@ -1,6 +1,5 @@
 package com.revature.gambit.skill.services;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -21,29 +20,25 @@ public class SkillService implements ISkillService {
 	public Skill create(Skill skill) {
 		return skillRepository.save(skill);
 	}
-	
-	public Skill findById(int id) {
-		return this.skillRepository.findBySkillID(id);
-	}
 
 	public Iterable<Skill> findAll() {
 		return skillRepository.findAll();
 	}
-	
-	public Iterable<Skill> findAllActive(){
+
+	public Iterable<Skill> findAllActive() {
 		return skillRepository.findAllByIsActive(true);
 	}
-	
+
 	public Skill findByName(String name) {
 		return skillRepository.findBySkillName(name);
 	}
 
 	@Transactional
 	public Skill saveSkill(Skill skill) {
-		return skillRepository.save(skill);
+		return skillRepository.saveAndFlush(skill);
 	}
 
-	@Transactional
+	@Override
 	public void deleteSkillViaName(String name) {
 		skillRepository.delete(findByName(name));
 	}
