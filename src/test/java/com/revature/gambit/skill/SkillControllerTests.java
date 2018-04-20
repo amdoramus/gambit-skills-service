@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.controllers.SkillController;
-import com.revature.gambit.skill.services.SkillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SkillControllerTests {

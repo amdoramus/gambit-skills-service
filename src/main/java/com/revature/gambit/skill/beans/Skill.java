@@ -98,26 +98,11 @@ public class Skill {
 			return false;
 		return true;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
 
 	@Override
 	public String toString() {
 		return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", isActive=" + isActive + ", skillTypes="
 				+ skillTypes + "]";
 	}
-<<<<<<< HEAD
-	
-<<<<<<< HEAD
-	
->>>>>>> origin/feature-get-skill
-	
-=======
->>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
-=======
 
->>>>>>> origin/feature-deleteSkill
 }
