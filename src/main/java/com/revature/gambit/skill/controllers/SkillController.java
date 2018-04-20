@@ -21,7 +21,9 @@ public class SkillController {
     private SkillService skillService;
 
     @PostMapping("/skill")
-    public Skill create(@Valid @RequestBody Skill skill) { return this.skillService.create(skill); }
+    public Skill create(@Valid @RequestBody Skill skill) { 
+    	return this.skillService.create(skill); 
+    }
 
     @GetMapping("/skill")
     public Iterable<Skill> findAll(){

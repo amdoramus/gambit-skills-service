@@ -29,14 +29,14 @@ import com.revature.gambit.skill.services.SkillTypeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class SkillJPATests {
+public class SkillJPAGetandPutTest {
 
     @Autowired
     private SkillService skillService;
     
     @Test
     public void testFindAllSkills() {
-        Iterable<Skill> skill = skillService.findAll();
+        Iterable<Skill> skill = skillService.findAllSkill();
         assertEquals(41, ((List<Skill>) skill).size());
     }
     
@@ -44,6 +44,13 @@ public class SkillJPATests {
     public void testFindBySkillName() {
     	Skill skill = skillService.findByName("Java");
     	assertEquals(skill.getSkillName(), "Java");
+    }
+ 
+    
+    @Test
+    public void testFindAllByIsActive() {
+    	List<Skill> skills = skillService.findAllActive();
+    	assertEquals(skills.size(), 40);
     }
     
     @Test
@@ -54,11 +61,4 @@ public class SkillJPATests {
     	Skill skill3 = skillService.saveSkill(new Skill(1, skill1.getSkillName(), true));
     	assertEquals(skill1.getSkillName(), skill3.getSkillName());
     }
-    
-    @Test
-    public void testFindAllByIsActive() {
-    	List<Skill> skills = skillService.findAllActive();
-    	assertEquals(skills.size(), 40);
-    }
-
 }

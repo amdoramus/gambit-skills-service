@@ -17,8 +17,6 @@ public class SkillService {
 
     public Skill create(Skill skill) { return this.skillRepository.save(skill); }
 
-    public Iterable<Skill> findAll() { return this.skillRepository.findAll(); }
-
     public Skill findById(int id) { return this.skillRepository.findBySkillID(id); }
     
     @Transactional

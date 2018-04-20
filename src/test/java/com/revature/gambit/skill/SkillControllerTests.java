@@ -38,6 +38,5 @@ public class SkillControllerTests {
 	@Test
 	public void getSkillType() throws Exception{
 		mvc.perform(get("/skill")).andExpect(content().string(""));
-		
 	}
 }
