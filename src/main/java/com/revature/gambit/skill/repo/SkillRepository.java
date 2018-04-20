@@ -10,6 +10,8 @@ public interface SkillRepository extends CrudRepository<Skill, Integer> {
 	
 	Skill findBySkillID(int id);
 	
+	Skill findBySkillName(String name);
+	
 	void deleteBySkillID(int id);
 	void deleteBySkillName(String name);
 

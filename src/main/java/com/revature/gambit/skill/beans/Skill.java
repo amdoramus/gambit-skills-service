@@ -2,15 +2,12 @@ package com.revature.gambit.skill.beans;
 
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
@@ -32,7 +29,7 @@ public class Skill {
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
 
-	@ManyToMany(mappedBy = "skills", cascade =CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "skills", cascade =CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<SkillType> skillTypes;
 
 	public Skill() {

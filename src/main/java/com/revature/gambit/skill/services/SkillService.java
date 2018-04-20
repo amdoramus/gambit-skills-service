@@ -26,21 +26,24 @@ public class SkillService implements ISkillService {
 	public Skill findById(int id) {
 		return this.skillRepository.findBySkillID(id);
 	}
+	
+	public Skill findByName(String name) {
+		return this.skillRepository.findBySkillName(name);
+	}
 
 	@Override
 	public void deleteSkillViaId(int id) {
-
 		skillRepository.delete(findById(id));
-
 	}
 
 	@Override
-	public void deleteSkillViaName(int id) {
+	public void deleteSkillViaName(String name) {
 		// TODO Auto-generated method stub
 
-		skillRepository.delete(findById(id)); //change to take a name instead of an int
+		skillRepository.delete(findByName(name)); //change to take a name instead of an int
 
 	}
+
 
 
 }
