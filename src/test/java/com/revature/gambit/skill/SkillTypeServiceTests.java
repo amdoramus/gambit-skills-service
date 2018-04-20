@@ -1,6 +1,7 @@
 package com.revature.gambit.skill;
 
 import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -23,6 +24,19 @@ public class SkillTypeServiceTests {
     @Autowired
     private SkillTypeService skillTypeService;
 
+    @Autowired
+    private SkillTypeRepository skillTypeRepository;
+
+    @Test
+    public void testCreate(){
+        int sizeOfList = skillTypeService.findByAll().size();
+        SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true , true);
+        skillTypeService.create(tstSkillType);
+        assertTrue( skillTypeService.findByAll().size() > sizeOfList );
+        skillTypeRepository.delete(tstSkillType);
+
+    }
+
     @Test
     public void getAllSkillTypes() {
         Iterable<SkillType> skillTypes = skillTypeService.findByAll();
@@ -43,15 +57,25 @@ public class SkillTypeServiceTests {
 
     @Test
     public void updateSkillType() {
-        SkillType skillType = skillTypeService.findBySkillTypeName("PEGA");
-        skillType.setIsCore(false);
-        assertTrue(skillTypeService.update(skillType,"PEGA"));
+        SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true , true);
+        skillTypeService.create(tstSkillType);
+        tstSkillType.setIsCore(false);
+        skillTypeService.update(tstSkillType,"Testing");
+        tstSkillType = skillTypeService.findBySkillTypeName("Testing");
+        assertFalse(tstSkillType.isIs_core());
+        skillTypeRepository.delete(tstSkillType);
+
     }
 
-    @Test
+   @Test
     public void failUpdateSkillType() {
-        SkillType skillType = skillTypeService.findBySkillTypeName("PEGAN");
-        assertFalse(skillTypeService.update(skillType,"PEGAN"));
+       SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true , true);
+       skillTypeService.create(tstSkillType);
+       tstSkillType.setIsCore(false);
+       skillTypeService.update(tstSkillType,"Test");
+       tstSkillType = skillTypeService.findBySkillTypeName("Testing");
+       assertTrue(tstSkillType.isIs_core());
+       skillTypeRepository.delete(tstSkillType);
     }
 
 }

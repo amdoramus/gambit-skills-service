@@ -4,11 +4,14 @@ import com.revature.gambit.skill.beans.SkillType;
 
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @RestController
 public class SkillTypeController {
@@ -17,34 +20,35 @@ public class SkillTypeController {
     private SkillTypeService skillTypeService;
 
     @PostMapping("/skilltype")
-    public SkillType create(@Valid @RequestBody SkillType skillType) { return this.skillTypeService.create(skillType); }
-
-    @GetMapping("/skilltype")
-    public Iterable<SkillType> findAll(){
-        return this.skillTypeService.findByAll();
+    public ResponseEntity<Void> create(@Valid @RequestBody SkillType skillType) {
+        this.skillTypeService.create(skillType);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/skilltype")
+    public ResponseEntity<List<SkillType>> findAll(){ return new ResponseEntity<List<SkillType>>(this.skillTypeService.findByAll() , HttpStatus.OK); }
+
     @GetMapping("/skilltype/{name}")
-    public SkillType findSkill(@PathVariable String name){
+    public ResponseEntity<SkillType> findSkill(@PathVariable String name){
         try {
-            return this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name,"UTF-8"));
+            return new ResponseEntity<SkillType>(this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.OK);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
     }
 
    @PutMapping(value = "/skilltype/{name}",consumes = MediaType.APPLICATION_JSON_VALUE)
-   public boolean update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
+   public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable String name){
        try {
-           return this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8"));
+           return  new ResponseEntity<Boolean>(this.skillTypeService.update(skillType,java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.ACCEPTED);
 
        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
        }
-       return false;
+       return new ResponseEntity<Boolean>( HttpStatus.NOT_FOUND);
 
    }
 
