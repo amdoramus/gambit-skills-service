@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import com.revature.gambit.skill.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 @RestController
 public class SkillController {
 
@@ -21,13 +25,14 @@ public class SkillController {
     private SkillService skillService;
 
     @PostMapping("/skill")
-    public Skill create(@Valid @RequestBody Skill skill) { 
-    	return this.skillService.create(skill); 
+    public ResponseEntity<Void> create(@Valid @RequestBody Skill skill) {
+        this.skillService.create(skill);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @GetMapping("/skill")
-    public Iterable<Skill> findAll(){
-        return this.skillService.findAllSkill();
+    public ResponseEntity<Iterable<Skill>> findAll(){
+        return new ResponseEntity<Iterable<Skill>>(this.skillService.findAllSkill() , HttpStatus.OK);
     }
     
     @GetMapping("/skill/active")
@@ -36,13 +41,22 @@ public class SkillController {
     }
 
     @PutMapping
-    public void update(@RequestBody Skill updatedSkill) {
-        skillService.saveSkill(updatedSkill);
+    public ResponseEntity<Void> update(@RequestBody Skill updatedSkill) {
+
+        this.skillService.saveSkill(updatedSkill);
+        return  new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("{name}")
-    public Skill findById(@PathVariable String name) {
-    	return skillService.findByName(name);
+    @GetMapping("/skill/{name}")
+    public ResponseEntity<Skill> findById(@PathVariable String name) {
+        try {
+            return new ResponseEntity<Skill>(this.skillService.findByName(java.net.URLDecoder.decode(name,"UTF-8")) , HttpStatus.OK);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
     }
     
 }

@@ -77,7 +77,10 @@ public class Skill {
 		return true;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
 
 	@Override
 	public String toString() {
@@ -85,7 +88,10 @@ public class Skill {
 				+ skillTypes + "]";
 	}
 	
+<<<<<<< HEAD
 	
 >>>>>>> origin/feature-get-skill
 	
+=======
+>>>>>>> 66b4d4241fae575011cd0d9a6072bc14419ca6e9
 }
