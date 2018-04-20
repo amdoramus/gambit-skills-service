@@ -76,5 +76,16 @@ public class Skill {
 			return false;
 		return true;
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public String toString() {
+		return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", isActive=" + isActive + ", skillTypes="
+				+ skillTypes + "]";
+	}
+	
+	
+>>>>>>> origin/feature-get-skill
 	
 }
