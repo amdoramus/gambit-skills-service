@@ -30,10 +30,10 @@ public class SkillTypeControllerTests {
 	
 	@Autowired
 	private MockMvc mvc;
-	
+
 	@MockBean
 	private SkillTypeController repository;
-	
+
 	@Test
 	public void getSkillType() throws Exception{
 		

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class SkillTypeJPATests {
+public class SkillTypeBootTests {
 
     @Autowired
     private SkillTypeService skillTypeService;
