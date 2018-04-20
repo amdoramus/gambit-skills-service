@@ -1,5 +1,6 @@
 package com.revature.gambit.skill.controllers;
 
+import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.beans.SkillType;
 
 import com.revature.gambit.skill.services.SkillTypeService;
@@ -47,9 +48,5 @@ public class SkillTypeController {
        return false;
 
    }
-
-
-
-
 
 }
