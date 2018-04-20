@@ -34,9 +34,27 @@ public class SkillJPATests {
     private SkillService skillService;
     
     @Test
-    public void getAllSkills() {
+    public void testFindAllSkills() {
         Iterable<Skill> skill = skillService.findAll();
-        assertEquals(41,((List<Skill>) skill).size());
+        assertEquals(41, ((List<Skill>) skill).size());
+    }
+    
+    @Test
+    public void testFindBySkillName() {
+    	Skill skill = skillService.findByName("Java");
+    	assertEquals(skill.getSkillName(), "Java");
+    }
+    
+    @Test
+    public void testSaveSkill() {
+    	Skill skill = skillService.saveSkill(new Skill(1, "Javas", true));
+    	assertEquals(skill.getSkillName(), "Javas");
+    }
+    
+    @Test
+    public void testFindAllByIsActive() {
+    	List<Skill> skills = skillService.findAllActive();
+    	assertEquals(skills.size(), 40);
     }
 
 }

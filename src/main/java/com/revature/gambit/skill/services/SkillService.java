@@ -23,7 +23,7 @@ public class SkillService {
     
     @Transactional
 	public Skill saveSkill(Skill skill) {
-		return skillRepository.save(skill);
+		return skillRepository.saveAndFlush(skill);
 	}
 	
 	public Skill findByName(String name) {
@@ -32,6 +32,10 @@ public class SkillService {
 	
 	public List<Skill> findAllSkill(){
 		return skillRepository.findAll();
+	}
+	
+	public List<Skill> findAllActive(){
+		return skillRepository.findAllByIsActive(true);
 	}
 
 }

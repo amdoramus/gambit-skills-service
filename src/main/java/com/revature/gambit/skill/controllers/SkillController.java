@@ -27,6 +27,11 @@ public class SkillController {
     public Iterable<Skill> findAll(){
         return this.skillService.findAllSkill();
     }
+    
+    @GetMapping("/skill/active")
+    public Iterable<Skill> findActive(){
+    	return this.skillService.findAllActive();
+    }
 
     @PutMapping
     public void update(@RequestBody Skill updatedSkill) {
@@ -37,5 +42,5 @@ public class SkillController {
     public Skill findById(@PathVariable String name) {
     	return skillService.findByName(name);
     }
-
+    
 }
