@@ -1,8 +1,9 @@
 package com.revature.gambit.skill;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -44,21 +45,48 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillType() throws Exception{
 		
-		SkillType skillT = new SkillType(100, "Java", "I can code in Java", true, true);
-		Iterable<SkillType> skills = Arrays.asList(skillT);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+
+		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
 
 		when(skillTypeService.findByAll()).thenReturn((List<SkillType>) skills);
 	 
 		mvc.perform(MockMvcRequestBuilders.get("/skilltype")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1)));
-		
-	//	mvc.perform(get("/api/employees")
-	//		      .contentType(MediaType.APPLICATION_JSON))
-	//		      .andExpect(status().isOk())
-	//		      .andExpect(jsonPath("$[0].name", is(alex.getName())));
+				.andExpect(status().isOk());
+
 	}
+
+	@Test
+	public void getSkillTypeByName() throws Exception{
+
+        SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+        SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+
+        Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+
+        when(skillTypeService.findBySkillTypeName("Java")).thenReturn(((List<SkillType>) skills).get(0));
+        when(skillTypeService.findBySkillTypeName("Fortran")).thenReturn(((List<SkillType>) skills).get(1));
+
+		mvc.perform(MockMvcRequestBuilders.get("/skilltype/{name}", "Java")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders.get("/skilltype/{name}", "Fortran")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+	}
+
+    @Test
+    public void getSkillTypeByNameDoesNotExist() throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.get("/skilltype/{name}", "jv")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
 
 
 }
