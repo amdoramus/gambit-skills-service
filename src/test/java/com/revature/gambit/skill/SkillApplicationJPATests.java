@@ -57,11 +57,5 @@ public class SkillApplicationJPATests {
 		for(SkillType s : skillTypess) {
 			System.out.println("." + s.getSkillTypeName());
 		}
-//		this.skillTypeService.deleteBySkillTypeName("DBA");
-//		System.out.println(((List<SkillType>) skillTypess).size());
-//		Iterable<SkillType> skillTypesss = this.skillTypeService.findByAll();
-//		for(SkillType s : skillTypesss) {
-//			System.out.println("." + s.getSkillTypeName());
-//		}
 	}
 }
