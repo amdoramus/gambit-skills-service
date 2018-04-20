@@ -34,7 +34,7 @@ public class Skill {
 	}
 	public void setSkillID(int skillID) {
 		this.skillID = skillID;
-	}
+	} 
 	public String getSkillName() {
 		return skillName;
 	}
@@ -75,6 +75,12 @@ public class Skill {
 		} else if (!skillName.equals(other.skillName))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", isActive=" + isActive + ", skillTypes="
+				+ skillTypes + "]";
 	}
 	
 }
