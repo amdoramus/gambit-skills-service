@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
 @RestController
 public class SkillController {
 
@@ -32,8 +31,8 @@ public class SkillController {
     }
 
     @GetMapping("/skill")
-    public ResponseEntity<Iterable<Skill>> findAll(){
-        return new ResponseEntity<Iterable<Skill>>(this.skillService.findAllSkill() , HttpStatus.OK);
+    public ResponseEntity<List<Skill>> findAll(){
+        return new ResponseEntity<List<Skill>>(this.skillService.findAllSkill() , HttpStatus.OK);
     }
 
     @PutMapping
