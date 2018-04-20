@@ -39,11 +39,5 @@ public class SkillService implements ISkillService {
 		skillRepository.deleteBySkillName(name);
 	}
 	
-//	@Bean
-//    public SkillService skillService() {
-//        SkillService skillService = new SkillService();
-//        // set properties, etc.
-//        return skillService;
-//    }
 
 }

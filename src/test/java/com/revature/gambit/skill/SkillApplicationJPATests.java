@@ -33,7 +33,7 @@ public class SkillApplicationJPATests {
 	public void testDeleteFunction() {
 		Iterable<Skill> skills = this.skillService.findAll();
 		System.out.println(((List<Skill>) skills).size());
-		this.skillService.deleteSkillViaId(1);
+		this.skillService.deleteSkillViaId(151);
 		Iterable<Skill> skillss = this.skillService.findAll();
 		System.out.println(((List<Skill>) skillss).size());
 	}
