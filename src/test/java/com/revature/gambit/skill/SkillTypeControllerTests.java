@@ -1,49 +1,58 @@
 package com.revature.gambit.skill;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Arrays;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.revature.gambit.skill.services.SkillTypeService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.controllers.SkillTypeController;
-import com.revature.gambit.skill.repo.SkillTypeRepository;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(SkillTypeController.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class SkillTypeControllerTests {
 
-	
-	@Autowired
 	private MockMvc mvc;
 
-	@MockBean
-	private SkillTypeController repository;
+	@InjectMocks
+	private SkillTypeController skillTypeController;
+
+	@Mock
+	private SkillTypeService skillTypeService;
+
+	@Before
+	public void setUp() throws Exception {
+		mvc = MockMvcBuilders.standaloneSetup(skillTypeController).build();
+	}
 
 	@Test
 	public void getSkillType() throws Exception{
 		
 		SkillType skillT = new SkillType(100, "Java", "I can code in Java", true, true);
 		Iterable<SkillType> skills = Arrays.asList(skillT);
+
+		when(skillTypeService.findByAll()).thenReturn((List<SkillType>) skills);
 	 
-		mvc.perform((RequestBuilder) ((ResultActions) get("/skilltype")
-			.contentType(MediaType.APPLICATION_JSON))
-			.andDo(print())
-			.andExpect(content().string("[]")));
+		mvc.perform(MockMvcRequestBuilders.get("/skilltype")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(1)));
 		
 	//	mvc.perform(get("/api/employees")
 	//		      .contentType(MediaType.APPLICATION_JSON))
@@ -51,5 +60,5 @@ public class SkillTypeControllerTests {
 	//		      .andExpect(jsonPath("$[0].name", is(alex.getName())));
 	}
 
-	
+
 }
