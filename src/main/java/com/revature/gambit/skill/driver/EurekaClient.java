@@ -6,7 +6,7 @@ import feign.RequestLine;
 
 
 /**
- * PUT IN THE SERVICE WE ARE CONNECTING TO 
+ * (To-Do) Service we are connecting to.
  * @author Delano
  *
  */

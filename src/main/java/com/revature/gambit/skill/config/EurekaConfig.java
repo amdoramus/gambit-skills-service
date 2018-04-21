@@ -7,24 +7,22 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import feign.Feign;
 
+/**
+ * Configuration class for Eureka service.
+ * Allows discovery and registry of services.
+ */
 @RestController
 public class EurekaConfig {
 
 public static int count = 0;
 	
-	
 	@GetMapping("/")
 	@HystrixCommand(fallbackMethod="myFallback")
-	public String doGet(){
-		
-		if (count++>5){
-			
-			throw new RuntimeException();
-			
-		}
-		
-		return "ok";
-		
+	public String doGet(){		
+		if (count++>5){			
+			throw new RuntimeException();		
+		}	
+		return "ok";		
 	}
 	
 	private String myFallback(){
@@ -34,10 +32,9 @@ public static int count = 0;
 	}
 	
 	/**
-	 * Currently do not know our ports. Change port and directory appropriately
-	 * @return
-	 */
-	
+	 * (TO-DO) Currently do not know our ports. Change port and directory appropriately.
+	 * @return String
+	 */	
 	@GetMapping("/testmessage")
 	@HystrixCommand(fallbackMethod="myFallback")
 	public String hello(){
