@@ -42,10 +42,10 @@ public class Skill {
 	private boolean isActive;
 
 	/**
-	 * List of SkillTypes that will be referenced by this skill.
-	 * Useful to establish a many-to-many relationship.
+	 * List of SkillTypes that will be referenced by this skill. Useful to establish
+	 * a many-to-many relationship.
 	 */
-	@ManyToMany(mappedBy = "skills", cascade =CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "skills", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<SkillType> skillTypes;
 
 	/**
@@ -56,9 +56,13 @@ public class Skill {
 
 	/**
 	 * Constructor that initializes class fields.
-	 * @param skill_id ID that uniquely identifies a skill.
-	 * @param skill_name Name of the skill.
-	 * @param active Flag that will be used for soft deletes.
+	 * 
+	 * @param skill_id
+	 *            ID that uniquely identifies a skill.
+	 * @param skill_name
+	 *            Name of the skill.
+	 * @param active
+	 *            Flag that will be used for soft deletes.
 	 */
 	public Skill(int skill_id, String skill_name, boolean active) {
 		this.skillID = skill_id;
@@ -73,7 +77,7 @@ public class Skill {
 	public void setSkillID(int skillID) {
 		this.skillID = skillID;
 	}
-	
+
 	public String getSkillName() {
 		return skillName;
 	}
