@@ -15,32 +15,6 @@ import com.revature.gambit.skill.beans.Skill;
 public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
 	/**
-	 * Looks up a skill based on the skill name.
-	 * 
-	 * @param name
-	 *            Name of the skill to lookup.
-	 * @return Skill that was found.
-	 */
-	Skill findBySkillName(String name);
-
-	/**
-	 * Looks up a skill based on the skill ID.
-	 * 
-	 * @param id
-	 *            ID of the skill to lookup.
-	 * @return Skill that was found.
-	 */
-	Skill findBySkillID(int id);
-
-	/**
-	 * Deletes a skill based on the skill name.
-	 * 
-	 * @param name
-	 *            Name of the skill to delete.
-	 */
-	void deleteBySkillName(String name);
-
-	/**
 	 * Retrieves all skills, including the inactive ones.
 	 * 
 	 * @return List of skills found.

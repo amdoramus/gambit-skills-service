@@ -28,7 +28,7 @@ public class SkillTypeService implements ISkillTypeService {
 	 */
 	@Transactional
 	public SkillType create(SkillType skillType) {
-		return this.skillTypeRepository.save(skillType);
+		return null;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class SkillTypeService implements ISkillTypeService {
 	 * @return Skill Type that was found.
 	 */
 	public SkillType findBySkillTypeName(String name) {
-		return this.skillTypeRepository.findBySkillTypeName(name);
+		return null;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class SkillTypeService implements ISkillTypeService {
 	 * @return Iterable object containing all the skill types.
 	 */
 	public Iterable<SkillType> findByAll() {
-		return this.skillTypeRepository.findAll();
+		return null;
 	}
 
 	/**
@@ -62,16 +62,7 @@ public class SkillTypeService implements ISkillTypeService {
 	 */
 	@Transactional
 	public boolean update(SkillType updatedSkillType, String name) {
-		SkillType skillType = this.skillTypeRepository.findBySkillTypeName(name);
-		if (skillType == null) {
-			return false;
-		} else {
-			skillType.setSkillTypeDesc(updatedSkillType.getSkillTypeDesc());
-			skillType.setIsCore(updatedSkillType.isIs_core());
-			skillType.setIsActive(updatedSkillType.isIsActive());
-			this.skillTypeRepository.saveAndFlush(skillType);
-			return true;
-		}
+		return false;
 	}
 
 	/**
@@ -82,7 +73,6 @@ public class SkillTypeService implements ISkillTypeService {
 	 */
 	@Transactional
 	public void deleteBySkillTypeName(String name) {
-		this.skillTypeRepository.deleteBySkillTypeName(name);
 	}
 
 }

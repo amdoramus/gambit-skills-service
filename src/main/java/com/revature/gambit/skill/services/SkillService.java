@@ -40,7 +40,7 @@ public class SkillService implements ISkillService {
 	 * @return Iterable object containing all the skills found.
 	 */
 	public Iterable<Skill> findAll() {
-		return skillRepository.findAll();
+		return null;
 	}
 
 	/**
@@ -60,31 +60,30 @@ public class SkillService implements ISkillService {
 	 * @return Skill that was found.
 	 */
 	public Skill findByName(String name) {
-		return skillRepository.findBySkillName(name);
+		return null;
 	}
 
 	/**
 	 * Adds a new skill to the DB, but unlike create(), this method will
 	 * commit/flush changes to DB immediately.
-	 * 
+	 *
 	 * @param skill
 	 *            Skill to be added.
 	 * @return Skill that was added.
 	 */
 	@Transactional
 	public Skill saveSkill(Skill skill) {
-		return skillRepository.saveAndFlush(skill);
+		return null;
 	}
 
 	/**
 	 * Deletes a skill based on its name.
-	 * 
+	 *
 	 * @param name
 	 *            Name of the skill to delete.
 	 */
 	@Override
 	public void deleteSkillViaName(String name) {
-		skillRepository.delete(findByName(name));
 	}
 
 }
