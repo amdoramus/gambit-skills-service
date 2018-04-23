@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Gambit Skill Service</name>
+	<description>MicroService in Gambit Ecosystem used to manage the state of Skills and SkillType resources for projects such as Caliber and AssignForce.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
