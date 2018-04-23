@@ -24,7 +24,7 @@ public class SkillService implements ISkillService {
 
 	/**
 	 * Adds a new skill to the database.
-	 * 
+	 *
 	 * @param skill
 	 *            Skill to be added.
 	 * @return Skill that has been added.
@@ -36,25 +36,25 @@ public class SkillService implements ISkillService {
 
 	/**
 	 * Retrieves all the skills, active and non-active.
-	 * 
+	 *
 	 * @return Iterable object containing all the skills found.
 	 */
 	public Iterable<Skill> findAll() {
-		return null;
+		return skillRepository.findAll();
 	}
 
 	/**
 	 * Retrieves all the active skills.
-	 * 
+	 *
 	 * @return Iterable object containing all the skills fouund.
 	 */
 	public Iterable<Skill> findAllActive() {
-		return skillRepository.findAllByIsActive(true);
+		return null;
 	}
 
 	/**
 	 * Retrieves a skill based on its skill name.
-	 * 
+	 *
 	 * @param name
 	 *            Name of the skill to retrieve.
 	 * @return Skill that was found.

@@ -1,6 +1,7 @@
 package com.revature.gambit.skill;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import java.util.List;
 
 import org.junit.Test;
@@ -18,7 +19,6 @@ public class SkillServiceTests {
 	@Autowired
 	private SkillService skillService;
 
-
 	@Test
 	public void testSkillCreate() {
 		int numberofSkills = ((List<Skill>) skillService.findAll()).size();
@@ -27,6 +27,5 @@ public class SkillServiceTests {
 		int newnumberofSkills = ((List<Skill>) skillService.findAll()).size();
 		assertEquals(numberofSkills, newnumberofSkills - 1);
 	}
-
 
 }
