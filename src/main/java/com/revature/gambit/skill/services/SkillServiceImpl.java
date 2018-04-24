@@ -83,6 +83,8 @@ public class SkillServiceImpl implements SkillService {
 	 */
 	@Override
 	public void deleteSkillViaName(String name) {
+		// Will be implelemented with Delete Skill feature
+		throw new UnsupportedOperationException();
 	}
 
 }

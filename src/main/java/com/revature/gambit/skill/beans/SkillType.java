@@ -1,8 +1,5 @@
 package com.revature.gambit.skill.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -137,7 +134,7 @@ public class SkillType {
 		this.isActive = isActive;
 	}
 
-	public boolean isIs_core() {
+	public boolean isIsCore() {
 		return isCore;
 	}
 

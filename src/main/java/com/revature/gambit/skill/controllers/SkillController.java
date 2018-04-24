@@ -36,7 +36,7 @@ public class SkillController {
 	@PostMapping("/skill")
 	public ResponseEntity<Void> create(@Valid @RequestBody Skill skill) {
 		this.skillService.create(skill);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class SkillController {
 	 */
 	@GetMapping("/skill")
 	public ResponseEntity<Iterable<Skill>> findAll() {
-		return new ResponseEntity<Iterable<Skill>>(this.skillService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(this.skillService.findAll(), HttpStatus.OK);
 	}
 
 

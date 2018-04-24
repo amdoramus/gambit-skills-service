@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
@@ -64,9 +63,9 @@ public class Skill {
 	 * @param active
 	 *            Flag that will be used for soft deletes.
 	 */
-	public Skill(int skill_id, String skill_name, boolean active) {
-		this.skillID = skill_id;
-		this.skillName = skill_name;
+	public Skill(int skillId, String skillName, boolean active) {
+		this.skillID = skillId;
+		this.skillName = skillName;
 		this.isActive = active;
 	}
 

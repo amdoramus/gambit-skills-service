@@ -21,14 +21,14 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 
 	/**
 	 * Adds a new skill type to the database.
-	 * 
+	 *
 	 * @param skillType
 	 *            Skill Type to be added.
 	 * @return Skill Type that has been added.
 	 */
 	@Transactional
 	public SkillType create(SkillType skillType) {
-		return null;
+		return this.skillTypeRepository.save(skillType);
 	}
 
 	/**
@@ -73,6 +73,8 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 */
 	@Transactional
 	public void deleteBySkillTypeName(String name) {
+		// Will be implelemented with Delete Skill feature
+		throw new UnsupportedOperationException();
 	}
 
 }
