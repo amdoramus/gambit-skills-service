@@ -1,14 +1,20 @@
 package com.revature.gambit.skill.controllers;
 
-import com.revature.gambit.skill.services.SkillTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.gambit.skill.services.SkillTypeService;
+
+/**
+ * Controller that will handle requests for the skill type service.
+ */
 @RestController
 public class SkillTypeController {
 
-    @Autowired
-    private SkillTypeService skillTypeService;
-
+	/**
+	 * Interface that contains all CRUD methods for skill type.
+	 */
+	@Autowired
+	private SkillTypeService skillTypeService;
 
 }
