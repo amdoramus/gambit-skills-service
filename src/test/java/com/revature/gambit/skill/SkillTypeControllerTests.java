@@ -1,6 +1,6 @@
 package com.revature.gambit.skill;
 
-import com.revature.gambit.skill.services.SkillTypeService;
+import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,6 +20,6 @@ public class SkillTypeControllerTests {
 	private SkillTypeController skillTypeController;
 
 	@Mock
-	private SkillTypeService skillTypeService;
+	private SkillTypeServiceImpl skillTypeService;
 
 }

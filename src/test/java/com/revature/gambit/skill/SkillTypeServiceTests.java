@@ -1,7 +1,7 @@
 package com.revature.gambit.skill;
 
 import com.revature.gambit.skill.repo.SkillTypeRepository;
-import com.revature.gambit.skill.services.SkillTypeService;
+import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SkillTypeServiceTests {
 
 	@Autowired
-	private SkillTypeService skillTypeService;
+	private SkillTypeServiceImpl skillTypeService;
 	
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;

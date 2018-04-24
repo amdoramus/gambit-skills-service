@@ -1,88 +1,60 @@
 package com.revature.gambit.skill.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.repo.SkillRepository;
 
 /**
- * Implementation of the Skill service API methods.
+ * API defining all the methods the skill service will implement.
  */
-@Service
-@Configuration
-public class SkillService implements ISkillService {
-
-	/**
-	 * Spring Data JPA Repository for skill methods.
-	 */
-	@Autowired
-	private SkillRepository skillRepository;
+public interface SkillService {
 
 	/**
 	 * Adds a new skill to the database.
-	 *
+	 * 
 	 * @param skill
 	 *            Skill to be added.
 	 * @return Skill that has been added.
 	 */
-	@Transactional
-	public Skill create(Skill skill) {
-		return skillRepository.save(skill);
-	}
+	public Skill create(Skill skill);
 
 	/**
 	 * Retrieves all the skills, active and non-active.
-	 *
+	 * 
 	 * @return Iterable object containing all the skills found.
 	 */
-	public Iterable<Skill> findAll() {
-		return skillRepository.findAll();
-	}
+	public Iterable<Skill> findAll();
 
 	/**
 	 * Retrieves all the active skills.
-	 *
+	 * 
 	 * @return Iterable object containing all the skills fouund.
 	 */
-	public Iterable<Skill> findAllActive() {
-		return null;
-	}
+	public Iterable<Skill> findAllActive();
 
 	/**
 	 * Retrieves a skill based on its skill name.
-	 *
+	 * 
 	 * @param name
 	 *            Name of the skill to retrieve.
 	 * @return Skill that was found.
 	 */
-	public Skill findByName(String name) {
-		return null;
-	}
+	public Skill findByName(String name);
 
 	/**
 	 * Adds a new skill to the DB, but unlike create(), this method will
 	 * commit/flush changes to DB immediately.
-	 *
+	 * 
 	 * @param skill
 	 *            Skill to be added.
 	 * @return Skill that was added.
 	 */
-	@Transactional
-	public Skill saveSkill(Skill skill) {
-		return null;
-	}
+	public Skill saveSkill(Skill skill);
 
 	/**
 	 * Deletes a skill based on its name.
-	 *
+	 * 
 	 * @param name
 	 *            Name of the skill to delete.
 	 */
-	@Override
-	public void deleteSkillViaName(String name) {
-	}
+	public void deleteSkillViaName(String name);
 
 }

@@ -1,11 +1,23 @@
 package com.revature.gambit.skill.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.repo.SkillTypeRepository;
 
 /**
- * API defining all the methods the skill type service will implement.
+ * Implementation of the Skill Type service API methods.
  */
-public interface ISkillTypeService {
+@Service
+public class SkillTypeServiceImpl implements SkillTypeService {
+
+	/**
+	 * Spring Data JPA Repository for skill type methods.
+	 */
+	@Autowired
+	private SkillTypeRepository skillTypeRepository;
 
 	/**
 	 * Adds a new skill type to the database.
@@ -14,7 +26,10 @@ public interface ISkillTypeService {
 	 *            Skill Type to be added.
 	 * @return Skill Type that has been added.
 	 */
-	public SkillType create(SkillType skillType);
+	@Transactional
+	public SkillType create(SkillType skillType) {
+		return null;
+	}
 
 	/**
 	 * Retrieves a skill type based on its skill type name.
@@ -23,14 +38,18 @@ public interface ISkillTypeService {
 	 *            Name of the skill type to retrieve.
 	 * @return Skill Type that was found.
 	 */
-	public SkillType findBySkillTypeName(String name);
+	public SkillType findBySkillTypeName(String name) {
+		return null;
+	}
 
 	/**
 	 * Retrieves all the skill types.
 	 * 
 	 * @return Iterable object containing all the skill types.
 	 */
-	public Iterable<SkillType> findByAll();
+	public Iterable<SkillType> findByAll() {
+		return null;
+	}
 
 	/**
 	 * Updates the value of a skill type.
@@ -41,7 +60,10 @@ public interface ISkillTypeService {
 	 *            Name of the skill type to be replaced.
 	 * @return True if success, false if the update can't be done.
 	 */
-	public boolean update(SkillType updatedSkillType, String name);
+	@Transactional
+	public boolean update(SkillType updatedSkillType, String name) {
+		return false;
+	}
 
 	/**
 	 * Deletes a skill type based on its name.
@@ -49,6 +71,8 @@ public interface ISkillTypeService {
 	 * @param name
 	 *            Name of the skill type to delete.
 	 */
-	public void deleteBySkillTypeName(String name);
+	@Transactional
+	public void deleteBySkillTypeName(String name) {
+	}
 
 }

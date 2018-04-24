@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.controllers.SkillController;
-import com.revature.gambit.skill.services.SkillService;
+import com.revature.gambit.skill.services.SkillServiceImpl;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -29,7 +29,7 @@ public class SkillControllerTests {
 	private SkillController skillController;
 
 	@Mock
-	private SkillService skillService;
+	private SkillServiceImpl skillService;
 
 	@Before
 	public void setUp() throws Exception {

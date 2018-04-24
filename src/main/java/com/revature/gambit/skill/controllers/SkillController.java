@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.services.ISkillService;
 import com.revature.gambit.skill.services.SkillService;
-
 
 /**
  * Controller that will handle requests for the skill service.
@@ -27,11 +25,6 @@ public class SkillController {
 	@Autowired
 	private SkillService skillService;
 
-	/**
-	 * Interface that contains all CRUD methods for skill.
-	 */
-	@Autowired
-	private ISkillService iskillService;
 
 	/**
 	 * Handles incoming POST request that adds a new skill to the DB.
