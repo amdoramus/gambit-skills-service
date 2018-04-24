@@ -1,8 +1,0 @@
-server:
-  port: 1994
-
-spring:
- application:
-  name: gambit-skills-service
-
-  
