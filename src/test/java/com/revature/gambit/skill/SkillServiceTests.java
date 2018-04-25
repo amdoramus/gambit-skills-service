@@ -22,9 +22,10 @@ public class SkillServiceTests {
 	public void testSkillCreate() {
 		int numberofSkills = ((List<Skill>) skillService.findAll()).size();
 		Skill skill = new Skill(1900, "test", true);
-		this.skillService.create(skill);
+		Skill returnedSkill = this.skillService.create(skill);
 		int newnumberofSkills = ((List<Skill>) skillService.findAll()).size();
 		assertEquals(numberofSkills, newnumberofSkills - 1);
+		assertEquals(returnedSkill.getSkillName(), skill.getSkillName() );
 	}
 
 }
