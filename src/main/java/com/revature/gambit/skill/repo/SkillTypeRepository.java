@@ -20,4 +20,13 @@ public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
      */
     SkillType findBySkillTypeName(String name);
 
+    /**
+     * Looks up a skill type based on the skill type name.
+     *
+     * @param id
+     *            Id of the skill type to lookup.
+     * @return Skill that was found.
+     */
+    SkillType findBySkillTypeId(int id);
+
 }

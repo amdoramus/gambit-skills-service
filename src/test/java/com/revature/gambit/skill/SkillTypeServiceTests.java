@@ -44,14 +44,14 @@ public class SkillTypeServiceTests {
 	}
 
 	@Test
-	public void getSkillTypeByName() {
-		SkillType stk = skillTypeService.findBySkillTypeName("PEGA");
+	public void getSkillTypeById() {
+		SkillType stk = skillTypeService.findBySkillTypeId(3);
 		assertEquals(stk.getSkillTypeDesc(), "PEGA Description");
 	}
 
 	@Test
 	public void getSkillTypeNotFound() {
-		SkillType stk = skillTypeService.findBySkillTypeName("PEGAN");
+		SkillType stk = skillTypeService.findBySkillTypeId(1000);
 		assertNull(stk);
 	}
 	
