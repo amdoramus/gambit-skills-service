@@ -14,6 +14,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -34,6 +35,24 @@ public class SkillTypeServiceTests {
 		assertTrue(((List)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
 		skillTypeRepository.delete(tstSkillType);
+	}
+
+	@Test
+	public void getAllSkillTypes() {
+		Iterable<SkillType> skillTypes = skillTypeService.findByAll();
+		assertEquals(9, ((List<SkillType>) skillTypes).size());
+	}
+
+	@Test
+	public void getSkillTypeByName() {
+		SkillType stk = skillTypeService.findBySkillTypeName("PEGA");
+		assertEquals(stk.getSkillTypeDesc(), "PEGA Description");
+	}
+
+	@Test
+	public void getSkillTypeNotFound() {
+		SkillType stk = skillTypeService.findBySkillTypeName("PEGAN");
+		assertNull(stk);
 	}
 	
 }

@@ -19,6 +19,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,6 +55,51 @@ public class SkillTypeControllerTests {
 				.contentType(MediaType.APPLICATION_JSON).content(json)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void getSkillType() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+
+		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+
+		when(skillTypeService.findByAll()).thenReturn((List<SkillType>) skills);
+
+		mvc.perform(MockMvcRequestBuilders.get("/skillType")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	public void getSkillTypeByName() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+
+		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+
+		when(skillTypeService.findBySkillTypeName("Java")).thenReturn(((List<SkillType>) skills).get(0));
+		when(skillTypeService.findBySkillTypeName("Fortran")).thenReturn(((List<SkillType>) skills).get(1));
+
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/{name}", "Java")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/{name}", "Fortran")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	public void getSkillTypeByNameDoesNotExist() throws Exception {
+
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/{name}", "jv")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
 	}
 
 }
