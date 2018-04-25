@@ -70,10 +70,10 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * 
 	 * @param name
 	 *            Name of the skill type to delete.
+	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
 	@Transactional
 	public void deleteBySkillTypeName(String name) {
-		// Will be implelemented with Delete Skill feature
 		throw new UnsupportedOperationException();
 	}
 

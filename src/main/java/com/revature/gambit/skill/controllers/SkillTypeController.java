@@ -31,10 +31,9 @@ public class SkillTypeController {
      *            Incoming data fields will be mapped into this SkillType object.
      * @return HTTP status code 201 (CREATED)
      */
-    @PostMapping("/skilltype")
-    public ResponseEntity<Void> create(@Valid @RequestBody SkillType skillType) {
-        this.skillTypeService.create(skillType);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping("/skillType")
+    public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
+        return new ResponseEntity<>(this.skillTypeService.create(skillType),HttpStatus.CREATED);
     }
 
 }

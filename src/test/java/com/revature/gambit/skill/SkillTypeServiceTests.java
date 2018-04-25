@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,8 +30,9 @@ public class SkillTypeServiceTests {
 	public void testCreate() {
 		int sizeOfList = ((List)skillTypeRepository.findAll()).size();
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
-		skillTypeService.create(tstSkillType);
+		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
 		assertTrue(((List)skillTypeRepository.findAll()).size() > sizeOfList);
+		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
 		skillTypeRepository.delete(tstSkillType);
 	}
 	

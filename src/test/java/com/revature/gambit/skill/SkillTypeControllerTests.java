@@ -3,6 +3,7 @@ package com.revature.gambit.skill;
 import com.google.gson.Gson;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeServiceImpl;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,12 +35,12 @@ public class SkillTypeControllerTests {
 	private SkillTypeServiceImpl skillTypeService;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		mvc = MockMvcBuilders.standaloneSetup(skillTypeController).build();
 	}
 
 	@Test
-	public void postCreate() throws Exception{
+	public void postCreate() throws Exception {
 
 		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
 		Gson gson = new Gson();
@@ -47,7 +48,7 @@ public class SkillTypeControllerTests {
 
 		when(skillTypeService.create(skill1)).thenReturn(skill1);
 
-		mvc.perform(MockMvcRequestBuilders.post("/skilltype/")
+		mvc.perform(MockMvcRequestBuilders.post("/skillType/")
 				.contentType(MediaType.APPLICATION_JSON).content(json)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());

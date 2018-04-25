@@ -34,9 +34,8 @@ public class SkillController {
 	 * @return HTTP status code 201 (CREATED)
 	 */
 	@PostMapping("/skill")
-	public ResponseEntity<Void> create(@Valid @RequestBody Skill skill) {
-		this.skillService.create(skill);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<Skill> create(@Valid @RequestBody Skill skill) {
+		return new ResponseEntity<>(this.skillService.create(skill),HttpStatus.CREATED);
 	}
 
 	/**
