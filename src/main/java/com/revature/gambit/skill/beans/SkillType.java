@@ -1,8 +1,5 @@
 package com.revature.gambit.skill.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class SkillType {
 	@Id
 	@Column(name = "SKILLTYPE_ID")
 	@SequenceGenerator(name = "SKILLTYPE_ID_SEQ", sequenceName = "SKILLTYPE_ID_SEQ")
-	@GeneratedValue(generator = "SKILLTYPE_ID_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "SKILLTYPE_ID_SEQ")
 	private Integer skillTypeId;
 
 	/**
@@ -129,7 +126,7 @@ public class SkillType {
 		this.skillTypeDesc = skillTypeDesc;
 	}
 
-	public boolean isIsActive() {
+	public boolean isActive() {
 		return isActive;
 	}
 
@@ -137,7 +134,7 @@ public class SkillType {
 		this.isActive = isActive;
 	}
 
-	public boolean isIs_core() {
+	public boolean isCore() {
 		return isCore;
 	}
 

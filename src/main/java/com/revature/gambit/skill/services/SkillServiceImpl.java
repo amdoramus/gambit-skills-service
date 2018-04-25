@@ -80,9 +80,11 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @param name
 	 *            Name of the skill to delete.
+	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
 	@Override
 	public void deleteSkillViaName(String name) {
+		throw new UnsupportedOperationException();
 	}
 
 }

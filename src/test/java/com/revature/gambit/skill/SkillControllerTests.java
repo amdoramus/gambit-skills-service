@@ -32,7 +32,7 @@ public class SkillControllerTests {
 	private SkillServiceImpl skillService;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		mvc = MockMvcBuilders.standaloneSetup(skillController).build();
 	}
 
