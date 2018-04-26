@@ -181,6 +181,7 @@
 
 	<build>
 		<plugins>
+			<<<<<<< HEAD
 			<!-- Javadocs Generation -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -191,6 +192,8 @@
 					<destDir>Javadocs</destDir>
 				</configuration>
 			</plugin>
+			=======
+			>>>>>>> 57f2d8b9384a1484d027d168c9963d45c1ebb413
 			<!--Docker Maven Plugin from Spotify -->
 			<!--Abstracts the process of creating Docker images from Java projects -->
 			<plugin>
@@ -259,6 +262,40 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+							<propertyName>surefireArgLine</propertyName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
