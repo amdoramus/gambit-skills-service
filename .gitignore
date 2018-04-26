@@ -25,7 +25,6 @@ mvnw.cmd
 **/.recommenders/**
 **/Servers
 **/.springBeans
-**/logs
 
 #IDEA
 **/.idea/
