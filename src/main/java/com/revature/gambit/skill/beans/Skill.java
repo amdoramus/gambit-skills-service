@@ -48,9 +48,9 @@ public class Skill {
 	/**
 	 * Constructor that initializes class fields.
 	 * 
-	 * @param skill_id
+	 * @param skillId
 	 *            ID that uniquely identifies a skill.
-	 * @param skill_name
+	 * @param skillName
 	 *            Name of the skill.
 	 * @param active
 	 *            Flag that will be used for soft deletes.
