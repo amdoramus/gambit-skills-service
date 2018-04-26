@@ -181,8 +181,7 @@
 
 	<build>
 		<plugins>
-			<<<<<<< HEAD
-			<!-- Javadocs Generation -->
+			<!-- Javadocs Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -192,8 +191,6 @@
 					<destDir>Javadocs</destDir>
 				</configuration>
 			</plugin>
-			=======
-			>>>>>>> 57f2d8b9384a1484d027d168c9963d45c1ebb413
 			<!--Docker Maven Plugin from Spotify -->
 			<!--Abstracts the process of creating Docker images from Java projects -->
 			<plugin>
