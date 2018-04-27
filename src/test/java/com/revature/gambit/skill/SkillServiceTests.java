@@ -27,5 +27,17 @@ public class SkillServiceTests {
 		assertEquals(numberofSkills, newnumberofSkills - 1);
 		assertEquals(returnedSkill.getSkillName(), skill.getSkillName() );
 	}
+	
+	@Test
+    public void testFindBySkillName() {
+    	Skill skill = skillService.findBySkillName("Java");
+    	assertEquals(skill.getSkillName(), "Java");
+    }
+    
+    @Test
+    public void testFindById() {
+    	Skill skill = skillService.findBySkillID(1);
+    	assertEquals(skill.getSkillName(), "Visual Basic");
+    }
 
 }
