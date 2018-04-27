@@ -4,13 +4,12 @@ import com.revature.gambit.skill.beans.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.gambit.skill.services.SkillTypeService;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Controller that will handle requests for the skill type service.
@@ -34,6 +33,56 @@ public class SkillTypeController {
     @PostMapping("/skillType")
     public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
         return new ResponseEntity<>(this.skillTypeService.create(skillType),HttpStatus.CREATED);
+    }
+
+    /**
+     * Handles incoming PUT request that will update an existing skill type with a
+     * new one.
+     *
+     * @param skillType
+     *            Existing skill type will be updated with this one.
+     * @param name
+     *            Name of the skill type to update.
+     * @return HTTP status code 202 (ACCEPTED) if success, HTTP status code 404 (NOT
+     *         FOUND) otherwise.
+     */
+    @PutMapping(value = "/skillType/name/{name}")
+    public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable String name) {
+        try {
+            boolean successful = this.skillTypeService.updateByName(skillType, java.net.URLDecoder.decode(name, "UTF-8"));
+            if (successful == true) {
+                return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Handles incoming PUT request that will update an existing skill type with a
+     * new one.
+     *
+     * @param skillType
+     *            Existing skill type will be updated with this one.
+     * @param id
+     *            Id of the skill type to update.
+     * @return HTTP status code 202 (ACCEPTED) if success, HTTP status code 404 (NOT
+     *         FOUND) otherwise.
+     */
+    @PutMapping(value = "/skillType/{id}")
+    public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable int id) {
+
+        boolean successful = this.skillTypeServiceImpl.updateById(skillType, id);
+        if (successful == true) {
+            return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
     }
 
 }

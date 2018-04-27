@@ -54,4 +54,8 @@ public class SkillTypeControllerTests {
 				.andExpect(status().isCreated());
 	}
 
+
+
+
+
 }

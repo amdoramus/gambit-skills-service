@@ -61,7 +61,21 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @return True if success, false if the update can't be done.
 	 */
 	@Transactional
-	public boolean update(SkillType updatedSkillType, String name) {
+	public boolean updateByName(SkillType updatedSkillType, String name) {
+		return false;
+	}
+
+	/**
+	 * Updates the value of a skill type.
+	 *
+	 * @param updatedSkillType
+	 *            Updated value that will replace the old one.
+	 * @param id
+	 *            Id of the skill type to be replaced.
+	 * @return True if success, false if the update can't be done.
+	 */
+	@Transactional
+	public boolean updateById(SkillType updatedSkillType, int id) {
 		return false;
 	}
 
