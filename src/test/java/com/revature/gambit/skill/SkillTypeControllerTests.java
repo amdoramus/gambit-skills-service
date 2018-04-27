@@ -54,8 +54,69 @@ public class SkillTypeControllerTests {
 				.andExpect(status().isCreated());
 	}
 
+	@Test
+	public void putSkillTypeById() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 100)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isAccepted());
+
+	}
 
 
+	@Test
+	public void putSkillTypeByIdFailed() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 101)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void putSkillByNameType() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{id}", "Java")
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isAccepted());
+
+	}
+
+
+	@Test
+	public void putSkillTypeNameFailed() throws Exception{
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "jv")
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 
 
 }

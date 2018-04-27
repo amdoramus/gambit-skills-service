@@ -2,7 +2,7 @@ package com.revature.gambit.skill;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.repo.SkillTypeRepository;
-import com.revature.gambit.skill.services.SkillTypeServiceImpl;
+import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,13 +14,14 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SkillTypeServiceTests {
 
 	@Autowired
-	private SkillTypeServiceImpl skillTypeService;
+	private SkillTypeService skillTypeService;
 	
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
@@ -33,7 +34,21 @@ public class SkillTypeServiceTests {
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
 		assertTrue(((List)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
-		skillTypeRepository.delete(tstSkillType);
+		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
-	
+
+	@Test
+	public void updateSkillType() {
+		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
+		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
+		returnedSkillType.setIsCore(false);
+		skillTypeService.update(returnedSkillType);
+		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
+		assertFalse(tstSkillType.isCore());
+		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
+
+
+	}
+
+
 }

@@ -1,7 +1,6 @@
 package com.revature.gambit.skill.controllers;
 
 import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,18 +47,17 @@ public class SkillTypeController {
      *         FOUND) otherwise.
      */
     @PutMapping(value = "/skillType/name/{name}")
-    public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable String name) {
+    public ResponseEntity<SkillType> update(@Valid @RequestBody SkillType skillType, @PathVariable String name) {
         try {
-             successful = this.skillTypeService.update(skillType);
             if (java.net.URLDecoder.decode(name, "UTF-8").equals(skillType.getSkillTypeName())) {
-                return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
+                return new ResponseEntity<>(this.skillTypeService.update(skillType),HttpStatus.ACCEPTED);
             } else {
-                return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -74,13 +72,12 @@ public class SkillTypeController {
      *         FOUND) otherwise.
      */
     @PutMapping(value = "/skillType/{id}")
-    public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable int id) {
+    public ResponseEntity<SkillType> update(@Valid @RequestBody SkillType skillType, @PathVariable int id) {
 
-        boolean successful = this.skillTypeService.updateById(skillType, id);
-        if ( == true) {
-            return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
+        if ( id == skillType.getSkillTypeId()) {
+            return new ResponseEntity<>(this.skillTypeService.update(skillType),HttpStatus.ACCEPTED);
         } else {
-            return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
