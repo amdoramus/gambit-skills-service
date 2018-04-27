@@ -1,6 +1,8 @@
 package com.revature.gambit.skill;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -26,6 +28,22 @@ public class SkillServiceTests {
 		int newnumberofSkills = ((List<Skill>) skillService.findAll()).size();
 		assertEquals(numberofSkills, newnumberofSkills - 1);
 		assertEquals(returnedSkill.getSkillName(), skill.getSkillName() );
+	}
+	
+	@Test
+	public void testDeleteSkillNameFunction() {
+		Iterable<Skill> skills = this.skillService.findAll();
+		this.skillService.deleteBySkillName("Java");
+		Iterable<Skill> skillss = this.skillService.findAll();
+		assertNotEquals(skills, skillss);
+	}
+	
+	@Test
+	public void testDeleteSkillIdFunction() {
+		Iterable<Skill> skills = this.skillService.findAll();
+		this.skillService.deleteBySkillID(1);
+		Iterable<Skill> skillss = this.skillService.findAll();
+		assertNotEquals(skills, skillss);
 	}
 
 }

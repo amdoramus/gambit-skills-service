@@ -46,7 +46,27 @@ public class SkillControllerTests {
 		mvc.perform(MockMvcRequestBuilders.post("/skill/")
 				.contentType(MediaType.APPLICATION_JSON).content(json)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isCreated());
+		.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void testDeleteSkillByID() throws Exception {
+		Skill skill1 = new Skill(100, "Java", true);
+		when(skillService.findBySkillID(100)).thenReturn(skill1);
+		mvc.perform(MockMvcRequestBuilders.delete("/skill/{id}", 100)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted());
+		when(skillService.findBySkillID(100)).thenReturn(null);
+	}
+	
+	@Test
+	public void testDeleteSkillByName() throws Exception {
+		Skill skill1 = new Skill(100, "Java", true);
+		when(skillService.findBySkillName("Java")).thenReturn(skill1);
+		mvc.perform(MockMvcRequestBuilders.delete("/skill/name/{name}", "Java")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted());
+		when(skillService.findBySkillName("Java")).thenReturn(null);
 	}
 
 }
