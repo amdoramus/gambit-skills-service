@@ -22,5 +22,12 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 	 */
 	List<Skill> findAll();
 
+	Skill findBySkillID(int id);
+
+	Skill findBySkillName(String name);
+
+	void deleteBySkillID(Skill skill);
+
+	void deleteBySkillName(String name);
 
 }

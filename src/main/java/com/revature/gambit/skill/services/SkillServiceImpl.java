@@ -29,6 +29,7 @@ public class SkillServiceImpl implements SkillService {
 	 * @return Skill that has been added.
 	 */
 	@Transactional
+	@Override
 	public Skill create(Skill skill) {
 		return skillRepository.save(skill);
 	}
@@ -38,6 +39,7 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @return Iterable object containing all the skills found.
 	 */
+	@Override
 	public Iterable<Skill> findAll() {
 		return skillRepository.findAll();
 	}
@@ -47,6 +49,7 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @return Iterable object containing all the skills fouund.
 	 */
+	@Override
 	public Iterable<Skill> findAllActive() {
 		return null;
 	}
@@ -58,8 +61,14 @@ public class SkillServiceImpl implements SkillService {
 	 *            Name of the skill to retrieve.
 	 * @return Skill that was found.
 	 */
-	public Skill findByName(String name) {
-		return null;
+	@Override
+	public Skill findBySkillName(String name) {
+		return this.skillRepository.findBySkillName(name);
+	}
+
+	@Override
+	public Skill findBySkillID(int id) {
+		return this.skillRepository.findBySkillID(id); 
 	}
 
 	/**
@@ -71,6 +80,7 @@ public class SkillServiceImpl implements SkillService {
 	 * @return Skill that was added.
 	 */
 	@Transactional
+	@Override
 	public Skill saveSkill(Skill skill) {
 		return null;
 	}
@@ -80,11 +90,22 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @param name
 	 *            Name of the skill to delete.
-	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
 	@Override
-	public void deleteSkillViaName(String name) {
-		throw new UnsupportedOperationException();
+	public void deleteBySkillName(String name) {
+		this.skillRepository.delete(findBySkillName(name));
+	}
+
+	/**
+	 * Deletes a skill based on its name.
+	 * 
+	 * @param name
+	 *            Name of the skill to delete.
+	 */
+	@Transactional
+	@Override
+	public void deleteBySkillID(int id) {
+		this.skillRepository.delete(findBySkillID(id));
 	}
 
 }

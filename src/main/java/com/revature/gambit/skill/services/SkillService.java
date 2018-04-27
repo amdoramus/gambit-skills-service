@@ -14,21 +14,21 @@ public interface SkillService {
 	 *            Skill to be added.
 	 * @return Skill that has been added.
 	 */
-	public Skill create(Skill skill);
+	Skill create(Skill skill);
 
 	/**
 	 * Retrieves all the skills, active and non-active.
 	 * 
 	 * @return Iterable object containing all the skills found.
 	 */
-	public Iterable<Skill> findAll();
+	Iterable<Skill> findAll();
 
 	/**
 	 * Retrieves all the active skills.
 	 * 
 	 * @return Iterable object containing all the skills fouund.
 	 */
-	public Iterable<Skill> findAllActive();
+	Iterable<Skill> findAllActive();
 
 	/**
 	 * Retrieves a skill based on its skill name.
@@ -37,7 +37,9 @@ public interface SkillService {
 	 *            Name of the skill to retrieve.
 	 * @return Skill that was found.
 	 */
-	public Skill findByName(String name);
+	Skill findBySkillName(String name);
+
+	Skill findBySkillID(int id);
 
 	/**
 	 * Adds a new skill to the DB, but unlike create(), this method will
@@ -47,7 +49,7 @@ public interface SkillService {
 	 *            Skill to be added.
 	 * @return Skill that was added.
 	 */
-	public Skill saveSkill(Skill skill);
+	Skill saveSkill(Skill skill);
 
 	/**
 	 * Deletes a skill based on its name.
@@ -55,6 +57,8 @@ public interface SkillService {
 	 * @param name
 	 *            Name of the skill to delete.
 	 */
-	public void deleteSkillViaName(String name);
+	void deleteBySkillName(String name);
+
+	void deleteBySkillID(int id);
 
 }
