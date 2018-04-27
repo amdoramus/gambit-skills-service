@@ -58,8 +58,14 @@ public class SkillServiceImpl implements SkillService {
 	 *            Name of the skill to retrieve.
 	 * @return Skill that was found.
 	 */
-	public Skill findByName(String name) {
-		return null;
+	@Override
+	public Skill findBySkillName(String name) {
+		return skillRepository.findBySkillName(name);
+	}
+	
+	@Override
+	public Skill findBySkillID(int id) {
+		return this.skillRepository.findBySkillID(id);
 	}
 
 	/**
