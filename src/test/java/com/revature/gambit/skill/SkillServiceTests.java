@@ -31,6 +31,7 @@ public class SkillServiceTests {
 	}
 	
 	@Test
+<<<<<<< HEAD
 	public void testDeleteSkillNameFunction() {
 		Iterable<Skill> skills = this.skillService.findAll();
 		this.skillService.deleteBySkillName("Java");
@@ -45,5 +46,17 @@ public class SkillServiceTests {
 		Iterable<Skill> skillss = this.skillService.findAll();
 		assertNotEquals(skills, skillss);
 	}
+=======
+    public void testFindBySkillName() {
+    	Skill skill = skillService.findBySkillName("Java");
+    	assertEquals(skill.getSkillName(), "Java");
+    }
+    
+    @Test
+    public void testFindById() {
+    	Skill skill = skillService.findBySkillID(1);
+    	assertEquals(skill.getSkillName(), "Visual Basic");
+    }
+>>>>>>> 945fb4be7a90738c2bb1673d14ae7e2c28abb813
 
 }

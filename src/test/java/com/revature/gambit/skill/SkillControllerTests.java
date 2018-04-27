@@ -50,6 +50,7 @@ public class SkillControllerTests {
 	}
 
 	@Test
+<<<<<<< HEAD
 	public void testDeleteSkillByID() throws Exception {
 		Skill skill1 = new Skill(100, "Java", true);
 		when(skillService.findBySkillID(100)).thenReturn(skill1);
@@ -67,6 +68,53 @@ public class SkillControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isAccepted());
 		when(skillService.findBySkillName("Java")).thenReturn(null);
+=======
+	public void testFindSkillByName() throws Exception {
+		Skill skill1 = new Skill(99, "Javas", true);
+		Skill skill2 = new Skill(100, "Javas2", false);
+
+		when(skillService.findBySkillName("Javas")).thenReturn(skill1);
+		when(skillService.findBySkillName("Javas2")).thenReturn(skill2);
+
+		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Javas")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
+
+		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Javas2")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testFindSkillByID() throws Exception {
+		Skill skill1 = new Skill(99, "Javas", true);
+		Skill skill2 = new Skill(100, "Javas2", false);
+		
+		when(skillService.findBySkillID(99)).thenReturn(skill1);
+		when(skillService.findBySkillID(100)).thenReturn(skill2);
+		
+		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 99)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+		
+		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testFindSkillByIDNotFound() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100000)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void testFindSkillByNameNotFound() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Jeva")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+>>>>>>> 945fb4be7a90738c2bb1673d14ae7e2c28abb813
 	}
 
 }

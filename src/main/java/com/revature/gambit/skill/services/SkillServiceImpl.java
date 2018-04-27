@@ -65,10 +65,10 @@ public class SkillServiceImpl implements SkillService {
 	public Skill findBySkillName(String name) {
 		return this.skillRepository.findBySkillName(name);
 	}
-
+	
 	@Override
 	public Skill findBySkillID(int id) {
-		return this.skillRepository.findBySkillID(id); 
+		return this.skillRepository.findBySkillID(id);
 	}
 
 	/**
@@ -93,19 +93,19 @@ public class SkillServiceImpl implements SkillService {
 	 */
 	@Override
 	public void deleteBySkillName(String name) {
-		this.skillRepository.delete(findBySkillName(name));
+		this.skillRepository.deleteBySkillName(name);
 	}
 
 	/**
-	 * Deletes a skill based on its name.
+	 * Deletes a skill based on its id.
 	 * 
-	 * @param name
-	 *            Name of the skill to delete.
+	 * @param id
+	 *            id of the skill to delete.
 	 */
 	@Transactional
 	@Override
 	public void deleteBySkillID(int id) {
-		this.skillRepository.delete(findBySkillID(id));
+		this.skillRepository.deleteBySkillID(id);
 	}
 
 }

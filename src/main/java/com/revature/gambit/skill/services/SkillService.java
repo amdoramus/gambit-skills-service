@@ -50,6 +50,8 @@ public interface SkillService {
 	 * @return Skill that was added.
 	 */
 	Skill saveSkill(Skill skill);
+	
+	Skill update(Skill skill);
 
 	/**
 	 * Deletes a skill based on its name.
