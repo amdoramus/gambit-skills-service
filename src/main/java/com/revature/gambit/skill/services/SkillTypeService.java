@@ -41,7 +41,7 @@ public interface SkillTypeService {
 	 *            Name of the skill type to be replaced.
 	 * @return True if success, false if the update can't be done.
 	 */
-	public boolean update(SkillType updatedSkillType, String name);
+	public boolean update(SkillType updatedSkillType);
 
 	/**
 	 * Deletes a skill type based on its name.

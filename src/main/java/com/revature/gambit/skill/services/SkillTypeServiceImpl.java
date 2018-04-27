@@ -61,7 +61,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @return True if success, false if the update can't be done.
 	 */
 	@Transactional
-	public boolean update(SkillType updatedSkillType, String name) {
+	public boolean update(SkillType updatedSkillType) {
 		return false;
 	}
 

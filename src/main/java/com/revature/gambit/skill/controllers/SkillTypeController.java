@@ -46,9 +46,12 @@ public class SkillTypeController {
 
 
 	@DeleteMapping("/skilltype/{id}")
-	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable int id) {
-		skillTypeService.deleteBySkillTypeID(id);
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> deleteSkillTypeByName(@PathVariable int id) {
+		SkillType skillType = this.skillTypeService.findBySkillTypeId();
+		
+		skillType.setIsActive(false);
+		this.skillTypeService.update(skillType);
+		return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
 	}
 
 }
