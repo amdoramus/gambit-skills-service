@@ -56,28 +56,15 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * 
 	 * @param updatedSkillType
 	 *            Updated value that will replace the old one.
-	 * @param name
-	 *            Name of the skill type to be replaced.
-	 * @return True if success, false if the update can't be done.
+
+	 * @return SkillType that was updated.
 	 */
 	@Transactional
-	public boolean updateByName(SkillType updatedSkillType, String name) {
-		return false;
+	public SkillType update(SkillType updatedSkillType) {
+		return skillTypeRepository.saveAndFlush(updatedSkillType);
 	}
 
-	/**
-	 * Updates the value of a skill type.
-	 *
-	 * @param updatedSkillType
-	 *            Updated value that will replace the old one.
-	 * @param id
-	 *            Id of the skill type to be replaced.
-	 * @return True if success, false if the update can't be done.
-	 */
-	@Transactional
-	public boolean updateById(SkillType updatedSkillType, int id) {
-		return false;
-	}
+
 
 	/**
 	 * Deletes a skill type based on its name.

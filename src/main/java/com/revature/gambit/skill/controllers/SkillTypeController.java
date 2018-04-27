@@ -1,6 +1,7 @@
 package com.revature.gambit.skill.controllers;
 
 import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,8 +50,8 @@ public class SkillTypeController {
     @PutMapping(value = "/skillType/name/{name}")
     public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable String name) {
         try {
-            boolean successful = this.skillTypeService.updateByName(skillType, java.net.URLDecoder.decode(name, "UTF-8"));
-            if (successful == true) {
+             successful = this.skillTypeService.update(skillType);
+            if (java.net.URLDecoder.decode(name, "UTF-8").equals(skillType.getSkillTypeName())) {
                 return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
             } else {
                 return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
@@ -75,14 +76,13 @@ public class SkillTypeController {
     @PutMapping(value = "/skillType/{id}")
     public ResponseEntity<Boolean> update(@Valid @RequestBody SkillType skillType, @PathVariable int id) {
 
-        boolean successful = this.skillTypeServiceImpl.updateById(skillType, id);
-        if (successful == true) {
+        boolean successful = this.skillTypeService.updateById(skillType, id);
+        if ( == true) {
             return new ResponseEntity<Boolean>(HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
     }
 
 }

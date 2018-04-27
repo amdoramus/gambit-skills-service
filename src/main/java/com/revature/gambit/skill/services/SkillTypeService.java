@@ -37,11 +37,9 @@ public interface SkillTypeService {
 	 * 
 	 * @param updatedSkillType
 	 *            Updated value that will replace the old one.
-	 * @param name
-	 *            Name of the skill type to be replaced.
-	 * @return True if success, false if the update can't be done.
+	 * @return SkillType that was updated.
 	 */
-	public boolean update(SkillType updatedSkillType, String name);
+	public SkillType update(SkillType updatedSkillType);
 
 	/**
 	 * Deletes a skill type based on its name.
