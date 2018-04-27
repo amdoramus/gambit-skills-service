@@ -22,7 +22,7 @@ public class SkillTypeController {
 	 * Interface that contains all CRUD methods for skill type.
 	 */
 	@Autowired
-	private SkillTypeServiceImpl skillTypeService;
+	private SkillTypeService skillTypeService;
 
     /**
      * Handles incoming POST request that adds a new skill type to the DB.
