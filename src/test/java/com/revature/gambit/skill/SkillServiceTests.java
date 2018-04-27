@@ -1,6 +1,8 @@
 package com.revature.gambit.skill;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -27,5 +29,26 @@ public class SkillServiceTests {
 		assertEquals(numberofSkills, newnumberofSkills - 1);
 		assertEquals(returnedSkill.getSkillName(), skill.getSkillName() );
 	}
+	
+	@Test
+    public void testFindBySkillName() {
+    	Skill skill = skillService.findBySkillName("Java");
+    	assertEquals(skill.getSkillName(), "Java");
+    }
+    
+    @Test
+    public void testFindById() {
+    	Skill skill = skillService.findBySkillID(1);
+    	assertEquals(skill.getSkillName(), "Visual Basic");
+    }
+    
+	@Test
+    public void testSaveSkill() {
+    	Skill skill1 = skillService.findBySkillID(1);
+    	Skill skill2 = skillService.saveSkill(new Skill(1, "Javas", true));
+    	assertNotEquals(skill2.getSkillName(), skill1.getSkillName());
+    	Skill skill3 = skillService.saveSkill(new Skill(1, skill1.getSkillName(), true));
+    	assertEquals(skill1.getSkillName(), skill3.getSkillName());
+    }
 
 }

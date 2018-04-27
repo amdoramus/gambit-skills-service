@@ -26,22 +26,29 @@ public interface SkillTypeService {
 	public SkillType findBySkillTypeName(String name);
 
 	/**
+	 * Retrieves a skill type based on its skill type name.
+	 *
+	 * @param id
+	 *            Name of the skill type to retrieve.
+	 * @return Skill Type that was found.
+	 */
+	public SkillType findBySkillTypeId(int id);
+
+	/**
 	 * Retrieves all the skill types.
 	 * 
 	 * @return Iterable object containing all the skill types.
 	 */
-	public Iterable<SkillType> findByAll();
+	public Iterable<SkillType> findAll();
 
 	/**
 	 * Updates the value of a skill type.
 	 * 
 	 * @param updatedSkillType
 	 *            Updated value that will replace the old one.
-	 * @param name
-	 *            Name of the skill type to be replaced.
-	 * @return True if success, false if the update can't be done.
+	 * @return SkillType that was updated.
 	 */
-	public boolean update(SkillType updatedSkillType, String name);
+	public SkillType update(SkillType updatedSkillType);
 
 	/**
 	 * Deletes a skill type based on its name.
