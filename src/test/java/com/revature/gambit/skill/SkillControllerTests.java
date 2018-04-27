@@ -50,7 +50,7 @@ public class SkillControllerTests {
 	}
 
 	@Test
-	public void getSkillByName() throws Exception {
+	public void testFindSkillByName() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 		Skill skill2 = new Skill(100, "Javas2", false);
 
@@ -67,7 +67,7 @@ public class SkillControllerTests {
 	}
 	
 	@Test
-	public void getSkillsById() throws Exception {
+	public void testFindSkillByID() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 		Skill skill2 = new Skill(100, "Javas2", false);
 		
@@ -81,6 +81,20 @@ public class SkillControllerTests {
 		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testFindSkillByIDNotFound() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100000)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void testFindSkillByNameNotFound() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Jeva")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
 	}
 
 }
