@@ -11,7 +11,7 @@ import com.revature.gambit.skill.beans.SkillType;
  */
 @Repository
 public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
-	boolean deleteBySkillTypeName(String name);
+	void deleteBySkillTypeName(String name);
 
-	boolean deleteBySkillTypeId(int id);
+	void deleteBySkillTypeId(int id);
 }

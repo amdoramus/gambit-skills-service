@@ -53,5 +53,19 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 	}
+	
+	@Test
+	public void testDeleteSkillTypeID() throws Exception {		
+	    mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", 101)
+	             .accept(MediaType.APPLICATION_JSON))
+	             .andExpect(status().isAccepted());
+	}
+	
+	@Test
+	public void testDeleteSkillTypeName() throws Exception {		
+	    mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "JUnit")
+	             .accept(MediaType.APPLICATION_JSON))
+	             .andExpect(status().isAccepted());
+	}
 
 }

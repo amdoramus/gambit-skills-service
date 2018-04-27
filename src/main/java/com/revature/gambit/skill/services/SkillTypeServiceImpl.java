@@ -47,8 +47,8 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * 
 	 * @return Iterable object containing all the skill types.
 	 */
-	public Iterable<SkillType> findByAll() {
-		return null;
+	public Iterable<SkillType> findAll() {
+		return this.skillTypeRepository.findAll();
 	}
 
 	/**
@@ -71,11 +71,13 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @param name
 	 *            Name of the skill type to delete.
 	 */
+	@Transactional
 	@Override
 	public void deleteBySkillTypeName(String name) {
 		this.skillTypeRepository.deleteBySkillTypeName(name);
 	}
 
+	@Transactional
 	@Override
 	public void deleteBySkillTypeID(int id) {
 		this.skillTypeRepository.deleteBySkillTypeId(id);
