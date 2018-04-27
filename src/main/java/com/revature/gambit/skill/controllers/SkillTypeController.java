@@ -43,7 +43,7 @@ public class SkillTypeController {
      */
     @GetMapping("/skillType")
     public ResponseEntity<Iterable<SkillType>> findAll() {
-        return new ResponseEntity<Iterable<SkillType>>(this.skillTypeService.findByAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.skillTypeService.findAll(), HttpStatus.OK);
     }
 
     /**
@@ -66,5 +66,32 @@ public class SkillTypeController {
                     HttpStatus.OK);
         }
     }
+
+    /**
+     * Handles incoming GET request that grabs a specific skill type.
+     *
+     * @param name
+     *            Name of the skill type that needs to be retrieved.
+     * @return Skill type along with HTTP status code 200 (OK) if found, HTTP status
+     *         code 404 (NOT FOUND) otherwise.
+     */
+    @GetMapping("/skillType/name/{name}")
+    public ResponseEntity<SkillType> findSkill(@PathVariable String name) {
+        try {
+            SkillType skillType = this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8"));
+            if (skillType == null) {
+                return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<SkillType>(
+                        this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8")),
+                        HttpStatus.OK);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+    }
+
+
 
 }

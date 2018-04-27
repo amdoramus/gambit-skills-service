@@ -39,7 +39,7 @@ public class SkillTypeServiceTests {
 
 	@Test
 	public void getAllSkillTypes() {
-		Iterable<SkillType> skillTypes = skillTypeService.findByAll();
+		Iterable<SkillType> skillTypes = skillTypeService.findAll();
 		assertEquals(9, ((List<SkillType>) skillTypes).size());
 	}
 
@@ -52,6 +52,18 @@ public class SkillTypeServiceTests {
 	@Test
 	public void getSkillTypeNotFound() {
 		SkillType stk = skillTypeService.findBySkillTypeId(1000);
+		assertNull(stk);
+	}
+
+	@Test
+	public void getSkillTypeByName() {
+		SkillType stk = skillTypeService.findBySkillTypeName("PEGA");
+		assertEquals(stk.getSkillTypeDesc(), "PEGA Description");
+	}
+
+	@Test
+	public void getSkillTypeByNameNotFound() {
+		SkillType stk = skillTypeService.findBySkillTypeName("PEGAN");
 		assertNull(stk);
 	}
 	

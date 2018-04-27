@@ -39,7 +39,7 @@ public interface SkillTypeService {
 	 * 
 	 * @return Iterable object containing all the skill types.
 	 */
-	public Iterable<SkillType> findByAll();
+	public Iterable<SkillType> findAll();
 
 	/**
 	 * Updates the value of a skill type.

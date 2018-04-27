@@ -56,7 +56,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 *
 	 * @return Iterable object containing all the skill types.
 	 */
-	public Iterable<SkillType> findByAll() {
+	public Iterable<SkillType> findAll() {
 		return this.skillTypeRepository.findAll();
 	}
 
