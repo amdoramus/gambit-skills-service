@@ -1,6 +1,7 @@
 package com.revature.gambit.skill.controllers;
 
 import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class SkillTypeController {
 	 * Interface that contains all CRUD methods for skill type.
 	 */
 	@Autowired
-	private SkillTypeService skillTypeService;
+	private SkillTypeServiceImpl skillTypeService;
 
     /**
      * Handles incoming POST request that adds a new skill type to the DB.
