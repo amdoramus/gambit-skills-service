@@ -96,5 +96,33 @@ public class SkillControllerTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 	}
+	
+	@Test
+	public void putSkillByIdValid() throws Exception {
+		Skill skill1 = new Skill(99, "Javas", true);
+		Gson gson = new Gson();
+        String json = gson.toJson(skill1);
+        
+        when(skillService.saveSkill(skill1)).thenReturn(skill1);
+        
+        mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 99)
+                .contentType(MediaType.APPLICATION_JSON).content(json)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
+	}
+	
+	@Test
+	public void putSkillByIdInvalid() throws Exception {
+		Skill skill1 = new Skill(999, "Javas", true);
+		
+		Gson gson =  new Gson();
+		String json = gson.toJson(skill1);
+		
+
+		mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 101)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+	}
 
 }
