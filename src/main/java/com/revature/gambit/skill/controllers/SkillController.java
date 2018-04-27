@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,22 +44,41 @@ public class SkillController {
 	/**
 	 * Handles incoming GET request that grabs all the skills.
 	 *
-	 * @return Iterable object containing all the skills retrieved along with HTTP
+	 * @return List object containing all the skills retrieved along with HTTP
 	 *         status code 200 (OK)
+	 * @return HTTP status code 204 (NO_CONTENT) if no skills exist.
 	 */
 	@GetMapping("/skill")
-	public ResponseEntity<Iterable<Skill>> findAll() {
-		return new ResponseEntity<>(this.skillService.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Skill>> findAll() {
+		List<Skill> skills = (List<Skill>) this.skillService.findAll();
+
+		if (skills.isEmpty()) {
+			return new ResponseEntity<List<Skill>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/skill/name/{name}")
 	public ResponseEntity<Skill> findByName(@PathVariable String name) {
-		return new ResponseEntity<Skill>(skillService.findBySkillName(name), HttpStatus.OK);
+		Skill skill = this.skillService.findBySkillName(name);
+
+		if (skill == null) {
+			return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Skill>(this.skillService.findBySkillName(name), HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/skill/{id}")
 	public ResponseEntity<Skill> findById(@PathVariable int id) {
-		return new ResponseEntity<Skill>(skillService.findBySkillID(id), HttpStatus.OK);
+		Skill skill = this.skillService.findBySkillID(id);
+
+		if (skill == null) {
+			return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Skill>(this.skillService.findBySkillID(id), HttpStatus.OK);
+		}
 	}
 
 
