@@ -36,6 +36,63 @@ public class SkillTypeController {
     }
 
     /**
+     * Handles incoming GET request that grabs all the skill types.
+     *
+     * @return Iterable object containing all the skill types retrieved along with
+     *         HTTP status code 200 (OK)
+     */
+    @GetMapping("/skillType")
+    public ResponseEntity<Iterable<SkillType>> findAll() {
+        return new ResponseEntity<>(this.skillTypeService.findAll(), HttpStatus.OK);
+    }
+
+    /**
+     * Handles incoming GET request that grabs a specific skill type.
+     *
+     * @param id
+     *            Id of the skill type that needs to be retrieved.
+     * @return Skill type along with HTTP status code 200 (OK) if found, HTTP status
+     *         code 404 (NOT FOUND) otherwise.
+     */
+    @GetMapping("/skillType/{id}")
+    public ResponseEntity<SkillType> findSkill(@PathVariable int id) {
+
+        SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
+        if (skillType == null) {
+            return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<SkillType>(
+                    this.skillTypeService.findBySkillTypeId(id),
+                    HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Handles incoming GET request that grabs a specific skill type.
+     *
+     * @param name
+     *            Name of the skill type that needs to be retrieved.
+     * @return Skill type along with HTTP status code 200 (OK) if found, HTTP status
+     *         code 404 (NOT FOUND) otherwise.
+     */
+    @GetMapping("/skillType/name/{name}")
+    public ResponseEntity<SkillType> findSkill(@PathVariable String name) {
+        try {
+            SkillType skillType = this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8"));
+            if (skillType == null) {
+                return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<SkillType>(
+                        this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8")),
+                        HttpStatus.OK);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+    }
+
+    /**
      * Handles incoming PUT request that will update an existing skill type with a
      * new one.
      *
