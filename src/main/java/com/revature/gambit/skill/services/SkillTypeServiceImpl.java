@@ -70,11 +70,15 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * 
 	 * @param name
 	 *            Name of the skill type to delete.
-	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
-	@Transactional
+	@Override
 	public void deleteBySkillTypeName(String name) {
-		throw new UnsupportedOperationException();
+		this.skillTypeRepository.deleteBySkillTypeName(name);
+	}
+
+	@Override
+	public void deleteBySkillTypeID(int id) {
+		this.skillTypeRepository.deleteBySkillTypeId(id);
 	}
 
 }
