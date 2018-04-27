@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -80,6 +81,21 @@ public class SkillController {
 			return new ResponseEntity<Skill>(this.skillService.findBySkillID(id), HttpStatus.OK);
 		}
 	}
-
+	
+	/**
+	 * Handles incoming PUT requests to update skill
+	 *
+	 * @return Skill that was updated and status code 202 (ACCEPTED) if id in url and id in body match
+	 * 
+	 * @return HTTP status code 400 (BAD_REQUEST) if id from url and id from body don't match.
+	 */
+	@PutMapping("/skill/{id}")
+    public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
+    	if(id == updatedSkill.getSkillID()) {
+    		return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
+    	} else {
+    		return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
+    	}
+    }
 
 }

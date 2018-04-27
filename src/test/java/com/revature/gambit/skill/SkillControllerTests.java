@@ -7,13 +7,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.revature.gambit.skill.controllers.SkillController;
-import com.revature.gambit.skill.services.SkillServiceImpl;
+import com.revature.gambit.skill.services.SkillService;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class SkillControllerTests {
 
 	private MockMvc mvc;
@@ -29,7 +30,7 @@ public class SkillControllerTests {
 	private SkillController skillController;
 
 	@Mock
-	private SkillServiceImpl skillService;
+	private SkillService skillService;
 
 	@Before
 	public void setUp() {
@@ -95,6 +96,33 @@ public class SkillControllerTests {
 		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Jeva")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void putSkillByIdValid() throws Exception {
+		Skill skill1 = new Skill(99, "Javas", true);
+		Gson gson = new Gson();
+        String json = gson.toJson(skill1);
+        
+        when(skillService.saveSkill(skill1)).thenReturn(skill1);
+        
+        mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 99)
+                .contentType(MediaType.APPLICATION_JSON).content(json)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
+	}
+	
+	@Test
+	public void putSkillByIdInvalid() throws Exception {
+		Skill skill1 = new Skill(999, "Javas", true);
+		
+		Gson gson =  new Gson();
+		String json = gson.toJson(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 101)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
 	}
 
 }

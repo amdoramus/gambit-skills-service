@@ -157,7 +157,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.9</version>
 		</dependency>
-
+		
 
 	</dependencies>
 
@@ -252,7 +252,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<configuration>
 					<!-- Change this to match path to actual Main class -->
-					<mainClass>com.revature.gambit.Application</mainClass>
+					<mainClass>com.revature.gambit.skill.Application</mainClass>
 				</configuration>
 			</plugin>
 
