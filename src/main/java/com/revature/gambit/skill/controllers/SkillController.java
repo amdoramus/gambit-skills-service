@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -83,29 +84,52 @@ public class SkillController {
 	}
 
 	/**
-	 * Hard delete by name here for convenience. You might need to comment this out avoid ambiguous mapping exceptions. 
+	 * Soft delete by name. Sets the skill to inactive.
 	 * @param name
 	 * @return
 	 */
 	@DeleteMapping("/skill/name/{name}")
 	public ResponseEntity<Void> deleteBySkillName(@PathVariable String name) {
-		skillService.deleteBySkillName(name);
+		Skill skill = skillService.findBySkillName(name);
+
+		if (skill != null) {
+			skill.setActive(false);
+			skillService.update(skill);
+		}
+
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
 	/**
-	 * Hard delete by id, the default deleting mechanism. 
-	 * @param name
+	 * Soft delete by id. Sets the skill to inactive.
+	 * @param id
 	 * @return
 	 */
 	@DeleteMapping("/skill/{id}")
-	public ResponseEntity<Boolean> deleteBySkillId(@PathVariable int id) {
+	public ResponseEntity<Void> deleteBySkillId(@PathVariable int id) {
 		Skill skill = this.skillService.findBySkillID(id);
-		
-		skill.setActive(false);
-		this.skillService.update(skill);
-		
-		return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
+
+		if (skill != null) {
+			skill.setActive(false);
+			this.skillService.update(skill);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
+	/**
+	 * Handles incoming PUT requests to update skill
+	 *
+	 * @return Skill that was updated and status code 202 (ACCEPTED) if id in url and id in body match
+	 * 
+	 * @return HTTP status code 400 (BAD_REQUEST) if id from url and id from body don't match.
+	 */
+	@PutMapping("/skill/{id}")
+	public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
+		if(id == updatedSkill.getSkillID()) {
+			return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }

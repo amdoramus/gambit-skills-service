@@ -72,17 +72,16 @@ public class SkillServiceImpl implements SkillService {
 	}
 
 	/**
-	 * Adds a new skill to the DB, but unlike create(), this method will
-	 * commit/flush changes to DB immediately.
+	 * Updates skill in DB and flushes change immediately 
 	 *
 	 * @param skill
-	 *            Skill to be added.
-	 * @return Skill that was added.
+	 *            Skill to be updated.
+	 * @return Skill that was updated.
 	 */
 	@Transactional
 	@Override
 	public Skill saveSkill(Skill skill) {
-		return null;
+		return skillRepository.saveAndFlush(skill);
 	}
 
 	/**
