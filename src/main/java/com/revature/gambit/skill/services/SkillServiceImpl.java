@@ -90,6 +90,7 @@ public class SkillServiceImpl implements SkillService {
 	 * @param name
 	 *            Name of the skill to delete.
 	 */
+	@Transactional
 	@Override
 	public void deleteBySkillName(String name) {
 		this.skillRepository.deleteBySkillName(name);

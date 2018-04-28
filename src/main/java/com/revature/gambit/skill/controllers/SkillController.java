@@ -94,7 +94,7 @@ public class SkillController {
 
 		if (skill != null) {
 			skill.setActive(false);
-			skillService.update(skill);
+			skillService.saveSkill(skill);
 		}
 
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
@@ -111,7 +111,7 @@ public class SkillController {
 
 		if (skill != null) {
 			skill.setActive(false);
-			this.skillService.update(skill);
+			this.skillService.saveSkill(skill);
 		}
 
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
