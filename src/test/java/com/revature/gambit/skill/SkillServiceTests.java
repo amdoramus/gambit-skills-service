@@ -2,6 +2,7 @@ package com.revature.gambit.skill;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.skill.repo.SkillRepository;
 import com.revature.gambit.skill.services.SkillServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,6 +21,9 @@ public class SkillServiceTests {
 
 	@Autowired
 	private SkillServiceImpl skillService;
+	
+	@Autowired
+	private SkillRepository skillRepository;
 
 	@Test
 	public void testSkillCreate() {
@@ -31,19 +36,25 @@ public class SkillServiceTests {
 	}
 	
 	@Test
-	public void testDeleteSkillNameFunction() {
-		Iterable<Skill> skills = this.skillService.findAll();
-		this.skillService.deleteBySkillName("Java");
-		Iterable<Skill> skillss = this.skillService.findAll();
-		assertNotEquals(skills, skillss);
+	public void testDeleteBySkillName() {
+		Skill skill = new Skill(0, "Test", true);
+		skill = this.skillRepository.saveAndFlush(skill);
+		
+		this.skillService.deleteBySkillName("Test");
+		
+		Skill actualSkill = this.skillRepository.findBySkillName("Test");
+		assertNull(actualSkill);
 	}
 	
 	@Test
-	public void testDeleteSkillIdFunction() {
-		Iterable<Skill> skills = this.skillService.findAll();
-		this.skillService.deleteBySkillID(1);
-		Iterable<Skill> skillss = this.skillService.findAll();
-		assertNotEquals(skills, skillss);
+	public void testDeleteBySkillID() {
+		Skill skill = new Skill(0, "Test", true);
+		skill = this.skillRepository.saveAndFlush(skill);
+		
+		this.skillService.deleteBySkillID(skill.getSkillID());
+		
+		Skill actualSkill = this.skillRepository.findBySkillID(skill.getSkillID());
+		assertNull(actualSkill);
 	}
 	
     public void testFindBySkillName() {
