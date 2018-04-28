@@ -27,6 +27,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @return Skill Type that has been added.
 	 */
 	@Transactional
+	@Override
 	public SkillType create(SkillType skillType) {
 		return this.skillTypeRepository.save(skillType);
 	}
@@ -38,6 +39,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 *            Name of the skill type to retrieve.
 	 * @return Skill Type that was found.
 	 */
+	@Override
 	public SkillType findBySkillTypeName(String name) {
 		return this.skillTypeRepository.findBySkillTypeName(name);
 	}
@@ -49,13 +51,17 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 *            Id of the skill type to retrieve.
 	 * @return Skill Type that was found.
 	 */
-	public SkillType findBySkillTypeId(int id){ return this.skillTypeRepository.findBySkillTypeId(id);}
+	@Override
+	public SkillType findBySkillTypeId(int id) {
+		return this.skillTypeRepository.findBySkillTypeId(id);
+	}
 
 	/**
 	 * Retrieves all the skill types.
 	 *
 	 * @return Iterable object containing all the skill types.
 	 */
+	@Override
 	public Iterable<SkillType> findAll() {
 		return this.skillTypeRepository.findAll();
 	}
@@ -65,14 +71,16 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * 
 	 * @param updatedSkillType
 	 *            Updated value that will replace the old one.
-	 * @param name
-	 *            Name of the skill type to be replaced.
-	 * @return True if success, false if the update can't be done.
+
+	 * @return SkillType that was updated.
 	 */
 	@Transactional
-	public boolean update(SkillType updatedSkillType) {
-		return false;
+	@Override
+	public SkillType update(SkillType updatedSkillType) {
+		return skillTypeRepository.saveAndFlush(updatedSkillType);
 	}
+
+
 
 	/**
 	 * Deletes a skill type based on its name.

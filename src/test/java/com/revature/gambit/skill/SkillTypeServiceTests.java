@@ -2,7 +2,7 @@ package com.revature.gambit.skill;
 
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.repo.SkillTypeRepository;
-import com.revature.gambit.skill.services.SkillTypeServiceImpl;
+import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +15,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertNull;
 public class SkillTypeServiceTests {
 
 	@Autowired
-	private SkillTypeServiceImpl skillTypeService;
+	private SkillTypeService skillTypeService;
 
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
@@ -30,12 +31,12 @@ public class SkillTypeServiceTests {
 
 	@Test
 	public void testCreate() {
-		int sizeOfList = ((List)skillTypeRepository.findAll()).size();
+		int sizeOfList = ((List<SkillType>) skillTypeRepository.findAll()).size();
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
-		assertTrue(((List)skillTypeRepository.findAll()).size() > sizeOfList);
+		assertTrue(((List<SkillType>)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
-		skillTypeRepository.delete(tstSkillType);
+		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
 
 	@Test
@@ -84,4 +85,15 @@ public class SkillTypeServiceTests {
 		assertNotEquals(before, after);
 	}
 
+	public void testUpdate() {
+		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
+		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
+		
+		returnedSkillType.setIsCore(false);
+		skillTypeService.update(returnedSkillType);
+		
+		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
+		assertFalse(tstSkillType.isCore());
+		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
+	}
 }

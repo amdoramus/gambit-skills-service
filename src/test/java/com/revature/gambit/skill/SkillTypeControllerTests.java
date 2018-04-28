@@ -71,13 +71,15 @@ public class SkillTypeControllerTests {
 	             .andExpect(status().isAccepted());
 	}
 
+
+
 	@Test
-	public void getSkillType() throws Exception{
+	public void getSkillType() throws Exception {
 
 		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
 		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
 
-		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
 		when(skillTypeService.findAll()).thenReturn((List<SkillType>) skills);
 
@@ -88,12 +90,12 @@ public class SkillTypeControllerTests {
 	}
 
 	@Test
-	public void getSkillTypeById() throws Exception{
+	public void getSkillTypeById() throws Exception {
 
 		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
 		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
 
-		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
 		when(skillTypeService.findBySkillTypeId(100)).thenReturn(((List<SkillType>) skills).get(0));
 		when(skillTypeService.findBySkillTypeId(101)).thenReturn(((List<SkillType>) skills).get(1));
@@ -109,20 +111,12 @@ public class SkillTypeControllerTests {
 	}
 
 	@Test
-	public void getSkillTypeByIdDoesNotExist() throws Exception {
-
-		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 1000)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
-	}
-
-	@Test
-	public void getSkillTypeByName() throws Exception{
+	public void getSkillTypeByName() throws Exception {
 
 		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
 		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
 
-		Iterable<SkillType> skills = Arrays.asList(skill1,skill2);
+		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
 		when(skillTypeService.findBySkillTypeName("Java")).thenReturn(((List<SkillType>) skills).get(0));
 		when(skillTypeService.findBySkillTypeName("Fortran")).thenReturn(((List<SkillType>) skills).get(1));
@@ -137,12 +131,70 @@ public class SkillTypeControllerTests {
 
 	}
 
-	@Test
-	public void getSkillTypeByNameDoesNotExist() throws Exception {
 
-		mvc.perform(MockMvcRequestBuilders.get("/skillType/name/{name}", "jv")
+	@Test
+	public void putSkillByNameType() throws Exception {
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{id}", "Java")
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isAccepted());
+
+	}
+
+
+	@Test
+	public void putSkillTypeNameFailed() throws Exception {
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "jv")
+				.contentType(MediaType.APPLICATION_JSON).content(json)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void putSkillTypeById() throws Exception {
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 100)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isAccepted());
+
+	}
+
+
+	@Test
+	public void putSkillTypeByIdFailed() throws Exception {
+
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		Gson gson = new Gson();
+		String json = gson.toJson(skill1);
+
+		when(skillTypeService.update(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 101)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+
 	}
 
 }
