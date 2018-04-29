@@ -1,15 +1,22 @@
 package com.revature.gambit.skill.controllers;
 
-import com.revature.gambit.skill.beans.SkillType;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeService;
-
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Controller that will handle requests for the skill type service.
@@ -137,6 +144,16 @@ public class SkillTypeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+    
+    @GetMapping(value = "/skillType/active")
+    public ResponseEntity<List<SkillType>> findAllActive() {
+    	List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+    	
+    	if (skillTypes.isEmpty())
+    		return new ResponseEntity<List<SkillType>>(HttpStatus.NO_CONTENT);
+    	
+    	return new ResponseEntity<List<SkillType>>(skillTypes, HttpStatus.OK);
     }
 
 }

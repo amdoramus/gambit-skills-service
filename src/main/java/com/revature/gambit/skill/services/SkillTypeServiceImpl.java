@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,6 +87,15 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	@Transactional
 	public void deleteBySkillTypeName(String name) {
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * Returns a list of all active SkillTypes.
+	 * @return A list of all SkillTypes where isActive is true.
+	 */
+	@Override
+	public List<SkillType> findAllActive() {
+		return this.skillTypeRepository.findAllByIsActive(true);
 	}
 
 }

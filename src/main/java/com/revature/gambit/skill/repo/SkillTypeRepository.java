@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +30,7 @@ public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
      * @return Skill that was found.
      */
     SkillType findBySkillTypeId(int id);
+    
+    List<SkillType> findAllByIsActive(boolean isActive);
 
 }
