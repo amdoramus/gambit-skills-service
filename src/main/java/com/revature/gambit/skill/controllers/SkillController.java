@@ -97,5 +97,19 @@ public class SkillController {
     		return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
     	}
     }
+	
+	/**
+	 * Handles incoming Get requests to find all active skills.
+	 * @return HTTP status code 200 if there are active skills, 204 if there are no active skills
+	 */
+	@GetMapping("/skill/active")
+	public ResponseEntity<List<Skill>> findAllActive() {
+		List<Skill> skills = this.skillService.findAllActive();
+		
+		if (skills.isEmpty())
+			return new ResponseEntity<List<Skill>>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
+	}
 
 }

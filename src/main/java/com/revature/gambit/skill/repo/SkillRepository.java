@@ -26,4 +26,5 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 
 	Skill findBySkillName(String name);
 
+	List<Skill> findAllByIsActive(boolean isActive);
 }

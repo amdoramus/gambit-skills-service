@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.services;
 
+import java.util.List;
+
 import com.revature.gambit.skill.beans.Skill;
 
 /**
@@ -26,9 +28,9 @@ public interface SkillService {
 	/**
 	 * Retrieves all the active skills.
 	 * 
-	 * @return Iterable object containing all the skills fouund.
+	 * @return List object containing all the skills fouund.
 	 */
-	Iterable<Skill> findAllActive();
+	List<Skill> findAllActive();
 
 	/**
 	 * Retrieves a skill based on its skill name.
