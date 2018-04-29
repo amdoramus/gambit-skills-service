@@ -79,4 +79,11 @@ public class SkillTypeServiceTests {
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 
 	}
+	
+	@Test
+	public void testFindAllActive() {
+		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+		
+		assertEquals(7, skillTypes.size());
+	}
 }

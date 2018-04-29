@@ -1,34 +1,39 @@
 package com.revature.gambit.skill;
 
-import com.google.gson.Gson;
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.services.SkillTypeServiceImpl;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.revature.gambit.skill.controllers.SkillTypeController;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.controllers.SkillTypeController;
+import com.revature.gambit.skill.services.SkillTypeServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SkillTypeControllerTests {
 
+	@Autowired
+	private ObjectMapper mapper;
+	
 	private MockMvc mvc;
 
 	@InjectMocks
@@ -181,6 +186,26 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 
+	}
+	
+	@Test
+	public void testFindAllActive() throws Exception {
+		SkillType activeSkillType = new SkillType(1, "Active", "Active SkillType", true, true);
+		List<SkillType> expectedSkillTypes = Arrays.asList(activeSkillType);
+		when(skillTypeService.findAllActive()).thenReturn(expectedSkillTypes);
+		
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/active"))
+		.andExpect(status().isOk())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillTypes)));
+	}
+	
+	@Test
+	public void testFindAllActiveNoContent() throws Exception {
+		List<SkillType> expectedSkillTypes = new ArrayList<>();
+		when(skillTypeService.findAllActive()).thenReturn(expectedSkillTypes);
+		
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/active"))
+		.andExpect(status().isNoContent());
 	}
 
 }
