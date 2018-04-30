@@ -95,7 +95,7 @@ public class SkillTypeServiceTests {
 		skillTypeService.update(returnedSkillType);
 		
 		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
-		assertFalse(tstSkillType.isCore());
+		assertFalse(tstSkillType.getIsCore());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
 }

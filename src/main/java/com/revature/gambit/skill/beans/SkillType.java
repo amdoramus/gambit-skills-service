@@ -126,7 +126,7 @@ public class SkillType {
 		this.skillTypeDesc = skillTypeDesc;
 	}
 
-	public boolean isActive() {
+	public boolean getIsActive() {
 		return isActive;
 	}
 
@@ -134,7 +134,7 @@ public class SkillType {
 		this.isActive = isActive;
 	}
 
-	public boolean isCore() {
+	public boolean getIsCore() {
 		return isCore;
 	}
 

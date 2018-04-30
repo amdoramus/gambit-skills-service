@@ -49,9 +49,9 @@ public class SkillTypeControllerTests {
 
 	@Test
 	public void testCreate() throws Exception {
-		SkillType skillType = new SkillType(1, "Java", "I can code in Java", true, true);
+		SkillType skillType = new SkillType("Java", "I can code in Java", true, true);
 		SkillType expectedSkillType = new SkillType(1, "Java", "I can code in Java", true, true);
-
+		
 		when(this.skillTypeService.create(skillType)).thenReturn(expectedSkillType);
 		mvc.perform(MockMvcRequestBuilders.post("/skillType/")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -75,7 +75,7 @@ public class SkillTypeControllerTests {
 		.andExpect(status().isAccepted());
 		
 		when(this.skillTypeService.findBySkillTypeId(2)).thenReturn(null);
-		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", 1))
+		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", 2))
 		.andExpect(status().isAccepted());
 	}
 
@@ -85,8 +85,8 @@ public class SkillTypeControllerTests {
 		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true);
 		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true);
 		
-		when(skillTypeService.findBySkillTypeName("Test")).thenReturn(skillType);
-		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
+		when(this.skillTypeService.findBySkillTypeName("Test")).thenReturn(skillType);
+		when(this.skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Test"))
 		.andExpect(status().isAccepted());
@@ -117,13 +117,13 @@ public class SkillTypeControllerTests {
 	public void testFindSkillTypeById() throws Exception {
 		SkillType skillType = new SkillType(1, "Java", "I can code in Java", true, true);
 
-		when(skillTypeService.findBySkillTypeId(1)).thenReturn(skillType);
+		when(this.skillTypeService.findBySkillTypeId(1)).thenReturn(skillType);
 
 		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 1))
 		.andExpect(status().isOk())
 		.andExpect(content().json(mapper.writeValueAsString(skillType)));
 
-		when(skillTypeService.findBySkillTypeId(2)).thenReturn(null);
+		when(this.skillTypeService.findBySkillTypeId(2)).thenReturn(null);
 		
 		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 2))
 		.andExpect(status().isNotFound());
@@ -165,26 +165,11 @@ public class SkillTypeControllerTests {
 		.andExpect(status().isBadRequest());
 	}
 
-//	@Test
-//	public void putSkillTypeNameFailed() throws Exception {
-//
-//		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
-//		Gson gson = new Gson();
-//		String json = gson.toJson(skill1);
-//
-//		when(skillTypeService.update(skill1)).thenReturn(skill1);
-//
-//		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "jv")
-//				.contentType(MediaType.APPLICATION_JSON).content(json)
-//				.accept(MediaType.APPLICATION_JSON))
-//		.andExpect(status().isBadRequest());
-//	}
-
 	@Test
-	public void putSkillTypeById() throws Exception {
+	public void testUpdateSkillTypeById() throws Exception {
 		SkillType expectedSkillType = new SkillType(100, "Java", "I can code in Java", true, true);
 
-		when(skillTypeService.update(expectedSkillType)).thenReturn(expectedSkillType);
+		when(this.skillTypeService.update(expectedSkillType)).thenReturn(expectedSkillType);
 
 		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 100)
 				.contentType(MediaType.APPLICATION_JSON)
@@ -192,22 +177,11 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isAccepted())
 		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
-	}
-
-	@Test
-	public void putSkillTypeByIdFailed() throws Exception {
-
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
-
-		when(skillTypeService.update(skill1)).thenReturn(skill1);
-
+		
 		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 101)
-				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsBytes(expectedSkillType))
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isBadRequest());
-
 	}
-
 }

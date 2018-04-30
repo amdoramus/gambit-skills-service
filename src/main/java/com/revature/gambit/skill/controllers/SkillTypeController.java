@@ -41,7 +41,8 @@ public class SkillTypeController {
 	 */
 	@PostMapping("/skillType")
 	public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
-		return new ResponseEntity<>(this.skillTypeService.create(skillType), HttpStatus.CREATED);
+		SkillType result = this.skillTypeService.create(skillType);
+		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/skilltype/name/{name}")
@@ -117,19 +118,21 @@ public class SkillTypeController {
 	 */
 	@GetMapping("/skillType/name/{name}")
 	public ResponseEntity<SkillType> findSkill(@PathVariable String name) {
+		String skillTypeName = "";
+		
 		try {
-			SkillType skillType = this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8"));
-			if (skillType == null) {
-				return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
-			} else {
-				return new ResponseEntity<SkillType>(
-						this.skillTypeService.findBySkillTypeName(java.net.URLDecoder.decode(name, "UTF-8")),
-						HttpStatus.OK);
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			skillTypeName = URLDecoder.decode(name, "UTF-8");
+		} catch (UnsupportedEncodingException e){
+			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+	
+		SkillType skillType = this.skillTypeService.findBySkillTypeName(skillTypeName);
+		
+		if (skillType == null) {
+			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<SkillType>(skillType, HttpStatus.OK);
+		}
 	}
 
 	/**

@@ -50,7 +50,7 @@ public class SkillControllerTests {
 	public void testCreate() throws Exception {
 		Skill skill = new Skill("Fortran", true);
 		Skill expectedSkill = new Skill(1, "Fortran", true);
-
+		
 		when(this.skillService.create(skill)).thenReturn(expectedSkill);
 
 		mvc.perform(MockMvcRequestBuilders.post("/skill/")
@@ -65,7 +65,8 @@ public class SkillControllerTests {
 	public void testDeleteSkillByID() throws Exception {
 		Skill deletedSkill = new Skill(100, "Java", false);
 
-		when(skillService.saveSkill(deletedSkill)).thenReturn(deletedSkill);
+		when(this.skillService.findBySkillID(100)).thenReturn(deletedSkill);
+		when(this.skillService.saveSkill(deletedSkill)).thenReturn(deletedSkill);
 		mvc.perform(MockMvcRequestBuilders.delete("/skill/{id}", 100))
 		.andExpect(status().isAccepted());
 
@@ -78,12 +79,13 @@ public class SkillControllerTests {
 	public void testDeleteSkillByName() throws Exception {
 		Skill deletedSkill = new Skill(100, "Java", false);
 
-		when(skillService.saveSkill(deletedSkill)).thenReturn(deletedSkill);
+		when(this.skillService.findBySkillName("Java")).thenReturn(deletedSkill);
+		when(this.skillService.saveSkill(deletedSkill)).thenReturn(deletedSkill);
 		mvc.perform(MockMvcRequestBuilders.delete("/skill/name/{name}", "Java"))
 		.andExpect(status().isAccepted());
 
 		when(this.skillService.findBySkillName("C")).thenReturn(null);
-		mvc.perform(MockMvcRequestBuilders.delete("/skill/name/{name}", "Java"))
+		mvc.perform(MockMvcRequestBuilders.delete("/skill/name/{name}", "C"))
 		.andExpect(status().isAccepted());
 	}
 
@@ -107,7 +109,7 @@ public class SkillControllerTests {
 	public void testFindSkillByID() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 
-		when(skillService.findBySkillID(99)).thenReturn(skill1);
+		when(this.skillService.findBySkillID(99)).thenReturn(skill1);
 		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 99)
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
@@ -140,7 +142,7 @@ public class SkillControllerTests {
 	public void testUpdateByID() throws Exception {
 		Skill skill = new Skill(99, "Javas", true);
 
-		when(skillService.saveSkill(skill)).thenReturn(skill);
+		when(this.skillService.saveSkill(skill)).thenReturn(skill);
 		mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 99)
 				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(skill))
 				.accept(MediaType.APPLICATION_JSON))
