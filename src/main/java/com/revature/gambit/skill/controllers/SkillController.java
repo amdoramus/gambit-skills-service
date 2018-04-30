@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,7 +82,41 @@ public class SkillController {
 			return new ResponseEntity<Skill>(this.skillService.findBySkillID(id), HttpStatus.OK);
 		}
 	}
-	
+
+	/**
+	 * Soft delete by name. Sets the skill to inactive.
+	 * @param name
+	 * @return
+	 */
+	@DeleteMapping("/skill/name/{name}")
+	public ResponseEntity<Void> deleteBySkillName(@PathVariable String name) {
+		Skill skill = skillService.findBySkillName(name);
+
+		if (skill != null) {
+			skill.setActive(false);
+			skillService.saveSkill(skill);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
+	/**
+	 * Soft delete by id. Sets the skill to inactive.
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/skill/{id}")
+	public ResponseEntity<Void> deleteBySkillId(@PathVariable int id) {
+		Skill skill = this.skillService.findBySkillID(id);
+
+		if (skill != null) {
+			skill.setActive(false);
+			this.skillService.saveSkill(skill);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
 	/**
 	 * Handles incoming PUT requests to update skill
 	 *
@@ -90,12 +125,11 @@ public class SkillController {
 	 * @return HTTP status code 400 (BAD_REQUEST) if id from url and id from body don't match.
 	 */
 	@PutMapping("/skill/{id}")
-    public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
-    	if(id == updatedSkill.getSkillID()) {
-    		return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
-    	} else {
-    		return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
-    	}
-    }
-
+	public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
+		if(id == updatedSkill.getSkillID()) {
+			return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
