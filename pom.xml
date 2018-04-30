@@ -266,8 +266,8 @@
 				<version>0.7.9</version>
 				<configuration>
 					<excludes>
-						<exclude>**/*Skill.class</exclude>
-						<exclude>**/*SkillType.class</exclude>
+						<exclude>**/beans/*</exclude>
+						<exclude>**/*Application.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
