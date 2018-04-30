@@ -40,7 +40,7 @@ public class SkillController {
 	 */
 	@PostMapping("/skill")
 	public ResponseEntity<Skill> create(@Valid @RequestBody Skill skill) {
-		return new ResponseEntity<>(this.skillService.create(skill),HttpStatus.CREATED);
+		return new ResponseEntity<>(this.skillService.create(skill), HttpStatus.CREATED);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class SkillController {
 		Skill skill = skillService.findBySkillName(name);
 
 		if (skill != null) {
-			skill.setActive(false);
+			skill.setIsActive(false);
 			skillService.saveSkill(skill);
 		}
 
@@ -110,7 +110,7 @@ public class SkillController {
 		Skill skill = this.skillService.findBySkillID(id);
 
 		if (skill != null) {
-			skill.setActive(false);
+			skill.setIsActive(false);
 			this.skillService.saveSkill(skill);
 		}
 

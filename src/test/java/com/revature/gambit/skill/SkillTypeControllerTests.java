@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Before;
@@ -49,16 +48,17 @@ public class SkillTypeControllerTests {
 	}
 
 	@Test
-	public void postCreate() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
-
-		when(skillTypeService.create(skill1)).thenReturn(skill1);
+	public void testCreate() throws Exception {
+		SkillType skillType = new SkillType("Java", "I can code in Java", true, true, Arrays.asList());
+		SkillType expectedSkillType = new SkillType(1, "Java", "I can code in Java", true, true, Arrays.asList());
+		
+		when(this.skillTypeService.create(skillType)).thenReturn(expectedSkillType);
 		mvc.perform(MockMvcRequestBuilders.post("/skillType/")
-				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(skillType))
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isCreated());
+		.andExpect(status().isCreated())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
 	}
 
 	@Test
@@ -66,18 +66,16 @@ public class SkillTypeControllerTests {
 		// Create the skillType to delete
 		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, Arrays.asList());
 		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, Arrays.asList());
-		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
+		
+		when(this.skillTypeService.findBySkillTypeId(1)).thenReturn(skillType);
+		when(this.skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		// Delete the newly added skill.
-		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", skillType.getSkillTypeId())
-				.accept(MediaType.APPLICATION_JSON))
+		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", skillType.getSkillTypeId()))
 		.andExpect(status().isAccepted());
-	}
-	
-	@Test
-	public void testDeleteSkillTypeNameInvalidID() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", 1000)
-				.accept(MediaType.APPLICATION_JSON))
+		
+		when(this.skillTypeService.findBySkillTypeId(2)).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/{id}", 2))
 		.andExpect(status().isAccepted());
 	}
 
@@ -86,135 +84,103 @@ public class SkillTypeControllerTests {
 		// Create the skillType to delete
 		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, Arrays.asList());
 		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, Arrays.asList());
-		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
+		
+		when(this.skillTypeService.findBySkillTypeName("Test")).thenReturn(skillType);
+		when(this.skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
-		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Test")
-				.accept(MediaType.APPLICATION_JSON))
+		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Test"))
 		.andExpect(status().isAccepted());
+		
+		when(this.skillTypeService.findBySkillTypeName("Tests")).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Tests"))
+		.andExpect(status().isAccepted());
+	}
+
+	@Test
+	public void testFindAll() throws Exception {
+		SkillType skillType1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
+		SkillType skillType2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
+
+		List<SkillType> skillTypes = Arrays.asList(skillType1, skillType2);
+
+		when(this.skillTypeService.findAll()).thenReturn(skillTypes);
+		mvc.perform(MockMvcRequestBuilders.get("/skillType"))
+		.andExpect(status().isOk())
+		.andExpect(content().json(mapper.writeValueAsString(skillTypes)));
+
+		when(this.skillTypeService.findAll()).thenReturn(new ArrayList<SkillType>());
+		mvc.perform(MockMvcRequestBuilders.get("/skillType"))
+		.andExpect(status().isNoContent());
 	}
 	
 	@Test
-	public void testDeleteSkillTypeNameInvalidName() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Tests")
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isAccepted());
+	public void testFindSkillTypeById() throws Exception {
+		SkillType skillType = new SkillType(1, "Java", "I can code in Java", true, true, Arrays.asList());
+		when(this.skillTypeService.findBySkillTypeId(1)).thenReturn(skillType);
+
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 1))
+		.andExpect(status().isOk())
+		.andExpect(content().json(mapper.writeValueAsString(skillType)));
+
+		when(this.skillTypeService.findBySkillTypeId(2)).thenReturn(null);
+		
+		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 2))
+		.andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void getSkillType() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
+	public void testFindSkillTypeByName() throws Exception {
+		SkillType skillType = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 
-		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
-
-		when(skillTypeService.findAll()).thenReturn((List<SkillType>) skills);
-
-		mvc.perform(MockMvcRequestBuilders.get("/skillType")
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
-
-	}
-
-	@Test
-	public void getSkillTypeById() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
-
-		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
-
-		when(skillTypeService.findBySkillTypeId(100)).thenReturn(((List<SkillType>) skills).get(0));
-		when(skillTypeService.findBySkillTypeId(101)).thenReturn(((List<SkillType>) skills).get(1));
-
-		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 100)
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
-
-		mvc.perform(MockMvcRequestBuilders.get("/skillType/{id}", 101)
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
-
-	}
-
-	@Test
-	public void getSkillTypeByName() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
-
-		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
-
-		when(skillTypeService.findBySkillTypeName("Java")).thenReturn(((List<SkillType>) skills).get(0));
-		when(skillTypeService.findBySkillTypeName("Fortran")).thenReturn(((List<SkillType>) skills).get(1));
-
+		when(this.skillTypeService.findBySkillTypeName("Java")).thenReturn(skillType);
 		mvc.perform(MockMvcRequestBuilders.get("/skillType/name/{name}", "Java")
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
+		.andExpect(status().isOk())
+		.andExpect(content().json(mapper.writeValueAsString(skillType)));
 
+		when(this.skillTypeService.findBySkillTypeName("Fortran")).thenReturn(null);
 		mvc.perform(MockMvcRequestBuilders.get("/skillType/name/{name}", "Fortran")
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
-
-	}
-
-
-	@Test
-	public void putSkillByNameType() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
-
-		when(skillTypeService.update(skill1)).thenReturn(skill1);
-
-		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{id}", "Java")
-				.contentType(MediaType.APPLICATION_JSON).content(json)
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isAccepted());
-
-	}
-
-
-	@Test
-	public void putSkillTypeNameFailed() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
-
-		when(skillTypeService.update(skill1)).thenReturn(skill1);
-
-		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "jv")
-				.contentType(MediaType.APPLICATION_JSON).content(json)
-				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void putSkillTypeById() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
+	public void testUpdateSkillTypeByName() throws Exception {
+		SkillType expectedSkillType = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 
-		when(skillTypeService.update(skill1)).thenReturn(skill1);
+		when(this.skillTypeService.update(expectedSkillType)).thenReturn(expectedSkillType);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "Java")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(expectedSkillType))
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
+
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{name}", "C")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(expectedSkillType))
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void testUpdateSkillTypeById() throws Exception {
+		SkillType expectedSkillType = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
+
+		when(this.skillTypeService.update(expectedSkillType)).thenReturn(expectedSkillType);
 
 		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 100)
-				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(expectedSkillType))
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isAccepted());
-
-	}
-
-
-	@Test
-	public void putSkillTypeByIdFailed() throws Exception {
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
-		Gson gson = new Gson();
-		String json = gson.toJson(skill1);
-
-		when(skillTypeService.update(skill1)).thenReturn(skill1);
+		.andExpect(status().isAccepted())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
 
 		mvc.perform(MockMvcRequestBuilders.put("/skillType/{id}", 101)
-				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsBytes(expectedSkillType))
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNotFound());
-
+		.andExpect(status().isBadRequest());
 	}
 	
 	@Test

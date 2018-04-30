@@ -41,19 +41,20 @@ public class SkillTypeServiceTests {
 		int sizeOfList = ((List<SkillType>) skillTypeRepository.findAll()).size();
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
+		
 		assertTrue(((List<SkillType>)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
 
 	@Test
-	public void getAllSkillTypes() {
+	public void testFindAll() {
 		Iterable<SkillType> skillTypes = skillTypeService.findAll();
 		assertEquals(9, ((List<SkillType>) skillTypes).size());
 	}
 
 	@Test
-	public void getSkillTypeById() {
+	public void testFindSkillTypeById() {
 		SkillType stk = skillTypeService.findBySkillTypeId(3);
 		assertEquals(stk.getSkillTypeDesc(), "PEGA Description");
 	}
@@ -92,6 +93,7 @@ public class SkillTypeServiceTests {
 		assertNotEquals(before, after);
 	}
 
+	@Test
 	public void testUpdate() {
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
@@ -100,7 +102,7 @@ public class SkillTypeServiceTests {
 		skillTypeService.update(returnedSkillType);
 		
 		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
-		assertFalse(tstSkillType.isCore());
+		assertFalse(tstSkillType.getIsCore());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
 	

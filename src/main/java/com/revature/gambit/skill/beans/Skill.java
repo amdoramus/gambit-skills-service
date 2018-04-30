@@ -44,11 +44,6 @@ public class Skill {
 	 */
 	public Skill() {
 	}
-
-	public Skill(String skillName, boolean active) {
-		this.skillName = skillName;
-		this.isActive = active;
-	}
 	
 	/**
 	 * Constructor that initializes class fields.
@@ -64,6 +59,12 @@ public class Skill {
 		this.skillID = skillId;
 		this.skillName = skillName;
 		this.isActive = active;
+	}
+	
+	public Skill(String skillName, boolean isActive) {
+		this.skillID = 0;
+		this.skillName = skillName;
+		this.isActive = isActive;
 	}
 
 	public int getSkillID() {
@@ -82,12 +83,12 @@ public class Skill {
 		this.skillName = skillName;
 	}
 
-	public boolean isActive() {
+	public boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean active) {
-		this.isActive = active;
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
