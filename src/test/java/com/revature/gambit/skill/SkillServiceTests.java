@@ -76,5 +76,12 @@ public class SkillServiceTests {
     	Skill skill3 = skillService.saveSkill(new Skill(1, skill1.getSkillName(), true));
     	assertEquals(skill1.getSkillName(), skill3.getSkillName());
     }
+	
+	@Test
+	public void testFindAllActive() {
+		List<Skill> skills = this.skillService.findAllActive();
+		
+		assertEquals(41, skills.size());
+	}
 
 }

@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -47,11 +49,11 @@ public class SkillServiceImpl implements SkillService {
 	/**
 	 * Retrieves all the active skills.
 	 *
-	 * @return Iterable object containing all the skills fouund.
+	 * @return List object containing all the skills found.
 	 */
 	@Override
-	public Iterable<Skill> findAllActive() {
-		return null;
+	public List<Skill> findAllActive() {
+		return this.skillRepository.findAllByIsActive(true);
 	}
 
 	/**
