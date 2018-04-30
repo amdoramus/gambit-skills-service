@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,31 @@ public class SkillTypeController {
 	@PostMapping("/skillType")
 	public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
 		return new ResponseEntity<>(this.skillTypeService.create(skillType),HttpStatus.CREATED);
+	}
+
+	@DeleteMapping("/skilltype/name/{name}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
+		SkillType skillType = skillTypeService.findBySkillTypeName(name);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
+
+	@DeleteMapping("/skilltype/{id}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable int id) {
+		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
 	/**
@@ -158,7 +184,7 @@ public class SkillTypeController {
 
 		if (skillType == null)
 			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
-		
+
 		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
 	}
 
@@ -172,11 +198,10 @@ public class SkillTypeController {
 	@PutMapping(value = "/skillType/name/{skillTypeName}/skill/name/{skillName}")
 	public ResponseEntity<SkillType> updateSkills(@PathVariable String skillTypeName, @PathVariable String skillName) {
 		SkillType skillType = this.skillTypeService.addSkill(skillTypeName, skillName);
-		
+
 		if (skillType == null)
 			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
 
 		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
 	}
-
 }

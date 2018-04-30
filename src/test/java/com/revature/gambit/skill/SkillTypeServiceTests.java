@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
@@ -28,7 +29,7 @@ public class SkillTypeServiceTests {
 
 	@Autowired
 	private SkillTypeService skillTypeService;
-	
+
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
 	
@@ -38,10 +39,10 @@ public class SkillTypeServiceTests {
 
 	@Test
 	public void testCreate() {
-		int sizeOfList = ((List)skillTypeRepository.findAll()).size();
+		int sizeOfList = ((List<SkillType>) skillTypeRepository.findAll()).size();
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
-		assertTrue(((List)skillTypeRepository.findAll()).size() > sizeOfList);
+		assertTrue(((List<SkillType>)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
@@ -77,15 +78,31 @@ public class SkillTypeServiceTests {
 	}
 
 	@Test
-	public void updateSkillType() {
+	public void testDeleteBySkillTypeName() {
+		Iterable<SkillType> before = this.skillTypeService.findAll();
+		this.skillTypeService.deleteBySkillTypeName("JTA");
+		Iterable<SkillType> after = this.skillTypeService.findAll();
+		assertNotEquals(before, after);
+	}
+
+	@Test
+	public void testDeleteBySkillTypeID() {
+		Iterable<SkillType> before = this.skillTypeService.findAll();
+		this.skillTypeService.deleteBySkillTypeID(1);
+		Iterable<SkillType> after = this.skillTypeService.findAll();
+		assertNotEquals(before, after);
+	}
+
+	public void testUpdate() {
 		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
+		
 		returnedSkillType.setIsCore(false);
 		skillTypeService.update(returnedSkillType);
+		
 		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
 		assertFalse(tstSkillType.isCore());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
-
 	}
 	
 	@Test
