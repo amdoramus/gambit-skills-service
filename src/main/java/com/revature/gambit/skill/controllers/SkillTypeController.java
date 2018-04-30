@@ -1,15 +1,22 @@
 package com.revature.gambit.skill.controllers;
 
-import com.revature.gambit.skill.beans.SkillType;
+import java.io.UnsupportedEncodingException;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeService;
-
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Controller that will handle requests for the skill type service.
@@ -43,7 +50,7 @@ public class SkillTypeController {
 			skillType.setIsActive(false);
 			this.skillTypeService.update(skillType);
 		}
-		
+
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
@@ -164,4 +171,37 @@ public class SkillTypeController {
 
 	}
 
+	/**
+	 * Handles incoming PUT request that will add a Skill to the list of skills in a SkillType.
+	 * The Skill must already exist for this method to not return a 404 response.
+	 * @param skillTypeId The Id of the SkillType to add to.
+	 * @param skillId The Id of the Skill to add.
+	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
+	 */
+	@PutMapping(value = "/skillType/{skillTypeId}/skill/{skillId}")
+	public ResponseEntity<SkillType> updateSkills(@PathVariable int skillTypeId, @PathVariable int skillId) {
+		SkillType skillType = this.skillTypeService.addSkill(skillTypeId, skillId);
+
+		if (skillType == null)
+			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+	}
+
+	/**
+	 * Handles incoming PUT request that will add a Skill to the list of skills in a SkillType.
+	 * The Skill must already exist for this method to not return a 404 response.
+	 * @param skillTypeName The name of the SkillType to add to.
+	 * @param skillName The name of the Skill to add.
+	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
+	 */
+	@PutMapping(value = "/skillType/name/{skillTypeName}/skill/name/{skillName}")
+	public ResponseEntity<SkillType> updateSkills(@PathVariable String skillTypeName, @PathVariable String skillName) {
+		SkillType skillType = this.skillTypeService.addSkill(skillTypeName, skillName);
+
+		if (skillType == null)
+			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+	}
 }

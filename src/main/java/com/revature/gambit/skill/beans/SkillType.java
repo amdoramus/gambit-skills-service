@@ -72,11 +72,12 @@ public class SkillType {
 	 * @param isCore
 	 *            Used to check whether this is identified as a core skill or not.
 	 */
-	public SkillType(String skillTypeName, String skillTypeDesc, boolean isActive, boolean isCore) {
+	public SkillType(String skillTypeName, String skillTypeDesc, boolean isActive, boolean isCore, List<Skill> skills) {
 		this.skillTypeName = skillTypeName;
 		this.skillTypeDesc = skillTypeDesc;
 		this.isActive = isActive;
 		this.isCore = isCore;
+		this.skills = skills;
 	}
 
 	/**
@@ -94,12 +95,13 @@ public class SkillType {
 	 *            Used to check whether this is identified as a core skill or not.
 	 */
 	public SkillType(Integer skillTypeID, String skillTypeName, String skillTypeDesc, boolean isActive,
-			boolean isCore) {
+			boolean isCore, List<Skill> skills) {
 		this.skillTypeId = skillTypeID;
 		this.skillTypeName = skillTypeName;
 		this.skillTypeDesc = skillTypeDesc;
 		this.isActive = isActive;
 		this.isCore = isCore;
+		this.skills = skills;
 	}
 
 	public Integer getSkillTypeId() {
@@ -178,5 +180,9 @@ public class SkillType {
 		result = 31 * result + (isActive ? 1 : 0);
 		result = 31 * result + (isCore ? 1 : 0);
 		return result;
+	}
+	
+	public void addSkill(Skill skill) {
+		this.skills.add(skill);
 	}
 }

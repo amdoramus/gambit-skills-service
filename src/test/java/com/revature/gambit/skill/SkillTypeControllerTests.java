@@ -1,37 +1,39 @@
 package com.revature.gambit.skill;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.revature.gambit.skill.controllers.SkillTypeController;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.skill.controllers.SkillTypeController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SkillTypeControllerTests {
 
-	private static ObjectMapper mapper;
+	@Autowired
+	private ObjectMapper mapper;
 
 	private MockMvc mvc;
 
@@ -41,11 +43,6 @@ public class SkillTypeControllerTests {
 	@Mock
 	private SkillTypeService skillTypeService;
 
-	@BeforeClass
-	public static void setUpClass() {
-		mapper = new ObjectMapper();
-	}
-
 	@Before
 	public void setUp() {
 		mvc = MockMvcBuilders.standaloneSetup(skillTypeController).build();
@@ -54,7 +51,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void postCreate() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -68,8 +65,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void testDeleteSkillTypeID() throws Exception {
 		// Create the skillType to delete
-		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true);
-		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true);
+		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, new ArrayList<Skill>());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, new ArrayList<Skill>());
 		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		// Delete the newly added skill.
@@ -88,8 +85,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void testDeleteSkillTypeName() throws Exception {
 		// Create the skillType to delete
-		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true);
-		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true);
+		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, new ArrayList<Skill>());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, new ArrayList<Skill>());
 		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Test")
@@ -107,8 +104,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillType() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -123,8 +120,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillTypeById() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -144,8 +141,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillTypeByName() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -166,7 +163,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillByNameType() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -183,7 +180,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeNameFailed() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -198,7 +195,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeById() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -215,7 +212,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeByIdFailed() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true);
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -226,6 +223,36 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isNotFound());
 
+	}
+	
+	@Test
+	public void testAddSkillById() throws Exception {
+		Skill skill = new Skill(1, "Test", true);
+		
+		SkillType skillType = new SkillType(1, "Test", "Test add skill to skillType", true, true, new ArrayList<Skill>());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test add skill to SkillType", true, true, new ArrayList<Skill>());
+		expectedSkillType.addSkill(skill);
+		
+		when(skillTypeService.addSkill(skillType.getSkillTypeId(), skill.getSkillID())).thenReturn(expectedSkillType);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{skillTypeId}/skill/{skillId}", skillType.getSkillTypeId(), skill.getSkillID())
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
+	}
+	
+	@Test
+	public void testAddSkillByName() throws Exception {
+		Skill skill = new Skill(1, "Test", true);
+		
+		SkillType skillType = new SkillType(1, "Test", "Test add skill to skillType", true, true, new ArrayList<Skill>());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test add skill to SkillType", true, true, new ArrayList<Skill>());
+		expectedSkillType.addSkill(skill);
+		
+		when(skillTypeService.addSkill(skillType.getSkillTypeName(), skill.getSkillName())).thenReturn(expectedSkillType);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{skillTypeName}/skill/name/{skillName}", "Test", "Test")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted())
+		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
 	}
 
 }

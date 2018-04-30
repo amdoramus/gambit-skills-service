@@ -45,6 +45,11 @@ public class Skill {
 	public Skill() {
 	}
 
+	public Skill(String skillName, boolean active) {
+		this.skillName = skillName;
+		this.isActive = active;
+	}
+	
 	/**
 	 * Constructor that initializes class fields.
 	 * 
