@@ -41,8 +41,7 @@ public class SkillTypeController {
 	 */
 	@PostMapping("/skillType")
 	public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
-		SkillType result = this.skillTypeService.create(skillType);
-		return new ResponseEntity<>(result, HttpStatus.CREATED);
+		return new ResponseEntity<>(this.skillTypeService.create(skillType), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/skilltype/name/{name}")
