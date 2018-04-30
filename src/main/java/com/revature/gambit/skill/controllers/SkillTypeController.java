@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -120,7 +121,7 @@ public class SkillTypeController {
 		String skillTypeName = "";
 		
 		try {
-			skillTypeName = URLDecoder.decode(name, "UTF-8");
+			skillTypeName = URLDecoder.decode(name, CharEncoding.UTF_8);
 		} catch (UnsupportedEncodingException e){
 			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
 		}
@@ -150,7 +151,7 @@ public class SkillTypeController {
 		String skillTypeName = "";
 		
 		try {
-			skillTypeName = URLDecoder.decode(name, "UTF-8");
+			skillTypeName = URLDecoder.decode(name, CharEncoding.UTF_8);
 		} catch (UnsupportedEncodingException e1) {
 			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
 		}
