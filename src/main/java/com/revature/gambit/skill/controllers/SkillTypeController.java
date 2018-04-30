@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -156,4 +157,28 @@ public class SkillTypeController {
     	return new ResponseEntity<List<SkillType>>(skillTypes, HttpStatus.OK);
     }
 
+	@DeleteMapping("/skilltype/name/{name}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
+		SkillType skillType = skillTypeService.findBySkillTypeName(name);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+		
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
+
+	@DeleteMapping("/skilltype/{id}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable int id) {
+		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
 }

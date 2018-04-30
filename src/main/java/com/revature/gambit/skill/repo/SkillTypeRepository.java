@@ -13,6 +13,9 @@ import com.revature.gambit.skill.beans.SkillType;
  */
 @Repository
 public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
+	void deleteBySkillTypeName(String name);
+
+	void deleteBySkillTypeId(int id);
     /**
      * Looks up a skill type based on the skill type name.
      *
@@ -29,8 +32,12 @@ public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
      *            Id of the skill type to lookup.
      * @return Skill that was found.
      */
-    SkillType findBySkillTypeId(int id);
+    SkillType findBySkillTypeId(Integer id);
     
+    /**
+     * Finds SkillTypes based on their isActive flag.
+     * @param isActive Boolean representing the isActive flag.
+     * @return A list of SkillTypes
+     */
     List<SkillType> findAllByIsActive(boolean isActive);
-
 }

@@ -59,6 +59,14 @@ public interface SkillTypeService {
 	 *            Name of the skill type to delete.
 	 */
 	public void deleteBySkillTypeName(String name);
+	
+	/**
+	 * Deletes a skill type based on its id.
+	 * 
+	 * @param name
+	 *            Name of the skill type to delete.
+	 */
+	public void deleteBySkillTypeID(int id);
 
 	/**
 	 * Returns a list of all active SkillTypes.

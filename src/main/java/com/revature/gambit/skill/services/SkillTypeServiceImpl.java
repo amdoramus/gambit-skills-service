@@ -29,6 +29,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @return Skill Type that has been added.
 	 */
 	@Transactional
+	@Override
 	public SkillType create(SkillType skillType) {
 		return this.skillTypeRepository.save(skillType);
 	}
@@ -40,6 +41,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 *            Name of the skill type to retrieve.
 	 * @return Skill Type that was found.
 	 */
+	@Override
 	public SkillType findBySkillTypeName(String name) {
 		return this.skillTypeRepository.findBySkillTypeName(name);
 	}
@@ -51,13 +53,17 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 *            Id of the skill type to retrieve.
 	 * @return Skill Type that was found.
 	 */
-	public SkillType findBySkillTypeId(int id){ return this.skillTypeRepository.findBySkillTypeId(id);}
+	@Override
+	public SkillType findBySkillTypeId(int id) {
+		return this.skillTypeRepository.findBySkillTypeId(id);
+	}
 
 	/**
 	 * Retrieves all the skill types.
 	 *
 	 * @return Iterable object containing all the skill types.
 	 */
+	@Override
 	public Iterable<SkillType> findAll() {
 		return this.skillTypeRepository.findAll();
 	}
@@ -71,22 +77,27 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 * @return SkillType that was updated.
 	 */
 	@Transactional
+	@Override
 	public SkillType update(SkillType updatedSkillType) {
 		return skillTypeRepository.saveAndFlush(updatedSkillType);
 	}
-
-
 
 	/**
 	 * Deletes a skill type based on its name.
 	 * 
 	 * @param name
 	 *            Name of the skill type to delete.
-	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
 	@Transactional
+	@Override
 	public void deleteBySkillTypeName(String name) {
-		throw new UnsupportedOperationException();
+		this.skillTypeRepository.deleteBySkillTypeName(name);
+	}
+
+	@Transactional
+	@Override
+	public void deleteBySkillTypeID(int id) {
+		this.skillTypeRepository.deleteBySkillTypeId(id);
 	}
 
 	/**
