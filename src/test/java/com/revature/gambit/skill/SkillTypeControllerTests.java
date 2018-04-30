@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,9 +26,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.revature.gambit.skill.controllers.SkillTypeController;
-import com.revature.gambit.skill.services.SkillTypeServiceImpl;
-
-import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -54,7 +50,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void postCreate() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -68,8 +64,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void testDeleteSkillTypeID() throws Exception {
 		// Create the skillType to delete
-		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, new ArrayList<Skill>());
-		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, new ArrayList<Skill>());
+		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, Arrays.asList());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, Arrays.asList());
 		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		// Delete the newly added skill.
@@ -88,8 +84,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void testDeleteSkillTypeName() throws Exception {
 		// Create the skillType to delete
-		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, new ArrayList<Skill>());
-		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, new ArrayList<Skill>());
+		SkillType skillType = new SkillType(1, "Test", "Test delete by id", true, true, Arrays.asList());
+		SkillType expectedSkillType = new SkillType(1, "Test", "Test delete by id", false, true, Arrays.asList());
 		when(skillTypeService.update(skillType)).thenReturn(expectedSkillType);
 
 		mvc.perform(MockMvcRequestBuilders.delete("/skilltype/name/{name}", "Test")
@@ -107,8 +103,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillType() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -123,8 +119,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillTypeById() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -144,8 +140,8 @@ public class SkillTypeControllerTests {
 	@Test
 	public void getSkillTypeByName() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
-		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
+		SkillType skill2 = new SkillType(101, "Fortran", "What is Fortran", true, true, Arrays.asList());
 
 		Iterable<SkillType> skills = Arrays.asList(skill1, skill2);
 
@@ -166,7 +162,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillByNameType() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -183,7 +179,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeNameFailed() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -198,7 +194,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeById() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -215,7 +211,7 @@ public class SkillTypeControllerTests {
 	@Test
 	public void putSkillTypeByIdFailed() throws Exception {
 
-		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, new ArrayList<Skill>());
+		SkillType skill1 = new SkillType(100, "Java", "I can code in Java", true, true, Arrays.asList());
 		Gson gson = new Gson();
 		String json = gson.toJson(skill1);
 
@@ -230,7 +226,7 @@ public class SkillTypeControllerTests {
 	
 	@Test
 	public void testFindAllActive() throws Exception {
-		SkillType activeSkillType = new SkillType(1, "Active", "Active SkillType", true, true, new ArrayList<Skill>());
+		SkillType activeSkillType = new SkillType(1, "Active", "Active SkillType", true, true, Arrays.asList());
 		List<SkillType> expectedSkillTypes = Arrays.asList(activeSkillType);
 		when(skillTypeService.findAllActive()).thenReturn(expectedSkillTypes);
 		
