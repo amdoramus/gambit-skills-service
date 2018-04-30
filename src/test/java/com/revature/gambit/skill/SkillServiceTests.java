@@ -57,6 +57,7 @@ public class SkillServiceTests {
 		assertNull(actualSkill);
 	}
 	
+	@Test
     public void testFindBySkillName() {
     	Skill skill = skillService.findBySkillName("Java");
     	assertEquals(skill.getSkillName(), "Java");
