@@ -53,6 +53,22 @@ public interface SkillTypeService {
 	public SkillType update(SkillType updatedSkillType);
 
 	/**
+	 * Adds a Skill to a SkillType
+	 * @param skillTypeId The id of the SkillType to add to.
+	 * @param skillId The id of the Skill to add.
+	 * @return The Updated SkillType, or null if neither the SkillType or Skill exist.
+	 */
+	SkillType addSkill(Integer skillTypeId, Integer skillId);
+	
+	/**
+	 * Adds a Skill to a SkillType
+	 * @param skillTypeName The name of the SkillType to add to.
+	 * @param skillName The name of the Skill to add.
+	 * @return The Updated SkillType, or null if neither the SkillType or Skill exist.
+	 */
+	SkillType addSkill(String skillTypeName, String skillName);
+	
+	/**
 	 * Deletes a skill type based on its name.
 	 * 
 	 * @param name
