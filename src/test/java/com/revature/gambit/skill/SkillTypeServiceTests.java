@@ -1,5 +1,14 @@
 package com.revature.gambit.skill;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.beans.SkillType;
 import com.revature.gambit.skill.repo.SkillRepository;
@@ -7,21 +16,11 @@ import com.revature.gambit.skill.repo.SkillTypeRepository;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
-
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -106,6 +105,12 @@ public class SkillTypeServiceTests {
 	}
 	
 	@Test
+	public void testFindAllActive() {
+		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+		
+		assertEquals(6, skillTypes.size());
+	}
+
 	@Transactional
 	public void testAddSkillById() {
 		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());

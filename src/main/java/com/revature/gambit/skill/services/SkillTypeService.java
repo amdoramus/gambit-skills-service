@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.services;
 
+import java.util.List;
+
 import com.revature.gambit.skill.beans.SkillType;
 
 /**
@@ -82,4 +84,9 @@ public interface SkillTypeService {
 	 */
 	public void deleteBySkillTypeID(int id);
 
+	/**
+	 * Returns a list of all active SkillTypes.
+	 * @return A list of all SkillTypes where isActive is true.
+	 */
+	List<SkillType> findAllActive();
 }

@@ -1,6 +1,7 @@
 package com.revature.gambit.skill.controllers;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -40,31 +41,6 @@ public class SkillTypeController {
 	@PostMapping("/skillType")
 	public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
 		return new ResponseEntity<>(this.skillTypeService.create(skillType),HttpStatus.CREATED);
-	}
-
-	@DeleteMapping("/skilltype/name/{name}")
-	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
-		SkillType skillType = skillTypeService.findBySkillTypeName(name);
-
-		if (skillType != null) {
-			skillType.setIsActive(false);
-			this.skillTypeService.update(skillType);
-		}
-
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
-	}
-
-
-	@DeleteMapping("/skilltype/{id}")
-	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable int id) {
-		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
-
-		if (skillType != null) {
-			skillType.setIsActive(false);
-			this.skillTypeService.update(skillType);
-		}
-
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
 	/**
@@ -169,6 +145,41 @@ public class SkillTypeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
+	}
+
+	@GetMapping(value = "/skillType/active")
+	public ResponseEntity<List<SkillType>> findAllActive() {
+		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+
+		if (skillTypes.isEmpty())
+			return new ResponseEntity<List<SkillType>>(HttpStatus.NO_CONTENT);
+
+		return new ResponseEntity<List<SkillType>>(skillTypes, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/skilltype/name/{name}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
+		SkillType skillType = skillTypeService.findBySkillTypeName(name);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
+
+	@DeleteMapping("/skilltype/{id}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable int id) {
+		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
+
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 
 	/**

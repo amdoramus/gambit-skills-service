@@ -1,5 +1,7 @@
 package com.revature.gambit.skill.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,8 +87,6 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 		return skillTypeRepository.saveAndFlush(updatedSkillType);
 	}
 
-
-
 	/**
 	 * Deletes a skill type based on its name.
 	 * 
@@ -105,6 +105,15 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 		this.skillTypeRepository.deleteBySkillTypeId(id);
 	}
 
+	/**
+	 * Returns a list of all active SkillTypes.
+	 * @return A list of all SkillTypes where isActive is true.
+	 */
+	@Override
+	public List<SkillType> findAllActive() {
+		return this.skillTypeRepository.findAllByIsActive(true);
+	}
+	
 	/**
 	 * Adds a Skill to a SkillType
 	 * @param skillTypeId The id of the SkillType to add to.
