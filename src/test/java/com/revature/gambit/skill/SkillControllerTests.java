@@ -61,6 +61,27 @@ public class SkillControllerTests {
 	}
 
 	@Test
+	public void testDeleteSkillByID() throws Exception {
+		Skill skill1 = new Skill(100, "Java", true);
+		Skill deletedSkill = new Skill(100, "Java", false);
+
+		when(skillService.saveSkill(skill1)).thenReturn(deletedSkill);
+		mvc.perform(MockMvcRequestBuilders.delete("/skill/{id}", 100)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted());
+	}
+
+	@Test
+	public void testDeleteSkillByName() throws Exception {
+		Skill skill1 = new Skill(100, "Java", true);
+		Skill deletedSkill = new Skill(100, "Java", false);
+
+		when(skillService.saveSkill(skill1)).thenReturn(deletedSkill);
+		mvc.perform(MockMvcRequestBuilders.delete("/skill/name/{name}", "Java")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted());
+	}
+
 	public void testFindSkillByName() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 		Skill skill2 = new Skill(100, "Javas2", false);
@@ -76,63 +97,63 @@ public class SkillControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testFindSkillByID() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 		Skill skill2 = new Skill(100, "Javas2", false);
-		
+
 		when(skillService.findBySkillID(99)).thenReturn(skill1);
 		when(skillService.findBySkillID(100)).thenReturn(skill2);
-		
+
 		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 99)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-		
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
+
 		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testFindSkillByIDNotFound() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/skill/{id}", 100000)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
 	}
-	
+
 	@Test
 	public void testFindSkillByNameNotFound() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/skill/name/{name}", "Jeva")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
 	}
-	
+
 	@Test
 	public void putSkillByIdValid() throws Exception {
 		Skill skill1 = new Skill(99, "Javas", true);
 		Gson gson = new Gson();
-        String json = gson.toJson(skill1);
-        
-        when(skillService.saveSkill(skill1)).thenReturn(skill1);
-        
-        mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 99)
-                .contentType(MediaType.APPLICATION_JSON).content(json)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isAccepted());
+		String json = gson.toJson(skill1);
+
+		when(skillService.saveSkill(skill1)).thenReturn(skill1);
+
+		mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 99)
+				.contentType(MediaType.APPLICATION_JSON).content(json)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isAccepted());
 	}
-	
+
 	@Test
 	public void putSkillByIdInvalid() throws Exception {
 		Skill skill1 = new Skill(999, "Javas", true);
-		
+
 		Gson gson =  new Gson();
 		String json = gson.toJson(skill1);
 
 		mvc.perform(MockMvcRequestBuilders.put("/skill/{id}", 101)
 				.contentType(MediaType.APPLICATION_JSON).content(json)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isBadRequest());
 	}
 	
 	@Test

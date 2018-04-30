@@ -59,6 +59,8 @@ public interface SkillService {
 	 * @param name
 	 *            Name of the skill to delete.
 	 */
-	void deleteSkillViaName(String name);
+	void deleteBySkillName(String name);
+
+	void deleteBySkillID(int id);
 
 }
