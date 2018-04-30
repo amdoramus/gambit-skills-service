@@ -1,22 +1,26 @@
 package com.revature.gambit.skill;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.gambit.skill.beans.Skill;
 import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.skill.repo.SkillRepository;
 import com.revature.gambit.skill.repo.SkillTypeRepository;
 import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import javax.transaction.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -27,26 +31,30 @@ public class SkillTypeServiceTests {
 
 	@Autowired
 	private SkillTypeRepository skillTypeRepository;
+	
+	@Autowired
+	private SkillRepository skillRepository;
 
 
 	@Test
 	public void testCreate() {
 		int sizeOfList = ((List<SkillType>) skillTypeRepository.findAll()).size();
-		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
+		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
+		
 		assertTrue(((List<SkillType>)skillTypeRepository.findAll()).size() > sizeOfList);
 		assertEquals(returnedSkillType.getSkillTypeName(), tstSkillType.getSkillTypeName());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
 	}
 
 	@Test
-	public void getAllSkillTypes() {
+	public void testFindAll() {
 		Iterable<SkillType> skillTypes = skillTypeService.findAll();
 		assertEquals(9, ((List<SkillType>) skillTypes).size());
 	}
 
 	@Test
-	public void getSkillTypeById() {
+	public void testFindSkillTypeById() {
 		SkillType stk = skillTypeService.findBySkillTypeId(3);
 		assertEquals(stk.getSkillTypeDesc(), "PEGA Description");
 	}
@@ -85,15 +93,111 @@ public class SkillTypeServiceTests {
 		assertNotEquals(before, after);
 	}
 
+	@Test
 	public void testUpdate() {
-		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true);
+		SkillType tstSkillType = new SkillType("Testing", "Testing Desc", true, true, new ArrayList<Skill>());
 		SkillType returnedSkillType = skillTypeService.create(tstSkillType);
 		
 		returnedSkillType.setIsCore(false);
 		skillTypeService.update(returnedSkillType);
 		
 		tstSkillType = skillTypeRepository.findOne(returnedSkillType.getSkillTypeId());
-		assertFalse(tstSkillType.isCore());
+		assertFalse(tstSkillType.getIsCore());
 		skillTypeRepository.delete(skillTypeRepository.findOne(returnedSkillType.getSkillTypeId()));
+	}
+	
+	@Test
+	public void testFindAllActive() {
+		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+		
+		assertEquals(6, skillTypes.size());
+	}
+
+	@Transactional
+	public void testAddSkillById() {
+		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());
+		Skill skill = new Skill("Test", true);
+		
+		skill = this.skillRepository.saveAndFlush(skill);
+		skillType = this.skillTypeRepository.saveAndFlush(skillType);
+		
+		skillType = this.skillTypeService.addSkill(skillType.getSkillTypeId(), skill.getSkillID());
+		List<Skill> expectedSkillList = skillType.getSkills();
+		
+		assertEquals(1, expectedSkillList.size());
+		assertEquals(skill, expectedSkillList.get(0));
+		
+		this.skillRepository.delete(skill);
+		this.skillTypeRepository.delete(skillType);
+	}
+	
+	@Test
+	@Transactional
+	public void testAddSkillByIdSkillTypeDoesNotExist() {
+		Skill skill = new Skill("Test", true);
+		
+		skill = this.skillRepository.saveAndFlush(skill);
+		
+		SkillType expectedSkillType = this.skillTypeService.addSkill(100000000, skill.getSkillID());
+		assertNull(expectedSkillType);
+		
+		this.skillRepository.delete(skill);
+	}
+	
+	@Test
+	@Transactional
+	public void testAddSkillByIdSkillDoesNotExist() {
+		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());
+		
+		skillType = this.skillTypeRepository.saveAndFlush(skillType);
+		
+		SkillType expectedSkillType = this.skillTypeService.addSkill(skillType.getSkillTypeId(), 10000000);
+		assertNull(expectedSkillType);
+		
+		this.skillTypeRepository.delete(skillType);
+	}
+	
+	@Test
+	@Transactional
+	public void testAddSkillByName() {
+		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());
+		Skill skill = new Skill("Test", true);
+		
+		skill = this.skillRepository.saveAndFlush(skill);
+		skillType = this.skillTypeRepository.saveAndFlush(skillType);
+		
+		skillType = this.skillTypeService.addSkill(skillType.getSkillTypeName(), skill.getSkillName());
+		List<Skill> expectedSkillList = skillType.getSkills();
+		assertEquals(1, expectedSkillList.size());
+		assertEquals(skill, expectedSkillList.get(0));
+		
+		this.skillRepository.delete(skill);
+		this.skillTypeRepository.delete(skillType);
+	}
+	
+	@Test
+	@Transactional
+	public void testAddSkillByNameSkillTypeDoesNotExist() {
+		Skill skill = new Skill("Test", true);
+		
+		skill = this.skillRepository.saveAndFlush(skill);
+		
+		SkillType expectedSkillType = this.skillTypeService.addSkill("Test", skill.getSkillName());
+		assertNull(expectedSkillType);
+		
+		this.skillRepository.delete(skill);
+	}
+	
+	@Test
+	@Transactional
+	public void testAddSkillByNameSkillDoesNotExist() {
+		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());
+		
+		skillType = this.skillTypeRepository.saveAndFlush(skillType);
+		
+		SkillType expectedSkillType = this.skillTypeService.addSkill(skillType.getSkillTypeName(), "Test");
+		assertNull(expectedSkillType);
+		
+		this.skillTypeRepository.delete(skillType);
 	}
 }

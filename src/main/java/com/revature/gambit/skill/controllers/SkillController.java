@@ -40,7 +40,7 @@ public class SkillController {
 	 */
 	@PostMapping("/skill")
 	public ResponseEntity<Skill> create(@Valid @RequestBody Skill skill) {
-		return new ResponseEntity<>(this.skillService.create(skill),HttpStatus.CREATED);
+		return new ResponseEntity<>(this.skillService.create(skill), HttpStatus.CREATED);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class SkillController {
 		Skill skill = skillService.findBySkillName(name);
 
 		if (skill != null) {
-			skill.setActive(false);
+			skill.setIsActive(false);
 			skillService.saveSkill(skill);
 		}
 
@@ -110,7 +110,7 @@ public class SkillController {
 		Skill skill = this.skillService.findBySkillID(id);
 
 		if (skill != null) {
-			skill.setActive(false);
+			skill.setIsActive(false);
 			this.skillService.saveSkill(skill);
 		}
 
@@ -125,11 +125,25 @@ public class SkillController {
 	 * @return HTTP status code 400 (BAD_REQUEST) if id from url and id from body don't match.
 	 */
 	@PutMapping("/skill/{id}")
-	public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
-		if(id == updatedSkill.getSkillID()) {
-			return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
-		} else {
-			return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
-		}
+    public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
+    	if(id == updatedSkill.getSkillID()) {
+    		return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
+    	} else {
+    		return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
+    	}
+    }
+	
+	/**
+	 * Handles incoming Get requests to find all active skills.
+	 * @return HTTP status code 200 if there are active skills, 204 if there are no active skills
+	 */
+	@GetMapping("/skill/active")
+	public ResponseEntity<List<Skill>> findAllActive() {
+		List<Skill> skills = this.skillService.findAllActive();
+		
+		if (skills.isEmpty())
+			return new ResponseEntity<List<Skill>>(HttpStatus.NO_CONTENT);
+		
+		return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
 	}
 }
