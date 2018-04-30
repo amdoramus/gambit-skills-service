@@ -44,7 +44,7 @@ public class Skill {
 	 */
 	public Skill() {
 	}
-
+	
 	/**
 	 * Constructor that initializes class fields.
 	 * 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.commons.codec.CharEncoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,19 +44,11 @@ public class SkillTypeController {
 		return new ResponseEntity<>(this.skillTypeService.create(skillType), HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/skilltype/name/{name}")
-	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
-		SkillType skillType = skillTypeService.findBySkillTypeName(name);
-
-		if (skillType != null) {
-			skillType.setIsActive(false);
-			this.skillTypeService.update(skillType);
-		}
-
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
-	}
-
-
+	/**
+	 * Handles DELETE request that soft deletes a SkillType.
+	 * @param id The id to soft delete
+	 * @return
+	 */
 	@DeleteMapping("/skilltype/{id}")
 	public ResponseEntity<Void> deleteSkillTypeById(@PathVariable int id) {
 		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
@@ -69,7 +60,24 @@ public class SkillTypeController {
 
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
+	
+	/**
+	 * Handles DELETE request that soft deletes a SkillType.
+	 * @param Name The name to soft delete
+	 * @return
+	 */
+	@DeleteMapping("/skilltype/name/{name}")
+	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
+		SkillType skillType = skillTypeService.findBySkillTypeName(name);
 
+		if (skillType != null) {
+			skillType.setIsActive(false);
+			this.skillTypeService.update(skillType);
+		}
+
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+	
 	/**
 	 * Handles incoming GET request that grabs all the skill types.
 	 *
@@ -121,7 +129,7 @@ public class SkillTypeController {
 		String skillTypeName = "";
 		
 		try {
-			skillTypeName = URLDecoder.decode(name, CharEncoding.UTF_8);
+			skillTypeName = URLDecoder.decode(name, "UTF-8");
 		} catch (UnsupportedEncodingException e){
 			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
 		}
@@ -151,7 +159,7 @@ public class SkillTypeController {
 		String skillTypeName = "";
 		
 		try {
-			skillTypeName = URLDecoder.decode(name, CharEncoding.UTF_8);
+			skillTypeName = URLDecoder.decode(name, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
 		}
@@ -186,4 +194,47 @@ public class SkillTypeController {
 
 	}
 
+	@GetMapping(value = "/skillType/active")
+	public ResponseEntity<List<SkillType>> findAllActive() {
+		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
+
+		if (skillTypes.isEmpty())
+			return new ResponseEntity<List<SkillType>>(HttpStatus.NO_CONTENT);
+
+		return new ResponseEntity<List<SkillType>>(skillTypes, HttpStatus.OK);
+	}
+
+	/**
+	 * Handles incoming PUT request that will add a Skill to the list of skills in a SkillType.
+	 * The Skill must already exist for this method to not return a 404 response.
+	 * @param skillTypeId The Id of the SkillType to add to.
+	 * @param skillId The Id of the Skill to add.
+	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
+	 */
+	@PutMapping(value = "/skillType/{skillTypeId}/skill/{skillId}")
+	public ResponseEntity<SkillType> updateSkills(@PathVariable int skillTypeId, @PathVariable int skillId) {
+		SkillType skillType = this.skillTypeService.addSkill(skillTypeId, skillId);
+
+		if (skillType == null)
+			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+	}
+
+	/**
+	 * Handles incoming PUT request that will add a Skill to the list of skills in a SkillType.
+	 * The Skill must already exist for this method to not return a 404 response.
+	 * @param skillTypeName The name of the SkillType to add to.
+	 * @param skillName The name of the Skill to add.
+	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
+	 */
+	@PutMapping(value = "/skillType/name/{skillTypeName}/skill/name/{skillName}")
+	public ResponseEntity<SkillType> updateSkills(@PathVariable String skillTypeName, @PathVariable String skillName) {
+		SkillType skillType = this.skillTypeService.addSkill(skillTypeName, skillName);
+
+		if (skillType == null)
+			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+	}
 }
