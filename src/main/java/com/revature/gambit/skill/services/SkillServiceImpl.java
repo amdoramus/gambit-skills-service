@@ -29,6 +29,7 @@ public class SkillServiceImpl implements SkillService {
 	 * @return Skill that has been added.
 	 */
 	@Transactional
+	@Override
 	public Skill create(Skill skill) {
 		return skillRepository.save(skill);
 	}
@@ -38,6 +39,7 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @return Iterable object containing all the skills found.
 	 */
+	@Override
 	public Iterable<Skill> findAll() {
 		return skillRepository.findAll();
 	}
@@ -47,6 +49,7 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @return Iterable object containing all the skills fouund.
 	 */
+	@Override
 	public Iterable<Skill> findAllActive() {
 		return null;
 	}
@@ -60,7 +63,7 @@ public class SkillServiceImpl implements SkillService {
 	 */
 	@Override
 	public Skill findBySkillName(String name) {
-		return skillRepository.findBySkillName(name);
+		return this.skillRepository.findBySkillName(name);
 	}
 	
 	@Override
@@ -76,6 +79,7 @@ public class SkillServiceImpl implements SkillService {
 	 * @return Skill that was updated.
 	 */
 	@Transactional
+	@Override
 	public Skill saveSkill(Skill skill) {
 		return skillRepository.saveAndFlush(skill);
 	}
@@ -85,11 +89,23 @@ public class SkillServiceImpl implements SkillService {
 	 *
 	 * @param name
 	 *            Name of the skill to delete.
-	 * @exception UnsupportedOperationException Since the method has yet to be implemented
 	 */
+	@Transactional
 	@Override
-	public void deleteSkillViaName(String name) {
-		throw new UnsupportedOperationException();
+	public void deleteBySkillName(String name) {
+		this.skillRepository.deleteBySkillName(name);
+	}
+
+	/**
+	 * Deletes a skill based on its id.
+	 * 
+	 * @param id
+	 *            id of the skill to delete.
+	 */
+	@Transactional
+	@Override
+	public void deleteBySkillID(int id) {
+		this.skillRepository.deleteBySkillID(id);
 	}
 
 }
