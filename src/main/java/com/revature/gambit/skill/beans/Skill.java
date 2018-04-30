@@ -60,6 +60,12 @@ public class Skill {
 		this.skillName = skillName;
 		this.isActive = active;
 	}
+	
+	public Skill(String skillName, boolean isActive) {
+		this.skillID = 0;
+		this.skillName = skillName;
+		this.isActive = isActive;
+	}
 
 	public int getSkillID() {
 		return skillID;
