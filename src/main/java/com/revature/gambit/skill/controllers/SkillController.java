@@ -55,9 +55,9 @@ public class SkillController {
 		List<Skill> skills = (List<Skill>) this.skillService.findAll();
 
 		if (skills.isEmpty()) {
-			return new ResponseEntity<List<Skill>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
+			return new ResponseEntity<>(skills, HttpStatus.OK);
 		}
 	}
 
@@ -66,9 +66,9 @@ public class SkillController {
 		Skill skill = this.skillService.findBySkillName(name);
 
 		if (skill == null) {
-			return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<Skill>(this.skillService.findBySkillName(name), HttpStatus.OK);
+			return new ResponseEntity<>(skill, HttpStatus.OK);
 		}
 	}
 
@@ -77,9 +77,9 @@ public class SkillController {
 		Skill skill = this.skillService.findBySkillID(id);
 
 		if (skill == null) {
-			return new ResponseEntity<Skill>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<Skill>(this.skillService.findBySkillID(id), HttpStatus.OK);
+			return new ResponseEntity<>(skill, HttpStatus.OK);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class SkillController {
 			skillService.saveSkill(skill);
 		}
 
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class SkillController {
 			this.skillService.saveSkill(skill);
 		}
 
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
 	/**
@@ -127,9 +127,9 @@ public class SkillController {
 	@PutMapping("/skill/{id}")
     public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
     	if(id == updatedSkill.getSkillID()) {
-    		return new ResponseEntity<Skill>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
+    		return new ResponseEntity<>(skillService.saveSkill(updatedSkill), HttpStatus.ACCEPTED);
     	} else {
-    		return new ResponseEntity<Skill>(HttpStatus.BAD_REQUEST);
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     	}
     }
 	
@@ -142,8 +142,8 @@ public class SkillController {
 		List<Skill> skills = this.skillService.findAllActive();
 		
 		if (skills.isEmpty())
-			return new ResponseEntity<List<Skill>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		
-		return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
+		return new ResponseEntity<>(skills, HttpStatus.OK);
 	}
 }

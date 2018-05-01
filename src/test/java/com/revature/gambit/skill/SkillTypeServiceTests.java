@@ -113,6 +113,7 @@ public class SkillTypeServiceTests {
 		assertEquals(6, skillTypes.size());
 	}
 
+	@Test
 	@Transactional
 	public void testAddSkillById() {
 		SkillType skillType = new SkillType("Test", "Test add skill", true, true, new ArrayList<Skill>());

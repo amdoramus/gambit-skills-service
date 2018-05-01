@@ -203,6 +203,7 @@ public class SkillTypeControllerTests {
 		.andExpect(status().isNoContent());
 	}
 	
+	@Test
 	public void testAddSkillById() throws Exception {
 		Skill skill = new Skill(1, "Test", true);
 		
@@ -215,6 +216,16 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isAccepted())
 		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
+		
+		when(skillTypeService.addSkill(100000, skill.getSkillID())).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{skillTypeId}/skill/{skillId}", 100000, skill.getSkillID())
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
+		
+		when(skillTypeService.addSkill(skillType.getSkillTypeId(), 100000000)).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/{skillTypeId}/skill/{skillId}", skillType.getSkillTypeId(), 100000000)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
 	}
 	
 	@Test
@@ -230,5 +241,15 @@ public class SkillTypeControllerTests {
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isAccepted())
 		.andExpect(content().json(mapper.writeValueAsString(expectedSkillType)));
+		
+		when(skillTypeService.addSkill("Nothing", skill.getSkillName())).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{skillTypeName}/skill/name/{skillName}", "Nothing", "Test")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
+		
+		when(skillTypeService.addSkill(skillType.getSkillTypeName(), "nothing")).thenReturn(null);
+		mvc.perform(MockMvcRequestBuilders.put("/skillType/name/{skillTypeName}/skill/name/{skillName}", "Test", "nothing")
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isNotFound());
 	}
 }

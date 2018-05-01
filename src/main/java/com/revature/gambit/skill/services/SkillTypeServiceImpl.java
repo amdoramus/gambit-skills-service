@@ -24,7 +24,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	private SkillTypeRepository skillTypeRepository;
 	
 	@Autowired
-	private SkillRepository SkillRepository;
+	private SkillRepository skillRepository;
 
 	/**
 	 * Adds a new skill type to the database.
@@ -126,7 +126,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 		if (skillType == null)
 			return null;
 		
-		Skill skill = this.SkillRepository.findBySkillID(skillId);
+		Skill skill = this.skillRepository.findBySkillID(skillId);
 		if (skill == null)
 			return null;
 		
@@ -147,7 +147,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 		if (skillType == null)
 			return null;
 		
-		Skill skill = this.SkillRepository.findBySkillName(skillName);
+		Skill skill = this.skillRepository.findBySkillName(skillName);
 		if (skill == null)
 			return null;
 		

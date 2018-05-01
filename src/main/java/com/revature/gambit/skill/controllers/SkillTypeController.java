@@ -58,7 +58,7 @@ public class SkillTypeController {
 			this.skillTypeService.update(skillType);
 		}
 
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class SkillTypeController {
 			this.skillTypeService.update(skillType);
 		}
 
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 	/**
@@ -89,9 +89,9 @@ public class SkillTypeController {
 		List<SkillType> skillTypes = (List<SkillType>) this.skillTypeService.findAll();
 		
 		if (skillTypes.isEmpty()) {
-			return new ResponseEntity<Iterable<SkillType>>(skillTypes, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(skillTypes, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<Iterable<SkillType>>(skillTypes, HttpStatus.OK);
+			return new ResponseEntity<>(skillTypes, HttpStatus.OK);
 		}
 	}
 
@@ -108,9 +108,9 @@ public class SkillTypeController {
 
 		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
 		if (skillType == null) {
-			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<SkillType>(
+			return new ResponseEntity<>(
 					this.skillTypeService.findBySkillTypeId(id),
 					HttpStatus.OK);
 		}
@@ -131,15 +131,15 @@ public class SkillTypeController {
 		try {
 			skillTypeName = URLDecoder.decode(name, "UTF-8");
 		} catch (UnsupportedEncodingException e){
-			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	
 		SkillType skillType = this.skillTypeService.findBySkillTypeName(skillTypeName);
 		
 		if (skillType == null) {
-			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<SkillType>(skillType, HttpStatus.OK);
+			return new ResponseEntity<>(skillType, HttpStatus.OK);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class SkillTypeController {
 		try {
 			skillTypeName = URLDecoder.decode(name, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			return new ResponseEntity<SkillType>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
 		if (skillTypeName.equals(skillType.getSkillTypeName())) {
@@ -199,9 +199,9 @@ public class SkillTypeController {
 		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
 
 		if (skillTypes.isEmpty())
-			return new ResponseEntity<List<SkillType>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-		return new ResponseEntity<List<SkillType>>(skillTypes, HttpStatus.OK);
+		return new ResponseEntity<>(skillTypes, HttpStatus.OK);
 	}
 
 	/**
@@ -216,9 +216,9 @@ public class SkillTypeController {
 		SkillType skillType = this.skillTypeService.addSkill(skillTypeId, skillId);
 
 		if (skillType == null)
-			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(skillType, HttpStatus.ACCEPTED);
 	}
 
 	/**
@@ -233,8 +233,8 @@ public class SkillTypeController {
 		SkillType skillType = this.skillTypeService.addSkill(skillTypeName, skillName);
 
 		if (skillType == null)
-			return new ResponseEntity<SkillType>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-		return new ResponseEntity<SkillType>(skillType, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(skillType, HttpStatus.ACCEPTED);
 	}
 }
