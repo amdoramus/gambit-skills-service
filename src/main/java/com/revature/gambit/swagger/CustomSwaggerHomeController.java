@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.swagger;
+package com.revature.gambit.swagger;
 
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;

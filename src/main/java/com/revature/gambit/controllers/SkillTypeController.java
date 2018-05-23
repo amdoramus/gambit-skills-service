@@ -1,13 +1,15 @@
-package com.revature.gambit.skill.controllers;
+package com.revature.gambit.controllers;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +17,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.services.SkillTypeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.revature.gambit.entities.BucketDTO;
+import com.revature.gambit.entities.SkillType;
+import com.revature.gambit.entities.SkillTypeBucketLookup;
+import com.revature.gambit.services.SkillTypeBucketLookupService;
+import com.revature.gambit.services.SkillTypeService;
 
 /**
  * Controller that will handle requests for the skill type service.
  */
 @RestController
+@RequestMapping("/skillType")
 public class SkillTypeController {
 
 	/**
@@ -31,6 +40,9 @@ public class SkillTypeController {
 	 */
 	@Autowired
 	private SkillTypeService skillTypeService;
+	
+	@Autowired
+	private SkillTypeBucketLookupService stbls;
 
 	/**
 	 * Handles incoming POST request that adds a new skill type to the DB.
@@ -39,7 +51,7 @@ public class SkillTypeController {
 	 *            Incoming data fields will be mapped into this SkillType object.
 	 * @return HTTP status code 201 (CREATED)
 	 */
-	@PostMapping("/skillType")
+	@PostMapping
 	public ResponseEntity<SkillType> create(@Valid @RequestBody SkillType skillType) {
 		return new ResponseEntity<>(this.skillTypeService.create(skillType), HttpStatus.CREATED);
 	}
@@ -49,7 +61,7 @@ public class SkillTypeController {
 	 * @param id The id to soft delete
 	 * @return
 	 */
-	@DeleteMapping("/skilltype/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteSkillTypeById(@PathVariable int id) {
 		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
 
@@ -66,7 +78,7 @@ public class SkillTypeController {
 	 * @param Name The name to soft delete
 	 * @return
 	 */
-	@DeleteMapping("/skilltype/name/{name}")
+	@DeleteMapping("/name/{name}")
 	public ResponseEntity<Void> deleteSkillTypeByName(@PathVariable String name) {
 		SkillType skillType = skillTypeService.findBySkillTypeName(name);
 
@@ -84,7 +96,7 @@ public class SkillTypeController {
 	 * @return Iterable object containing all the skill types retrieved along with
 	 *         HTTP status code 200 (OK)
 	 */
-	@GetMapping("/skillType")
+	@GetMapping
 	public ResponseEntity<Iterable<SkillType>> findAll() {
 		List<SkillType> skillTypes = (List<SkillType>) this.skillTypeService.findAll();
 		
@@ -103,7 +115,7 @@ public class SkillTypeController {
 	 * @return Skill type along with HTTP status code 200 (OK) if found, HTTP status
 	 *         code 404 (NOT FOUND) otherwise.
 	 */
-	@GetMapping("/skillType/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<SkillType> findSkill(@PathVariable int id) {
 
 		SkillType skillType = this.skillTypeService.findBySkillTypeId(id);
@@ -124,7 +136,7 @@ public class SkillTypeController {
 	 * @return Skill type along with HTTP status code 200 (OK) if found, HTTP status
 	 *         code 404 (NOT FOUND) otherwise.
 	 */
-	@GetMapping("/skillType/name/{name}")
+	@GetMapping("/name/{name}")
 	public ResponseEntity<SkillType> findSkill(@PathVariable String name) {
 		String skillTypeName = "";
 		
@@ -154,7 +166,7 @@ public class SkillTypeController {
 	 * @return HTTP status code 202 (ACCEPTED) if success, HTTP status code 404 (NOT
 	 *         FOUND) otherwise.
 	 */
-	@PutMapping(value = "/skillType/name/{name}")
+	@PutMapping(value = "/name/{name}")
 	public ResponseEntity<SkillType> update(@Valid @RequestBody SkillType skillType, @PathVariable String name) {
 		String skillTypeName = "";
 		
@@ -183,7 +195,7 @@ public class SkillTypeController {
 	 * @return HTTP status code 202 (ACCEPTED) if success, HTTP status code 404 (NOT
 	 *         FOUND) otherwise.
 	 */
-	@PutMapping(value = "/skillType/{id}")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<SkillType> update(@Valid @RequestBody SkillType skillType, @PathVariable int id) {
 
 		if (id == skillType.getSkillTypeId()) {
@@ -194,7 +206,7 @@ public class SkillTypeController {
 
 	}
 
-	@GetMapping(value = "/skillType/active")
+	@GetMapping(value = "/active")
 	public ResponseEntity<List<SkillType>> findAllActive() {
 		List<SkillType> skillTypes = this.skillTypeService.findAllActive();
 
@@ -211,7 +223,7 @@ public class SkillTypeController {
 	 * @param skillId The Id of the Skill to add.
 	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
 	 */
-	@PutMapping(value = "/skillType/{skillTypeId}/skill/{skillId}")
+	@PutMapping(value = "/{skillTypeId}/skill/{skillId}")
 	public ResponseEntity<SkillType> updateSkills(@PathVariable int skillTypeId, @PathVariable int skillId) {
 		SkillType skillType = this.skillTypeService.addSkill(skillTypeId, skillId);
 
@@ -228,7 +240,7 @@ public class SkillTypeController {
 	 * @param skillName The name of the Skill to add.
 	 * @return HTTP status code 202 if success, HTTP status code 404 if either the SkillType, or Skill does not exist.
 	 */
-	@PutMapping(value = "/skillType/name/{skillTypeName}/skill/name/{skillName}")
+	@PutMapping(value = "/name/{skillTypeName}/skill/name/{skillName}")
 	public ResponseEntity<SkillType> updateSkills(@PathVariable String skillTypeName, @PathVariable String skillName) {
 		SkillType skillType = this.skillTypeService.addSkill(skillTypeName, skillName);
 
@@ -236,5 +248,49 @@ public class SkillTypeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 		return new ResponseEntity<>(skillType, HttpStatus.ACCEPTED);
+	}
+	
+	@PostMapping(value="/setSkillTypeBucket", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<SkillTypeBucketLookup>> setSkillTypeBucket(ObjectNode on) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String aStr = mapper.writeValueAsString(on.get("skillType"));
+			SkillType st = mapper.readValue(aStr, SkillType.class);
+			String bStr = mapper.writeValueAsString(on.get("skillType"));
+			int[] bucketIds = mapper.readValue(bStr, int[].class);
+			String cStr = mapper.writeValueAsString(on.get("weights"));
+			double[] weights = mapper.readValue(cStr, double[].class);
+			if (bucketIds.length != weights.length) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			List<SkillTypeBucketLookup> stbl = stbls.addSkillTypeBucketLookups(st, bucketIds, weights);
+			return new ResponseEntity<>(stbl, HttpStatus.CREATED);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PutMapping(value="/updateSkillTypeBucket", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> updateSkillTypeBucket() {
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping(value="/getSkillTypeBuckets/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<BucketDTO>> getSkillTypeBuckets(@PathVariable("id") Integer skillTypeId) {
+		SkillType st = skillTypeService.findBySkillTypeId(skillTypeId);
+		List<SkillTypeBucketLookup> stbl = stbls.getSkillTypeBucketLookupsBySkillType(st);
+		List<BucketDTO> buckets = new ArrayList<>();
+		for (SkillTypeBucketLookup s : stbl) {
+			buckets.add(s.getSkillTypeBucketId().getBucket());
+		}
+		return new ResponseEntity<>(buckets, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getSkillType/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<SkillTypeBucketLookup>> getSkillTypeBucketWithWeights(@PathVariable("id") Integer skillTypeId) {
+		SkillType st = skillTypeService.findBySkillTypeId(skillTypeId);
+		List<SkillTypeBucketLookup> stbl = stbls.getSkillTypeBucketLookupsBySkillType(st);
+		return new ResponseEntity<>(stbl, HttpStatus.OK);
 	}
 }

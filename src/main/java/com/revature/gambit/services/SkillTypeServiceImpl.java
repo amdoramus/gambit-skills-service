@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.services;
+package com.revature.gambit.services;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.repo.SkillRepository;
-import com.revature.gambit.skill.repo.SkillTypeRepository;
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.entities.SkillType;
+import com.revature.gambit.repositories.SkillRepository;
+import com.revature.gambit.repositories.SkillTypeRepository;
 
 /**
  * Implementation of the Skill Type service API methods.
@@ -60,7 +60,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 */
 	@Override
 	public SkillType findBySkillTypeId(int id) {
-		return this.skillTypeRepository.findBySkillTypeId(id);
+		return this.skillTypeRepository.getOne(id);
 	}
 
 	/**
@@ -87,23 +87,23 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 		return skillTypeRepository.saveAndFlush(updatedSkillType);
 	}
 
-	/**
-	 * Deletes a skill type based on its name.
-	 * 
-	 * @param name
-	 *            Name of the skill type to delete.
-	 */
-	@Transactional
-	@Override
-	public void deleteBySkillTypeName(String name) {
-		this.skillTypeRepository.deleteBySkillTypeName(name);
-	}
+//	/**
+//	 * Deletes a skill type based on its name.
+//	 * 
+//	 * @param name
+//	 *            Name of the skill type to delete.
+//	 */
+//	@Transactional
+//	@Override
+//	public void deleteBySkillTypeName(String name) {
+//		this.skillTypeRepository.deleteBySkillTypeName(name);
+//	}
 
-	@Transactional
-	@Override
-	public void deleteBySkillTypeID(int id) {
-		this.skillTypeRepository.deleteBySkillTypeId(id);
-	}
+//	@Transactional
+//	@Override
+//	public void deleteBySkillTypeID(int id) {
+//		this.skillTypeRepository.deleteBySkillTypeId(id);
+//	}
 
 	/**
 	 * Returns a list of all active SkillTypes.
@@ -122,7 +122,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 */
 	@Override
 	public SkillType addSkill(Integer skillTypeId, Integer skillId) {
-		SkillType skillType = this.skillTypeRepository.findBySkillTypeId(skillTypeId);
+		SkillType skillType = this.skillTypeRepository.getOne(skillTypeId);
 		if (skillType == null)
 			return null;
 		

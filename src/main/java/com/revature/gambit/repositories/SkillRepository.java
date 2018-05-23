@@ -1,11 +1,11 @@
-package com.revature.gambit.skill.repo;
+package com.revature.gambit.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.entities.Skill;
 
 /**
  * Spring Data repository interface for Skill service. Defines the boilerplate

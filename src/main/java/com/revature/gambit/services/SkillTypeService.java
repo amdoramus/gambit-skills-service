@@ -1,8 +1,8 @@
-package com.revature.gambit.skill.services;
+package com.revature.gambit.services;
 
 import java.util.List;
 
-import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.entities.SkillType;
 
 /**
  * API defining all the methods the skill type service will implement.
@@ -68,21 +68,21 @@ public interface SkillTypeService {
 	 */
 	SkillType addSkill(String skillTypeName, String skillName);
 	
-	/**
-	 * Deletes a skill type based on its name.
-	 * 
-	 * @param name
-	 *            Name of the skill type to delete.
-	 */
-	public void deleteBySkillTypeName(String name);
-	
-	/**
-	 * Deletes a skill type based on its id.
-	 * 
-	 * @param name
-	 *            Name of the skill type to delete.
-	 */
-	public void deleteBySkillTypeID(int id);
+//	/**
+//	 * Deletes a skill type based on its name.
+//	 * 
+//	 * @param name
+//	 *            Name of the skill type to delete.
+//	 */
+//	public void deleteBySkillTypeName(String name);
+//	
+//	/**
+//	 * Deletes a skill type based on its id.
+//	 * 
+//	 * @param name
+//	 *            Name of the skill type to delete.
+//	 */
+//	public void deleteBySkillTypeID(int id);
 
 	/**
 	 * Returns a list of all active SkillTypes.

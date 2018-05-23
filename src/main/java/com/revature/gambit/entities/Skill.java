@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.beans;
+package com.revature.gambit.entities;
 
 import java.util.List;
 

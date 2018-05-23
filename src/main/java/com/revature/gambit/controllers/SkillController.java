@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.controllers;
+package com.revature.gambit.controllers;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.services.SkillService;
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.services.SkillService;
 
 /**
  * Controller that will handle requests for the skill service.

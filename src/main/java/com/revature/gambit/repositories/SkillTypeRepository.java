@@ -1,11 +1,11 @@
-package com.revature.gambit.skill.repo;
+package com.revature.gambit.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.revature.gambit.skill.beans.SkillType;
+import com.revature.gambit.entities.SkillType;
 
 /**
  * Spring Data repository interface for Skill type service. Defines the
@@ -13,9 +13,7 @@ import com.revature.gambit.skill.beans.SkillType;
  */
 @Repository
 public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
-	void deleteBySkillTypeName(String name);
-
-	void deleteBySkillTypeId(int id);
+	
     /**
      * Looks up a skill type based on the skill type name.
      *
@@ -24,15 +22,6 @@ public interface SkillTypeRepository extends JpaRepository<SkillType, Integer> {
      * @return Skill that was found.
      */
     SkillType findBySkillTypeName(String name);
-
-    /**
-     * Looks up a skill type based on the skill type name.
-     *
-     * @param id
-     *            Id of the skill type to lookup.
-     * @return Skill that was found.
-     */
-    SkillType findBySkillTypeId(Integer id);
     
     /**
      * Finds SkillTypes based on their isActive flag.

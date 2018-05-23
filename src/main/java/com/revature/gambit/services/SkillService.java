@@ -1,8 +1,8 @@
-package com.revature.gambit.skill.services;
+package com.revature.gambit.services;
 
 import java.util.List;
 
-import com.revature.gambit.skill.beans.Skill;
+import com.revature.gambit.entities.Skill;
 
 /**
  * API defining all the methods the skill service will implement.

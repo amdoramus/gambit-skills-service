@@ -9,16 +9,17 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.repo.SkillRepository;
-import com.revature.gambit.skill.repo.SkillTypeRepository;
-import com.revature.gambit.skill.services.SkillTypeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.entities.SkillType;
+import com.revature.gambit.repositories.SkillRepository;
+import com.revature.gambit.repositories.SkillTypeRepository;
+import com.revature.gambit.services.SkillTypeService;
 
 import javax.transaction.Transactional;
 

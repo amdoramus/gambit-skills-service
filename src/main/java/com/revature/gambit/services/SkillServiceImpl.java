@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.services;
+package com.revature.gambit.services;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.repo.SkillRepository;
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.repositories.SkillRepository;
 
 /**
  * Implementation of the Skill service API methods.

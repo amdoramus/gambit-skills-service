@@ -1,4 +1,4 @@
-package com.revature.gambit.skill.beans;
+package com.revature.gambit.entities;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,7 +8,8 @@ import java.util.List;
  * SysAdmin, etc.
  */
 @Entity
-@Table(name = "SKILLTYPE")
+@Table(name = "SKILLTYPE",
+		uniqueConstraints = @UniqueConstraint(columnNames= {"SKILLTYPE_NAME"}))
 public class SkillType {
 
 	/**
@@ -102,6 +103,14 @@ public class SkillType {
 		this.isActive = isActive;
 		this.isCore = isCore;
 		this.skills = skills;
+	}
+	
+	public SkillType(SkillType t) {
+		super();
+		this.skillTypeId = t.getSkillTypeId();
+		this.skillTypeName = t.getSkillTypeName();
+		this.skillTypeDesc = t.getSkillTypeDesc();
+		this.isActive = t.getIsActive();
 	}
 
 	public Integer getSkillTypeId() {
