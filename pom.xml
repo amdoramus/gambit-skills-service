@@ -223,7 +223,7 @@
 					<!-- It will run this as a command -->
 					<!-- java -jar /opt/NameOfTheJar.jar -->
 					<entryPoint>
-						["java", "-jar", "/opt/${project.build.finalName}.jar"]
+						["java", "-Xmx256m", "-jar", "/opt/${project.build.finalName}.jar"]
 					</entryPoint>
 
 					<!-- There is something called Docker Hub -->
