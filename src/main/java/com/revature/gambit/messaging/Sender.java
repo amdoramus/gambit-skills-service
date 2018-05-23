@@ -22,7 +22,7 @@ public class Sender {
 			template.send(topic, mapper.writeValueAsString(payload));
 			logger.trace("Payload, " + payload + ", for topic, " + topic + " successfully sent.");
 		} catch (Exception e) {
-			logger.error("Couldn't stringify POJO in sender.", e);
+			logger.error("Couldn't stringify list of bucket id in sender.", e);
 		}
 	}
 }
