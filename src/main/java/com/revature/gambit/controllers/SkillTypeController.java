@@ -251,7 +251,7 @@ public class SkillTypeController {
 	}
 	
 	@PostMapping(value="/setSkillTypeBucket", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<SkillTypeBucketLookup>> setSkillTypeBucket(ObjectNode on) {
+	public ResponseEntity<List<SkillTypeBucketLookup>> setSkillTypeBucket(@RequestBody ObjectNode on) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			String aStr = mapper.writeValueAsString(on.get("skillType"));
@@ -272,8 +272,24 @@ public class SkillTypeController {
 	}
 	
 	@PutMapping(value="/updateSkillTypeBucket", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> updateSkillTypeBucket() {
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	public ResponseEntity<List<SkillTypeBucketLookup>> updateSkillTypeBucket(@RequestBody ObjectNode on) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String aStr = mapper.writeValueAsString(on.get("skillType"));
+			SkillType st = mapper.readValue(aStr, SkillType.class);
+			String bStr = mapper.writeValueAsString(on.get("skillType"));
+			int[] bucketIds = mapper.readValue(bStr, int[].class);
+			String cStr = mapper.writeValueAsString(on.get("weights"));
+			double[] weights = mapper.readValue(cStr, double[].class);
+			if (bucketIds.length != weights.length) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			List<SkillTypeBucketLookup> stbl = stbls.updateSkillTypeBucketLookups(st, bucketIds, weights);		
+			return new ResponseEntity<>(stbl, HttpStatus.CREATED);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping(value="/getSkillTypeBuckets/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
