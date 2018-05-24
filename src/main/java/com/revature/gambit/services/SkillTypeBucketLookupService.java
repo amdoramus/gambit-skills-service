@@ -5,11 +5,12 @@ import java.util.List;
 import com.revature.gambit.entities.*;
 
 public interface SkillTypeBucketLookupService {
-
 	
 	public SkillTypeBucketLookup addSkillTypeBucketLookup(SkillTypeBucketLookup stbl);
 	
 	public List<SkillTypeBucketLookup> addSkillTypeBucketLookups(SkillType st, int[] bucketIds, double[] weights);
+	
+	public List<SkillTypeBucketLookup> updateSkillTypeBucketLookups(SkillType st, int[] bucketIds, double[] weights);
 	
 	public List<SkillTypeBucketLookup> getAllSkillTypeBucketLookups();
 	

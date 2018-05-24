@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SKILL_TYPE_BUCKET_LOOKUP")
+@Table(name = "SKILLTYPE_BUCKET_LOOKUP")
 public class SkillTypeBucketLookup implements Serializable {
 
 	private static final long serialVersionUID = 67213928524176831L;
