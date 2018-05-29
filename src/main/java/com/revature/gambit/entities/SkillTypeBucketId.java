@@ -4,42 +4,83 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+/**
+ * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+ * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+ * 
+ * Creates an embeddable composite key
+ */
 @Embeddable
 public class SkillTypeBucketId implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Represents a skill type
+	 */
 	@ManyToOne
 	@JoinColumn(name="SKILLTYPE_ID")
 	private SkillType skillType;
 	
+
+	/**
+	 * Represents a bucket DTO
+	 */
 	@ManyToOne
 	@JoinColumn(name="BUCKET_ID")
 	private BucketDTO bucket;
 
+	/**
+	 * Constructs a skill type bucket id
+	 */
 	public SkillTypeBucketId() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructs a skill type bucket id
+	 * 
+	 * @param skillType - skill type
+	 * @param bucket - bucket DTO
+	 */
 	public SkillTypeBucketId(SkillType skillType, BucketDTO bucket) {
 		super();
 		this.skillType = skillType;
 		this.bucket = bucket;
 	}
 
+	/**
+	 * Gets a skill type
+	 * 
+	 * @return skill type
+	 */
 	public SkillType getSkillType() {
 		return skillType;
 	}
 
+	/**
+	 * Sets a skill type
+	 * 
+	 * @param skillType - skill type to set
+	 */
 	public void setSkillType(SkillType skillType) {
 		this.skillType = skillType;
 	}
 
+	/**
+	 * Gets a bucket DTO
+	 * 
+	 * @return bucket DTO
+	 */
 	public BucketDTO getBucket() {
 		return bucket;
 	}
 
+	/**
+	 * Sets a bucket DTO
+	 * 
+	 * @param bucket - bucket DTO to set
+	 */
 	public void setBucket(BucketDTO bucket) {
 		this.bucket = bucket;
 	}

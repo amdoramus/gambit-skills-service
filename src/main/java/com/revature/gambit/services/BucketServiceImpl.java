@@ -8,40 +8,23 @@ import com.revature.gambit.entities.BucketDTO;
 import com.revature.gambit.repositories.BucketRepository;
 
 /**
- * BucketServiceImpl which is the implementation of BucketService, defines the methods that will be used
+ * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+ * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
  * 
- * @author Josh Dughi and Richard Vo | 1803-USF-MAR26 | Wezley Singleton
- *
+ * BucketServiceImpl which is the implementation of BucketService,<br>
+ * defines the methods that will be used
  */
-
 @Service
-@Transactional
-public class BucketServiceImpl implements BucketService{
-	
+public class BucketServiceImpl implements BucketService {
 	
 	@Autowired
 	BucketRepository bucketRepo;
 	
-	/**
-	 * AddBucket method that takes in an integer and creates a BucketDTO object with
-	 * only the bucketId field populated with a value then saves it to database.
-	 * 
-	 * @author Josh Dughi and Richard Vo | 1803-USF-MAR26 | Wezley Singleton
-	 *
-	 * @param Integer
-	 * 		The bucketId for the BucketDTO to be created
-	 * @return BucketDTO
-	 * 		Returns the bucketDTO which was just created
-	 */
-	
+	@Transactional
 	@Override
 	public BucketDTO addBucket(Integer bucketId) {
-		
 		BucketDTO bucket = new BucketDTO(bucketId);
-		
-		BucketDTO savedBucket = bucketRepo.save(bucket);
-		
-		return savedBucket;
+		return bucketRepo.save(bucket);
 	}
 
 }

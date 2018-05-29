@@ -94,7 +94,7 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.10.RC0</version>
+			<version>9.4.10.RC0</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
 
@@ -155,7 +155,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.9</version>
+			<version>1.8.9</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
 
@@ -185,7 +185,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
 				<configuration>
 					<reportOutputDirectory>Documentation</reportOutputDirectory>
 					<destDir>Javadocs</destDir>
