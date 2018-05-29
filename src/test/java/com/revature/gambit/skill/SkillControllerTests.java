@@ -22,9 +22,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.controllers.SkillController;
-import com.revature.gambit.skill.services.SkillService;
+import com.revature.gambit.controllers.SkillController;
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.services.SkillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.revature.gambit.skill;
+package com.revature.gambit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -9,8 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.gambit.skill.beans.SkillType;
-import com.revature.gambit.skill.services.SkillTypeService;
+import com.revature.gambit.controllers.SkillTypeController;
+import com.revature.gambit.entities.Skill;
+import com.revature.gambit.entities.SkillType;
+import com.revature.gambit.services.SkillTypeService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +26,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import com.revature.gambit.skill.beans.Skill;
-import com.revature.gambit.skill.controllers.SkillTypeController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
