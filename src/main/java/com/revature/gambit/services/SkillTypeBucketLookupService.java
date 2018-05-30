@@ -4,21 +4,102 @@ import java.util.List;
 
 import com.revature.gambit.entities.*;
 
+/**
+ * Interface for the SkillTypeBucketLookup service
+ * 
+ * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+ * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+ */
 public interface SkillTypeBucketLookupService {
 	
-	public SkillTypeBucketLookup addSkillTypeBucketLookup(SkillTypeBucketLookup stbl);
+	/**
+	 * Adds a SkillTypeBucketLookup
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillTypeBucketLookup - SkillTypeBucketLookup to add
+	 * @return a SkillTypeBucketLookup
+	 */
+	public SkillTypeBucketLookup addSkillTypeBucketLookup(SkillTypeBucketLookup skillTypeBucketLookup);
 	
-	public List<SkillTypeBucketLookup> addSkillTypeBucketLookups(SkillType st, int[] bucketIds, double[] weights);
+	/**
+	 * Adds a SkillTypeBucketLookup
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillType - SkillType
+	 * @param bucketIds - list of Bucket ids
+	 * @param weights - a list of weights
+	 * @return list of SkillTypeBucketLookups
+	 */
+	public List<SkillTypeBucketLookup> addSkillTypeBucketLookups(SkillType skillType, int[] bucketIds, double[] weights);
 	
-	public List<SkillTypeBucketLookup> updateSkillTypeBucketLookups(SkillType st, int[] bucketIds, double[] weights);
+	/**
+	 * Updates SkillTypeBucketLookups
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillType - SkillType
+	 * @param bucketIds - list of Bucket ids
+	 * @param weights - list of weights
+	 * @return an updated list of SkillTypeBucketLookups
+	 */
+	public List<SkillTypeBucketLookup> updateSkillTypeBucketLookups(SkillType skillType, int[] bucketIds, double[] weights);
 	
+	/**
+	 * Gets a list of SkillTypeBucketLookups
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @return list of SkillTypeBucketLookups
+	 */
 	public List<SkillTypeBucketLookup> getAllSkillTypeBucketLookups();
 	
-	public List<SkillTypeBucketLookup> getSkillTypeBucketLookupsBySkillType(SkillType st);
+	/**
+	 * Gets a list of SkillTypeBucketLookups by SkillType
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillType - SkillType
+	 * @return list of SkillTypeBucketLookups that correspond to a specific SkillType
+	 */
+	public List<SkillTypeBucketLookup> getSkillTypeBucketLookupsBySkillType(SkillType skillType);
 	
-	public List<SkillTypeBucketLookup> getSkillTypeBucketLookupsByBucket(BucketDTO b);
+	/**
+	 * Gets a list of SkillTypeBucketLookups by Bucket
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param bucket - BucketDTO
+	 * @return list of SkillTypeBucketLookups that correspond to a specific Bucket
+	 */
+	public List<SkillTypeBucketLookup> getSkillTypeBucketLookupsByBucket(BucketDTO bucket);
 	
-	public SkillTypeBucketLookup updateSkillTypeBucketLookup(SkillTypeBucketLookup stbl);
+	/**
+	 * Updates SkillTypeBucketLookup
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillTypeBucketLookup - updated SkillTypeBucketLookup
+	 * @return updated SkillTypeBucketLookup
+	 */
+	public SkillTypeBucketLookup updateSkillTypeBucketLookup(SkillTypeBucketLookup skillTypeBucketLookup);
 	
-	public void deleteSkillTypeBucketLookup(SkillTypeBucketLookup stbl);
+	/**
+	 * Deletes a SkillTypeBucketLookup
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param skillTypeBucketLookup - SkillTypeBucketLookup to delete
+	 */
+	public void deleteSkillTypeBucketLookup(SkillTypeBucketLookup skillTypeBucketLookup);
+
 }

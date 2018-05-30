@@ -1,32 +1,59 @@
 package com.revature.gambit.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
+ * Creates a BucketDTO
  * 
- * @author defto
- *
+ * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+ * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
  */
+@ApiModel(value = "Bucket DTO", description = "DTO for joining with SkillType")
 @Entity
-@Table(name="BUCKET_DTO")
+@Table(name = "BUCKET_DTO")
 public class BucketDTO {
 	
+	@ApiModelProperty(value = "id of the Bucket")
 	@Id
-	@Column(name="BUCKET_ID")
+	@Column(name = "BUCKET_ID")
 	private Integer bucketId;
 
+	/**
+	 * Constructs a BucketDTO
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param bucketId - the Bucket id
+	 */
 	public BucketDTO(Integer bucketId) {
 		super();
 		this.bucketId = bucketId;
 	}
 
+	/**
+	 * Gets a BucketDTO Bucket id
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @return a Bucket id
+	 */
 	public Integer getBucketId() {
 		return bucketId;
 	}
 
+	/**
+	 * Sets a BucketDTO's Bucket id
+	 * 
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * @param bucketId - Bucket id to set
+	 */
 	public void setBucketId(Integer bucketId) {
 		this.bucketId = bucketId;
 	}
