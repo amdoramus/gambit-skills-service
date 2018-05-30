@@ -8,19 +8,19 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
+ * Creates lookup table for skill type bucket
+ * 
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
- * 
- * Creates lookup table for skill type bucket
  */
-@ApiModel(value = "Skill Type Bucket Lookup", description = "lookup table for skill type buckets and their assoicated weight")
+@ApiModel(value = "SkillTypeBucketLookup", description = "lookup table for skill type buckets and their assoicated weight")
 @Entity
 @Table(name = "SKILLTYPE_BUCKET_LOOKUP")
 public class SkillTypeBucketLookup implements Serializable {
 
 	private static final long serialVersionUID = 67213928524176831L;
 
-	@ApiModelProperty(value = "skill type bucket id")
+	@ApiModelProperty(value = "SkillTypeBucketId")
 	@EmbeddedId
 	private SkillTypeBucketId skillTypeBucketId;
 
@@ -29,23 +29,23 @@ public class SkillTypeBucketLookup implements Serializable {
 	private Double weight;
 
 	/**
+	 * Constructs a SkillTypeBucketLookup
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
-	 * 
-	 * Constructs a skill type bucket lookup
 	 */
 	public SkillTypeBucketLookup() {
 		super();
 	}
 	
 	/**
+	 * Constructs a SkillTypeBucketLookup
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Constructs a skill type bucket lookup
-	 * 
-	 * @param skillType - skill type
-	 * @param bucket - bucket DTO
+	 * @param skillType - SkillType
+	 * @param bucket - BucketDTO
 	 * @param weight - weight
 	 */
 	public SkillTypeBucketLookup(SkillType skillType, BucketDTO bucket, Double weight) {
@@ -55,12 +55,12 @@ public class SkillTypeBucketLookup implements Serializable {
 	}
 
 	/**
+	 * Constructs a SkillTypeBucketLookup
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Constructs a skill type bucket lookup
-	 * 
-	 * @param skillTypeBucketId - skill stype bucket id
+	 * @param skillTypeBucketId - SkillTypeBucketId
 	 * @param weight - weight
 	 */
 	public SkillTypeBucketLookup(SkillTypeBucketId skillTypeBucketId, Double weight) {
@@ -70,34 +70,34 @@ public class SkillTypeBucketLookup implements Serializable {
 	}
 
 	/**
+	 * Gets the SkillTypeBucketId
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Gets the skill type bucket id
-	 * 
-	 * @return skill type bucket id
+	 * @return a SkillTypeBucketId
 	 */
 	public SkillTypeBucketId getSkillTypeBucketId() {
 		return skillTypeBucketId;
 	}
 
 	/**
+	 * Sets the SkillTypeBucketId
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Sets the skill type bucket it
-	 * 
-	 * @param skillTypeBucketId - skill type bucket id to set
+	 * @param skillTypeBucketId - SkillTypeBucketId to set
 	 */
 	public void setSkillTypeBucketId(SkillTypeBucketId skillTypeBucketId) {
 		this.skillTypeBucketId = skillTypeBucketId;
 	}
 
 	/**
+	 * Gets the weight
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
-	 * 
-	 * Gets the weight
 	 * 
 	 * @return weight
 	 */
@@ -106,10 +106,10 @@ public class SkillTypeBucketLookup implements Serializable {
 	}
 
 	/**
+	 * Sets the weight
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
-	 * 
-	 * Sets the weight
 	 * 
 	 * @param weight - weight to set
 	 */

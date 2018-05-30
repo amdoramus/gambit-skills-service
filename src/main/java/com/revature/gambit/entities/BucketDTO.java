@@ -6,28 +6,28 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
+ * Creates a BucketDTO
+ * 
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
- * 
- * Creates a bucket DTO
  */
 @ApiModel(value = "Bucket DTO", description = "DTO for joining with SkillType")
 @Entity
-@Table(name="BUCKET_DTO")
+@Table(name = "BUCKET_DTO")
 public class BucketDTO {
 	
-	@ApiModelProperty(value = "id of the bucket")
+	@ApiModelProperty(value = "id of the Bucket")
 	@Id
-	@Column(name="BUCKET_ID")
+	@Column(name = "BUCKET_ID")
 	private Integer bucketId;
 
 	/**
+	 * Constructs a BucketDTO
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Constructs a bucket DTO
-	 * 
-	 * @param bucketId - the bucket id
+	 * @param bucketId - the Bucket id
 	 */
 	public BucketDTO(Integer bucketId) {
 		super();
@@ -35,24 +35,24 @@ public class BucketDTO {
 	}
 
 	/**
+	 * Gets a BucketDTO Bucket id
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Gets a bucket DTO bucket id
-	 * 
-	 * @return bucket id
+	 * @return a Bucket id
 	 */
 	public Integer getBucketId() {
 		return bucketId;
 	}
 
 	/**
+	 * Sets a BucketDTO's Bucket id
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Sets a bucket DTO's bucket id
-	 * 
-	 * @param bucketId - bucket id to set
+	 * @param bucketId - Bucket id to set
 	 */
 	public void setBucketId(Integer bucketId) {
 		this.bucketId = bucketId;

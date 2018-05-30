@@ -16,31 +16,31 @@ import io.swagger.annotations.ApiModelProperty;
 public class Skill {
 
 	/**
-	 * ID that uniquely identifies a skill
+	 * ID that uniquely identifies a Skill
 	 */
-	@ApiModelProperty(value = "skill's unique id")
+	@ApiModelProperty(value = "Skill's unique id")
 	@Id
 	@Column(name = "SKILL_ID")
 	@SequenceGenerator(name = "SKILL_ID_SEQ", sequenceName = "SKILL_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "SKILL_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SKILL_ID_SEQ")
 	private int skillID;
 
 	/**
-	 * Name of the skill
+	 * Name of the Skill
 	 */
-	@ApiModelProperty(value = "name of the the skill")
+	@ApiModelProperty(value = "name of the the Skill")
 	@Column(name = "SKILL_NAME")
 	private String skillName;
 
 	/**
 	 * Flag that will be used for soft deletes
 	 */
-	@ApiModelProperty(value = "flag for the state of the skill (active/inactive)")
+	@ApiModelProperty(value = "flag for the state of the Skill (active/inactive)")
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
 
 	/**
-	 * List of SkillTypes that will be referenced by this skill. Useful to establish<br>
+	 * List of SkillTypes that will be referenced by this Skill. Useful to establish<br>
 	 * a many-to-many relationship
 	 */
 	@ApiModelProperty(value = "list of SkillTypes")
@@ -56,8 +56,8 @@ public class Skill {
 	/**
 	 * Constructor that initializes class fields
 	 * 
-	 * @param skillId - id that uniquely identifies a skill
-	 * @param skillName - name of the skill
+	 * @param skillId - id that uniquely identifies a Skill
+	 * @param skillName - name of the Skill
 	 * @param active - flag that will be used for soft deletes
 	 */
 	public Skill(int skillId, String skillName, boolean active) {
@@ -67,10 +67,10 @@ public class Skill {
 	}
 	
 	/**
-	 * Constructs a skill
+	 * Constructs a Skill
 	 * 
-	 * @param skillName - name of skill
-	 * @param isActive - whether the skill is active or not
+	 * @param skillName - name of Skill
+	 * @param isActive - whether the Skill is active or not
 	 */
 	public Skill(String skillName, boolean isActive) {
 		this.skillID = 0;
@@ -79,43 +79,43 @@ public class Skill {
 	}
 
 	/**
-	 * Gets the skill's id
+	 * Gets the Skill's id
 	 * 
-	 * @return the skill's id
+	 * @return the Skill's id
 	 */
 	public int getSkillID() {
 		return skillID;
 	}
 
 	/**
-	 * Sets a skill's id
+	 * Sets a Skill's id
 	 * 
-	 * @param skillID - skill id to set
+	 * @param skillID - Skill id to set
 	 */
 	public void setSkillID(int skillID) {
 		this.skillID = skillID;
 	}
 
 	/**
-	 * Gets a skill's name
+	 * Gets a Skill's name
 	 * 
-	 * @return the skill's name
+	 * @return the Skill's name
 	 */
 	public String getSkillName() {
 		return skillName;
 	}
 
 	/**
-	 * Sets the skill's name
+	 * Sets the Skill's name
 	 * 
-	 * @param skillName - the skill's name to set
+	 * @param skillName - the Skill's name to set
 	 */
 	public void setSkillName(String skillName) {
 		this.skillName = skillName;
 	}
 
 	/**
-	 * Gets a skill's active state
+	 * Gets a Skill's active state
 	 * 
 	 * @return true if active; false if inactive
 	 */
@@ -124,9 +124,9 @@ public class Skill {
 	}
 
 	/**
-	 * Sets a skill's active state
+	 * Sets a Skill's active state
 	 * 
-	 * @param isActive - whether skills is active or not
+	 * @param isActive - whether Skills is active or not
 	 */
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
