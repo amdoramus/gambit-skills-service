@@ -15,6 +15,7 @@ import com.revature.gambit.services.BucketService;
  */
 @Component
 public class Receiver {
+
 	
 	private static Logger logger = Logger.getLogger(Receiver.class);
 	
@@ -33,5 +34,5 @@ public class Receiver {
 		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
 		bucketService.addBucket(Integer.parseInt(payload));	
 	}
-	
+
 }
