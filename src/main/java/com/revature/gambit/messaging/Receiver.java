@@ -15,26 +15,6 @@ import com.revature.gambit.services.BucketService;
  */
 @Component
 public class Receiver {
-<<<<<<< HEAD
-//	private static Logger logger = Logger.getLogger(Receiver.class);
-//	
-//	@Autowired
-//	BucketService bucketService;
-//	/**
-//	 * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
-//	 *
-//	 * @param String
-//	 *		listens for a string in the specified topic
-//	 */
-//	@KafkaListener(topics = "bucket.create.id.t")
-//	public void lookUpBucketIdFromSkills(String payload) {
-//		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
-//		
-//		bucketService.addBucket(Integer.parseInt(payload));
-//		
-//		
-//	}
-=======
 	
 	private static Logger logger = Logger.getLogger(Receiver.class);
 	
@@ -53,6 +33,5 @@ public class Receiver {
 		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
 		bucketService.addBucket(Integer.parseInt(payload));	
 	}
-	
->>>>>>> 692629dabdf5bd583d6b369a1d828a839c323751
+
 }
