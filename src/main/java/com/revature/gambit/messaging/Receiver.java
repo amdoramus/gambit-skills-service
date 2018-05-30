@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import com.revature.gambit.services.BucketService;
 
 /**
- * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
+ * Kafka Listener for updates regarding creating a new Bucket in the bucket-service
  * 
- * Kafka Listener for updates regarding creating a new bucket in the bucket-service
+ * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
  */
 @Component
 public class Receiver {
@@ -22,6 +22,8 @@ public class Receiver {
 	BucketService bucketService;
 	
 	/**
+	 * Listeners for id updates
+	 * 
 	 * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
 	 *
 	 * @param payload - listens for a string in the specified topic

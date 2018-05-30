@@ -22,42 +22,42 @@ public interface SkillRepository extends JpaRepository<Skill, Integer> {
 	List<Skill> findAll();
 
 	/**
-	 * Retrieves a skill by id
+	 * Retrieves a Skill by id
 	 * 
-	 * @param id - id of skill being retrieved
+	 * @param id - id of Skill being retrieved
 	 * 
-	 * @return a skill
+	 * @return a Skill
 	 */
 	Skill findBySkillID(int id);
 
 	/**
-	 * Retrieves a skill by name
+	 * Retrieves a Skill by name
 	 * 
-	 * @param name - name of the skill being retrieved
+	 * @param name - name of the Skill being retrieved
 	 * 
-	 * @return a skill
+	 * @return a Skill
 	 */
 	Skill findBySkillName(String name);
 
 	/**
-	 * Retrieves a list of skill's that are active
+	 * Retrieves a list of Skill's that are active
 	 * 
-	 * @param isActive - boolean as to whether skills is active or not
-	 * @return list of active skills
+	 * @param isActive - boolean as to whether Skills is active or not
+	 * @return list of active Skills
 	 */
 	List<Skill> findAllByIsActive(boolean isActive);
 	
 	/**
-	 * Deletes a skill by id
+	 * Deletes a Skill by id
 	 * 
-	 * @param id - id of the skill being deleted
+	 * @param id - id of the Skill being deleted
 	 */
 	void deleteBySkillID(int id);
 
 	/**
-	 * Deletes a skill by name
+	 * Deletes a Skill by name
 	 * 
-	 * @param name - name of the skill being deleted
+	 * @param name - name of the Skill being deleted
 	 */
 	void deleteBySkillName(String name);
 
