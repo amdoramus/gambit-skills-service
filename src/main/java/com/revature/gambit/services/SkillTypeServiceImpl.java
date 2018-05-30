@@ -60,7 +60,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	 */
 	@Override
 	public SkillType findBySkillTypeId(int id) {
-		return this.skillTypeRepository.getOne(id);
+		return this.skillTypeRepository.findOne(id);
 	}
 
 	/**

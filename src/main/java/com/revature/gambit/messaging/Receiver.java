@@ -17,28 +17,24 @@ import com.revature.gambit.services.BucketService;
 
 @Component
 public class Receiver {
-	private static Logger logger = Logger.getLogger(Receiver.class);
-	
-	private static final ObjectMapper objectMapper = new ObjectMapper();
-	
-	@Autowired
-	BucketService bucketService;
-	/**
-	 * 
-	 * 
-	 * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
-	 *
-	 * @param String
-	 *		listens for a string in the specified topic
-	 */
-	@KafkaListener(topics = "bucket.create.id.t")
-	public void lookUpBucketIdFromSkills(String payload) {
-		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
-		
-		bucketService.addBucket(Integer.parseInt(payload));
-		
-		
-	}
+//	private static Logger logger = Logger.getLogger(Receiver.class);
+//	
+//	@Autowired
+//	BucketService bucketService;
+//	/**
+//	 * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
+//	 *
+//	 * @param String
+//	 *		listens for a string in the specified topic
+//	 */
+//	@KafkaListener(topics = "bucket.create.id.t")
+//	public void lookUpBucketIdFromSkills(String payload) {
+//		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
+//		
+//		bucketService.addBucket(Integer.parseInt(payload));
+//		
+//		
+//	}
 }
 
 
