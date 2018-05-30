@@ -20,6 +20,16 @@ public class BucketDTO {
 	@Id
 	@Column(name="BUCKET_ID")
 	private Integer bucketId;
+	
+	/**
+	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
+	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
+	 * 
+	 * Constructs a bucket DTO
+	 */
+	public BucketDTO() {
+		super();
+	}
 
 	/**
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
@@ -33,7 +43,7 @@ public class BucketDTO {
 		super();
 		this.bucketId = bucketId;
 	}
-
+	
 	/**
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
