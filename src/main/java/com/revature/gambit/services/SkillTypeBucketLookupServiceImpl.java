@@ -11,10 +11,10 @@ import com.revature.gambit.entities.*;
 import com.revature.gambit.repositories.SkillTypeBucketLookupRepository;
 
 /**
+ * Service implementation for SkillTypeBucketLookup
+ * 
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
- * 
- * Service implementation for skill type bucket lookup
  */
 @Service
 public class SkillTypeBucketLookupServiceImpl implements SkillTypeBucketLookupService {

@@ -3,10 +3,10 @@ package com.revature.gambit.services;
 import com.revature.gambit.entities.BucketDTO;
 
 /**
+ * Bucket service interface that can be used with BucketServiceImpl
+ *  
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Richard Vo | 1803-USF-MAR26 | Wezley Singleton
- * 
- * Bucket service interface that can be used with BucketServiceImpl
  */
 public interface BucketService {
 

@@ -5,43 +5,36 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
+ * Creates an embeddable composite key
+ * 
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
- * 
- * Creates an embeddable composite key
  */
 @Embeddable
 public class SkillTypeBucketId implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Represents a skill type
-	 */
 	@ManyToOne
-	@JoinColumn(name="SKILLTYPE_ID")
+	@JoinColumn(name = "SKILLTYPE_ID")
 	private SkillType skillType;
 	
-
-	/**
-	 * Represents a bucket DTO
-	 */
 	@ManyToOne
-	@JoinColumn(name="BUCKET_ID")
+	@JoinColumn(name = "BUCKET_ID")
 	private BucketDTO bucket;
 
 	/**
-	 * Constructs a skill type bucket id
+	 * Constructs a SkillTypeBucketId
 	 */
 	public SkillTypeBucketId() {
 		super();
 	}
 
 	/**
-	 * Constructs a skill type bucket id
+	 * Constructs a SkillTypeBucketId
 	 * 
-	 * @param skillType - skill type
-	 * @param bucket - bucket DTO
+	 * @param skillType - a SkillType
+	 * @param bucket - a BucketDTO
 	 */
 	public SkillTypeBucketId(SkillType skillType, BucketDTO bucket) {
 		super();
@@ -50,36 +43,36 @@ public class SkillTypeBucketId implements Serializable {
 	}
 
 	/**
-	 * Gets a skill type
+	 * Gets a SkillType
 	 * 
-	 * @return skill type
+	 * @return a SkillType
 	 */
 	public SkillType getSkillType() {
 		return skillType;
 	}
 
 	/**
-	 * Sets a skill type
+	 * Sets a SkillType
 	 * 
-	 * @param skillType - skill type to set
+	 * @param skillType - a SkillType to set
 	 */
 	public void setSkillType(SkillType skillType) {
 		this.skillType = skillType;
 	}
 
 	/**
-	 * Gets a bucket DTO
+	 * Gets a BucketDTO
 	 * 
-	 * @return bucket DTO
+	 * @return a BucketDTO
 	 */
 	public BucketDTO getBucket() {
 		return bucket;
 	}
 
 	/**
-	 * Sets a bucket DTO
+	 * Sets a BucketDTO
 	 * 
-	 * @param bucket - bucket DTO to set
+	 * @param bucket - a BucketDTO to set
 	 */
 	public void setBucket(BucketDTO bucket) {
 		this.bucket = bucket;

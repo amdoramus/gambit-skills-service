@@ -8,34 +8,34 @@ import org.springframework.stereotype.Repository;
 import com.revature.gambit.entities.*;
 
 /**
+ * Repository layer for SkillTypeBucketLookup
+ *  
  * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
  * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
- *
- * Repository layer for skill type bucket lookup
  */
 @Repository
 public interface SkillTypeBucketLookupRepository extends JpaRepository<SkillTypeBucketLookup, Integer>{
 
 	/**
+	 * Finds the list of SkillTypeBucketLookups that pertain to<br>
+	 * SkillTypeBucketId SkillTypes
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Finds the list of skill type bucket lookups that pertain to skill<br>
-	 * type bucket id skill types
-	 * 
-	 * @param skillType - a skill type
-	 * @return list of skill type bucket lookups
+	 * @param skillType - a SkillType
+	 * @return list of SkillTypeBucketLookups
 	 */
 	List<SkillTypeBucketLookup> findSkillTypeBucketLookupsBySkillTypeBucketIdSkillType(SkillType skillType);
 	
 	/**
+	 * Finds SkillTypeBucketLookups by SkillTypeBucketId given a specific BucketDTO
+	 * 
 	 * @author Josh Dughi | 1803-USF-MAR26 | Wezley Singleton
 	 * @author Brandon Semba | 1803-USF-MAR26 | Wezley Singleton
 	 * 
-	 * Finds skill type bucket lookups by skill type bucket id given a specific bucket DTO
-	 * 
-	 * @param bucket - a Bucket DTO
-	 * @return list of skill type bucket lookups
+	 * @param bucket - a BucketDTO
+	 * @return list of SkillTypeBucketLookups
 	 */
 	List<SkillTypeBucketLookup> findSkillTypeBucketLookupsBySkillTypeBucketIdBucket(BucketDTO bucket);
 

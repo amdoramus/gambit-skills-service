@@ -10,7 +10,7 @@ import com.revature.gambit.entities.*;
 import com.revature.gambit.repositories.*;
 
 /**
- * Implementation of the Skill Type service API methods
+ * Implementation of the SkillType service API methods
  */
 @Service
 public class SkillTypeServiceImpl implements SkillTypeService {

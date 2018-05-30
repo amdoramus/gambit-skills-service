@@ -23,7 +23,7 @@ import com.revature.gambit.services.SkillService;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Controller that will handle requests for the skill service
+ * Controller that will handle requests for the Skill service
  */
 @RestController
 @RequestMapping("/skill")
@@ -37,24 +37,24 @@ public class SkillController {
 	private SkillService skillService;
 
 	/**
-	 * Handles incoming POST request that adds a new skill to the DB
+	 * Handles incoming POST request that adds a new Skill to the DB
 	 *
 	 * @param skill - incoming data fields will be mapped into this object
-	 * @return added skill and HTTP status code 201 (CREATED)
+	 * @return added Skill and HTTP status code 201 (CREATED)
 	 */
-	@ApiOperation(value = "Adds a new skill", response = Skill.class)
+	@ApiOperation(value = "Adds a new Skill", response = Skill.class)
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> create(@Valid @RequestBody Skill skill) {
 		return new ResponseEntity<>(this.skillService.create(skill), HttpStatus.CREATED);
 	}
 
 	/**
-	 * Handles incoming GET request that grabs all the skills
+	 * Handles incoming GET request that grabs all the Skills
 	 *
-	 * @return list object containing all the skills retrieved along with HTTP<br>
+	 * @return list object containing all the Skills retrieved along with HTTP<br>
 	 *         status code 200 (OK); otherwise, HTTP status code 204 (NO_CONTENT) if no skills exist
 	 */
-	@ApiOperation(value = "Gets a list of skills", response = Skill.class, responseContainer = "List")
+	@ApiOperation(value = "Gets a list of Skills", response = Skill.class, responseContainer = "List")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Skill>> findAll() {
 		List<Skill> skills = (List<Skill>) this.skillService.findAll();
@@ -67,13 +67,13 @@ public class SkillController {
 	}
 
 	/**
-	 * Handles incoming GET request that gets a skill by its name
+	 * Handles incoming GET request that gets a Skill by its name
 	 * 
-	 * @param name - name of the skill
-	 * @return skill retrieved along with HTTP status code 200 (OK); otherwise,<br>
+	 * @param name - name of the Skill
+	 * @return a Skill retrieved along with HTTP status code 200 (OK); otherwise,<br>
 	 * null is returned along with HTTP status code 404 (NOT_FOUND)
 	 */
-	@ApiOperation(value = "Get a skill by its name", response = Skill.class)
+	@ApiOperation(value = "Get a Skill by its name", response = Skill.class)
 	@GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> findByName(@PathVariable String name) {
 		Skill skill = this.skillService.findBySkillName(name);
@@ -86,13 +86,13 @@ public class SkillController {
 	}
 
 	/**
-	 * Handles incoming GET request that gets a skill by its id
+	 * Handles incoming GET request that gets a Skill by its id
 	 * 
-	 * @param id - skill's id
-	 * @return skill retrieved along with HTTP status code 200 (OK); otherwise,<br>
+	 * @param id - Skill's id
+	 * @return a Skill retrieved along with HTTP status code 200 (OK); otherwise,<br>
 	 * null is returned along with HTTP status code 404 (NOT_FOUND)
 	 */
-	@ApiOperation(value = "Get a skill by its id", response = Skill.class)
+	@ApiOperation(value = "Get a Skill by its id", response = Skill.class)
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> findById(@PathVariable int id) {
 		Skill skill = this.skillService.findBySkillID(id);
@@ -105,12 +105,12 @@ public class SkillController {
 	}
 
 	/**
-	 * Soft delete by name. Sets the skill to inactive
+	 * Soft delete by name. Sets the Skill to inactive
 	 * 
-	 * @param name - name of skill
-	 * @return skill with an updated state along with HTTP status code 202 (ACCEPTED)
+	 * @param name - name of Skill
+	 * @return a Skill with an updated state along with HTTP status code 202 (ACCEPTED)
 	 */
-	@ApiOperation(value = "Finds a skills by name and sets it to active or inactive", response = Skill.class)
+	@ApiOperation(value = "Finds a Skills by name and sets it to active or inactive", response = Skill.class)
 	@DeleteMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> deactivateBySkillName(@PathVariable String name) {
 		Skill skill = skillService.findBySkillName(name);
@@ -124,12 +124,12 @@ public class SkillController {
 	}
 
 	/**
-	 * Soft delete by id. Sets the skill to inactive
+	 * Soft delete by id. Sets the Skill to inactive
 	 * 
-	 * @param id - skill's id
-	 * @return Skill with an updated state along with HTTP status code 202 (ACCEPTED)
+	 * @param id - Skill's id
+	 * @return a Skill with an updated state along with HTTP status code 202 (ACCEPTED)
 	 */
-	@ApiOperation(value = "Finds a skill by id and sets it to active or inactive", response = Skill.class)
+	@ApiOperation(value = "Finds a Skill by id and sets it to active or inactive", response = Skill.class)
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> deactivateBySkillId(@PathVariable int id) {
 		Skill skill = this.skillService.findBySkillID(id);
@@ -143,12 +143,12 @@ public class SkillController {
 	}
 
 	/**
-	 * Handles incoming PUT requests to update skill
+	 * Handles incoming PUT requests to update Skill
 	 *
-	 * @return Skill that was updated and status code 202 (ACCEPTED); otherwise,<br>
+	 * @return a Skill that was updated and status code 202 (ACCEPTED); otherwise,<br>
 	 * HTTP status code 400 (BAD_REQUEST)
 	 */
-	@ApiOperation(value = "Updates a skill by id", response = Skill.class)
+	@ApiOperation(value = "Updates a Skill by id", response = Skill.class)
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Skill> update(@PathVariable int id, @RequestBody Skill updatedSkill) {
     	if(id == updatedSkill.getSkillID()) {
@@ -161,10 +161,10 @@ public class SkillController {
 	/**
 	 * Handles incoming Get requests to find all active Skills
 	 * 
-	 * @return HTTP status code 200 (OK) if there are active skills,<br> 
-	 * 204 (NO_CONTENT) if there are no active skills
+	 * @return HTTP status code 200 (OK) if there are active Skills,<br> 
+	 * 204 (NO_CONTENT) if there are no active Skills
 	 */
-	@ApiOperation(value = "Gets a list of all active skills", response = Skill.class, responseContainer = "List")
+	@ApiOperation(value = "Gets a list of all active Skills", response = Skill.class, responseContainer = "List")
 	@GetMapping(value = "/active", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Skill>> findAllActive() {
 		List<Skill> skills = this.skillService.findAllActive();
