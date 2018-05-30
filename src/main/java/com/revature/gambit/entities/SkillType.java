@@ -1,77 +1,84 @@
 package com.revature.gambit.entities;
 
 import javax.persistence.*;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
- * Represents an entire SkillType (a.k.a. curriculum) such as Pega, .NET, DBA,
- * SysAdmin, etc.
+ * Represents an entire SkillType (a.k.a. curriculum) such as Pega, .NET, DBA,<br>
+ * SysAdmin, etc
  */
+@ApiModel(value = "Skill Type", description = "A specific curriculum")
 @Entity
 @Table(name = "SKILLTYPE",
 		uniqueConstraints = @UniqueConstraint(columnNames= {"SKILLTYPE_NAME"}))
 public class SkillType {
 
 	/**
-	 * ID that uniquely identifies the skill type.
+	 * ID that uniquely identifies the SkillType
 	 */
+	@ApiModelProperty(value = "SkillType id")
 	@Id
 	@Column(name = "SKILLTYPE_ID")
 	@SequenceGenerator(name = "SKILLTYPE_ID_SEQ", sequenceName = "SKILLTYPE_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "SKILLTYPE_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SKILLTYPE_ID_SEQ")
 	private Integer skillTypeId;
 
 	/**
-	 * Name of the skill type.
+	 * Name of the SkillType
 	 */
+	@ApiModelProperty(value = "SkillType name")
 	@Column(name = "SKILLTYPE_NAME")
 	private String skillTypeName;
 
 	/**
-	 * A description of the skill type.
+	 * A description of the SkillType
 	 */
+	@ApiModelProperty(value = "SkillType description")
 	@Column(name = "SKILLTYPE_DESC")
 	private String skillTypeDesc;
 
 	/**
-	 * Flag that will be used for soft deletes.
+	 * Flag that will be used for soft deletes
 	 */
+	@ApiModelProperty(value = "SkillType active state")
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
 
 	/**
-	 * Tells us whether this skill type is a core part of the program or not.
+	 * Tells us whether this SkillType is a core part of the program or not
 	 */
+	@ApiModelProperty(value = "whether SkillType is part of core")
 	@Column(name = "IS_CORE")
 	private boolean isCore;
 
 	/**
-	 * List of Skills that will be referenced by this SkillType. Useful to establish
-	 * a many-to-many relationship.
+	 * List of Skills that will be referenced by this SkillType<br>
+	 * Useful to establish a many-to-many relationship
 	 */
+	@ApiModelProperty(value = "list of Skills")
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinTable(name = "SKILL_SKILLTYPE", joinColumns = { @JoinColumn(name = "SKILLTYPE_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "SKILL_ID") })
 	private List<Skill> skills;
 
 	/**
-	 * No-args constructor.
+	 * No-args constructor
 	 */
 	public SkillType() {
 	}
 
 	/**
-	 * Constructor that initializes class fields excluding ID, which will be
-	 * auto-generated in the DB before insertion.
+	 * Constructor that initializes class fields excluding ID, which will be<br>
+	 * auto-generated in the DB before insertion
 	 * 
-	 * @param skillTypeName
-	 *            Name of the skill type.
-	 * @param skillTypeDesc
-	 *            A description of the skill type.
-	 * @param isActive
-	 *            Flag that will be used for soft deletes.
-	 * @param isCore
-	 *            Used to check whether this is identified as a core skill or not.
+	 * @param skillTypeName - name of the SkillType
+	 * @param skillTypeDesc - description of the SkillType
+	 * @param isActive - flag that will be used for soft deletes
+	 * @param isCore - used to check whether this is identified as a core Skill or not
 	 */
 	public SkillType(String skillTypeName, String skillTypeDesc, boolean isActive, boolean isCore, List<Skill> skills) {
 		this.skillTypeName = skillTypeName;
@@ -82,18 +89,13 @@ public class SkillType {
 	}
 
 	/**
-	 * Constructor that initializes class fields, including ID.
+	 * Constructor that initializes class fields, including ID
 	 * 
-	 * @param skillTypeID
-	 *            ID that uniquely identifies the skill type.
-	 * @param skillTypeName
-	 *            Name of the skill type.
-	 * @param skillTypeDesc
-	 *            A description of the skill type.
-	 * @param isActive
-	 *            Flag that will be used for soft deletes.
-	 * @param isCore
-	 *            Used to check whether this is identified as a core skill or not.
+	 * @param skillTypeID - id that uniquely identifies the SkillType
+	 * @param skillTypeName - name of the SkillType
+	 * @param skillTypeDesc - description of the SkillType
+	 * @param isActive - flag that will be used for soft deletes
+	 * @param isCore - used to check whether this is identified as a core Skill or not
 	 */
 	public SkillType(Integer skillTypeID, String skillTypeName, String skillTypeDesc, boolean isActive,
 			boolean isCore, List<Skill> skills) {
@@ -105,60 +107,134 @@ public class SkillType {
 		this.skills = skills;
 	}
 	
-	public SkillType(SkillType t) {
+	/**
+	 * Constructs a SkillType
+	 * 
+	 * @param skillType - a SkillType
+	 */
+	public SkillType(SkillType skillType) {
 		super();
-		this.skillTypeId = t.getSkillTypeId();
-		this.skillTypeName = t.getSkillTypeName();
-		this.skillTypeDesc = t.getSkillTypeDesc();
-		this.isActive = t.getIsActive();
+		this.skillTypeId = skillType.getSkillTypeId();
+		this.skillTypeName = skillType.getSkillTypeName();
+		this.skillTypeDesc = skillType.getSkillTypeDesc();
+		this.isActive = skillType.getIsActive();
 	}
 
+	/**
+	 * Gets a SkillType by id
+	 * 
+	 * @return a SkillType id
+	 */
 	public Integer getSkillTypeId() {
 		return skillTypeId;
 	}
 
-	public void setSkillTypeId(Integer skillId) {
-		this.skillTypeId = skillId;
+	/**
+	 * Sets a SkillType id
+	 * 
+	 * @param skillTypeId - SkillType id
+	 */
+	public void setSkillTypeId(Integer skillTypeId) {
+		this.skillTypeId = skillTypeId;
 	}
 
+	/**
+	 * Gets a SkillType name
+	 *  
+	 * @return SkillType name
+	 */
 	public String getSkillTypeName() {
 		return skillTypeName;
 	}
 
+	/**
+	 * Sets a SkillType name
+	 * 
+	 * @param skillTypeName - a SkillType name to set
+	 */
 	public void setSkillTypeName(String skillTypeName) {
 		this.skillTypeName = skillTypeName;
 	}
 
+	/**
+	 * Gets a SkillType description
+	 * 
+	 * @return SkillType description
+	 */
 	public String getSkillTypeDesc() {
 		return skillTypeDesc;
 	}
 
+	/**
+	 * Sets a SkillType description
+	 * 
+	 * @param skillTypeDesc - SkillType description to set
+	 */
 	public void setSkillTypeDesc(String skillTypeDesc) {
 		this.skillTypeDesc = skillTypeDesc;
 	}
 
+	/**
+	 * Gets a SkillType's active state
+	 * 
+	 * @return SkillTypes's active state
+	 */
 	public boolean getIsActive() {
 		return isActive;
 	}
 
+	/**
+	 * Sets a SkillTypes's active state
+	 * 
+	 * @param isActive - whether the SkillType is active or not
+	 */
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
+	/**
+	 * Gets a boolean as to whether SkillType belongs to core
+	 * 
+	 * @return true if SkillType is part of core; false otherwise
+	 */
 	public boolean getIsCore() {
 		return isCore;
 	}
 
+	/**
+	 * Sets whether SkillType belongs to core
+	 * 
+	 * @param isCore - whether SkillType is part of core or not
+	 */
 	public void setIsCore(boolean isCore) {
 		this.isCore = isCore;
 	}
 
+	/**
+	 * Gets a list of Skills
+	 * 
+	 * @return list of Skills
+	 */
 	public List<Skill> getSkills() {
 		return skills;
 	}
 
+	/**
+	 * Sets a list of Skills
+	 * 
+	 * @param skills - list of Skills to set
+	 */
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+	
+	/**
+	 * Adds a skill to the Skill's list
+	 * 
+	 * @param skill - skill to add to Skill's list
+	 */
+	public void addSkill(Skill skill) {
+		this.skills.add(skill);
 	}
 
 	@Override
@@ -191,7 +267,4 @@ public class SkillType {
 		return result;
 	}
 	
-	public void addSkill(Skill skill) {
-		this.skills.add(skill);
-	}
 }

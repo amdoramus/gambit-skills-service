@@ -11,58 +11,25 @@ import com.revature.gambit.entities.Skill;
 import com.revature.gambit.repositories.SkillRepository;
 
 /**
- * Implementation of the Skill service API methods.
+ * Implementation of the Skill service API methods
  */
 @Service
 @Configuration
 public class SkillServiceImpl implements SkillService {
 
-	/**
-	 * Spring Data JPA Repository for skill methods.
-	 */
 	@Autowired
 	private SkillRepository skillRepository;
 
-	/**
-	 * Adds a new skill to the database.
-	 *
-	 * @param skill
-	 *            Skill to be added.
-	 * @return Skill that has been added.
-	 */
-	@Transactional
-	@Override
-	public Skill create(Skill skill) {
-		return skillRepository.save(skill);
-	}
-
-	/**
-	 * Retrieves all the skills, active and non-active.
-	 *
-	 * @return Iterable object containing all the skills found.
-	 */
 	@Override
 	public Iterable<Skill> findAll() {
 		return skillRepository.findAll();
 	}
 
-	/**
-	 * Retrieves all the active skills.
-	 *
-	 * @return List object containing all the skills found.
-	 */
 	@Override
 	public List<Skill> findAllActive() {
 		return this.skillRepository.findAllByIsActive(true);
 	}
 
-	/**
-	 * Retrieves a skill based on its skill name.
-	 *
-	 * @param name
-	 *            Name of the skill to retrieve.
-	 * @return Skill that was found.
-	 */
 	@Override
 	public Skill findBySkillName(String name) {
 		return this.skillRepository.findBySkillName(name);
@@ -72,38 +39,25 @@ public class SkillServiceImpl implements SkillService {
 	public Skill findBySkillID(int id) {
 		return this.skillRepository.findBySkillID(id);
 	}
+	
+	@Transactional
+	@Override
+	public Skill create(Skill skill) {
+		return skillRepository.save(skill);
+	}
 
-	/**
-	 * Updates skill in DB and flushes change immediately 
-	 *
-	 * @param skill
-	 *            Skill to be updated.
-	 * @return Skill that was updated.
-	 */
 	@Transactional
 	@Override
 	public Skill saveSkill(Skill skill) {
 		return skillRepository.saveAndFlush(skill);
 	}
 
-	/**
-	 * Deletes a skill based on its name.
-	 *
-	 * @param name
-	 *            Name of the skill to delete.
-	 */
 	@Transactional
 	@Override
 	public void deleteBySkillName(String name) {
 		this.skillRepository.deleteBySkillName(name);
 	}
 
-	/**
-	 * Deletes a skill based on its id.
-	 * 
-	 * @param id
-	 *            id of the skill to delete.
-	 */
 	@Transactional
 	@Override
 	public void deleteBySkillID(int id) {

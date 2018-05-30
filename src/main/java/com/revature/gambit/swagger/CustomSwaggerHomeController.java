@@ -40,4 +40,5 @@ public class CustomSwaggerHomeController extends Swagger2Controller {
 			ServiceModelToSwagger2Mapper mapper, JsonSerializer jsonSerializer) {
 		super(environment, documentationCache, mapper, jsonSerializer);
 	}
+
 }
