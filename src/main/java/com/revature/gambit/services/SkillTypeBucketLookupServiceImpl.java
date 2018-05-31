@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.gambit.entities.*;
+import com.revature.gambit.entities.BucketDTO;
+import com.revature.gambit.entities.SkillType;
+import com.revature.gambit.entities.SkillTypeBucketLookup;
 import com.revature.gambit.repositories.SkillTypeBucketLookupRepository;
 
 /**
