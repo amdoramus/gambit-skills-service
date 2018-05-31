@@ -56,7 +56,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	@Transactional
 	@Override
 	public SkillType addSkill(Integer skillTypeId, Integer skillId) {
-		SkillType skillType = this.skillTypeRepository.getOne(skillTypeId);
+		SkillType skillType = this.skillTypeRepository.findOne(skillTypeId);
 		if (skillType == null)
 			return null;
 		
