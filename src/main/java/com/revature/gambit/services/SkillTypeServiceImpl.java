@@ -28,7 +28,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 
 	@Override
 	public SkillType findBySkillTypeId(int id) {
-		return this.skillTypeRepository.getOne(id);
+		return this.skillTypeRepository.findOne(id);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 	@Transactional
 	@Override
 	public SkillType addSkill(Integer skillTypeId, Integer skillId) {
-		SkillType skillType = this.skillTypeRepository.getOne(skillTypeId);
+		SkillType skillType = this.skillTypeRepository.findOne(skillTypeId);
 		if (skillType == null)
 			return null;
 		

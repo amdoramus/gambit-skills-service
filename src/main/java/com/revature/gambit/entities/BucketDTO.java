@@ -20,6 +20,15 @@ public class BucketDTO {
 	@Id
 	@Column(name = "BUCKET_ID")
 	private Integer bucketId;
+	
+	/**
+	 * Constructs a BucketDTO
+	 * 
+	 * @author Noah Dering | 1803-USF-MAR26 | Wezley Singleton
+	 */
+	public BucketDTO() {
+		super();
+	}
 
 	/**
 	 * Constructs a BucketDTO

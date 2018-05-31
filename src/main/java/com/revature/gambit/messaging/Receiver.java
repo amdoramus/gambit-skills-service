@@ -33,5 +33,5 @@ public class Receiver {
 		logger.debug("Receiving payload from bucket service, it contains bucket id: " + payload);
 		bucketService.addBucket(Integer.parseInt(payload));	
 	}
-	
+
 }
